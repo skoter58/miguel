@@ -71,6 +71,15 @@
       background: rgba(15, 23, 42, 0.5);
       backdrop-filter: blur(10px);
       border-radius: 12px;
+
+      <!-- Control de Música de Fondo -->
+<div class="control-audio">
+  <button id="btnAudio" onclick="toggleAudio()">🔊 Música de Fondo</button>
+  <audio id="musicaFondo" loop>
+    <source src="https://raw.githubusercontent.com/skoter58/miguel/main/fondo-ciberseguridad.mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+  </audio>
+</div>
     }
 
     .menu-titulo {
