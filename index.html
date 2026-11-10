@@ -108,25 +108,6 @@
       transform: translateY(-2px);
     }
 
-    /* Botón interactivo de audio */
-    .control-audio button {
-      background: rgba(15, 23, 42, 0.9);
-      color: #38ef7d;
-      border: 1px solid #38ef7d;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 13px;
-      transition: all 0.3s ease;
-    }
-
-    .control-audio button:hover {
-      background: #38ef7d;
-      color: #030712;
-      box-shadow: 0 0 15px rgba(56, 239, 125, 0.6);
-    }
-
     /* Contenido principal */
     main {
       margin-top: 20px;
@@ -244,6 +225,15 @@
       transform: scale(1.05);
     }
 
+    /* Contenedor del reproductor de YouTube estilizado */
+    .contenedor-youtube {
+      margin-top: 15px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+    }
+
     /* Texto inferior */
     .texto-inferior {
       margin-top: 20px;
@@ -324,7 +314,7 @@
       <div class="subtitulo-header">Innovación & Ciberseguridad</div>
     </header>
 
-    <!-- MENÚ CON BOTÓN DE AUDIO -->
+    <!-- MENÚ -->
     <nav>
       <div class="menu-titulo">Panel de Navegación</div>
 
@@ -334,21 +324,13 @@
         <li><a href="#galeria">Infraestructura</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
-
-      <!-- RUTA DIRECTA AL ARCHIVO SUBIDO FONDO-CIBERSEGURIDAD.MP4 -->
-      <div class="control-audio">
-        <button id="btnAudio" onclick="toggleAudio()">▶️ Reproducir Ambiente Cyber</button>
-        <audio id="musicaFondo" loop preload="auto">
-          <source src="https://raw.githubusercontent.com/skoter58/miguel/main/fondo-ciberseguridad.mp4" type="video/mp4">
-        </audio>
-      </div>
     </nav>
 
     <!-- CONTENIDO PRINCIPAL -->
     <main id="inicio">
       <section class="contenido-principal" id="contenido">
 
-        <!-- VIDEO PRINCIPAL -->
+        <!-- VIDEO PRINCIPAL EN BUCLE -->
         <div class="imagen-principal">
           <video autoplay loop muted playsinline>
             <source src="https://raw.githubusercontent.com/skoter58/miguel/main/gif.mp4" type="video/mp4">
@@ -380,61 +362,4 @@
             <div class="mini-imagen">
               <img src="https://raw.githubusercontent.com/skoter58/miguel/main/candado%20cibernetico.jpg" alt="Centro de operaciones de ciberseguridad">
             </div>
-            <div class="mini-imagen">
-              <img src="https://raw.githubusercontent.com/skoter58/miguel/main/candado%20cibernetico.jpg" alt="Centro de operaciones de ciberseguridad">
-            </div>
-            <div class="mini-imagen">
-              <img src="https://raw.githubusercontent.com/skoter58/miguel/main/candado%20cibernetico.jpg" alt="Centro de operaciones de ciberseguridad">
-            </div>
-          </div>
-        </article>
-
-        <article class="tarjeta">
-          <h2>Monitoreo en Tiempo Real</h2>
-          <p>
-            Detección y respuesta ante incidentes (EDR/XDR) respaldada por algoritmos de aprendizaje automático para neutralizar vectores de ataque antes de que impacten su red.
-          </p>
-        </article>
-
-      </section>
-
-      <!-- SECCIÓN INFERIOR -->
-      <section class="texto-inferior" id="contacto">
-        <h2>Visión Tecnológica</h2>
-        <p>
-          Liderar la transformación digital segura mediante el desarrollo de tecnologías defensivas de vanguardia que garanticen la integridad, confidencialidad y disponibilidad de la información a nivel global.
-        </p>
-      </section>
-    </main>
-
-    <!-- PIE DE PÁGINA -->
-    <footer>
-      <p>© 2026 CYBERGUARD | Plataforma de Seguridad Informática & Innovación</p>
-    </footer>
-
-  </div>
-
-  <!-- SCRIPT DE CONTROL PARA LA REPRODUCCIÓN INTERACTIVA -->
-  <script>
-    function toggleAudio() {
-      var audio = document.getElementById("musicaFondo");
-      var btn = document.getElementById("btnAudio");
-
-      if (audio.paused) {
-        audio.play().then(function() {
-          btn.innerHTML = "⏸️ Pausar Ambiente";
-          btn.style.borderColor = "#00f2fe";
-          btn.style.color = "#00f2fe";
-        }).catch(function(e) {
-          console.log("Error al reproducir:", e);
-        });
-      } else {
-        audio.pause();
-        btn.innerHTML = "▶️ Reproducir Ambiente Cyber";
-        btn.style.borderColor = "#38ef7d";
-        btn.style.color = "#38ef7d";
-      }
-    }
-  </script>
-</body>
-</html>
+            <div class="mini-imagen
