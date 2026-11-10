@@ -108,7 +108,7 @@
       transform: translateY(-2px);
     }
 
-    /* Botón de control de audio en el menú */
+    /* Botón interactivo de audio */
     .control-audio button {
       background: rgba(15, 23, 42, 0.9);
       color: #38ef7d;
@@ -145,7 +145,6 @@
       border-radius: 12px;
     }
 
-    /* Contenedor multimedia principal */
     .imagen-principal {
       min-height: 400px;
       border: 1px solid rgba(0, 242, 254, 0.4);
@@ -225,7 +224,6 @@
       gap: 12px;
     }
 
-    /* Miniaturas / Imágenes de la galería */
     .galeria .mini-imagen {
       height: 120px;
       border: 1px solid rgba(0, 242, 254, 0.3);
@@ -279,7 +277,6 @@
       font-size: 14px;
     }
 
-    /* Diseño adaptable */
     @media (max-width: 800px) {
       .pagina {
         width: calc(100% - 20px);
@@ -327,7 +324,7 @@
       <div class="subtitulo-header">Innovación & Ciberseguridad</div>
     </header>
 
-    <!-- MENÚ -->
+    <!-- MENÚ CON BOTÓN DE AUDIO -->
     <nav>
       <div class="menu-titulo">Panel de Navegación</div>
 
@@ -338,11 +335,12 @@
         <li><a href="#contacto">Contacto</a></li>
       </ul>
 
-      <!-- BOTÓN DE MÚSICA EN EL HTML CORRECTO -->
+      <!-- ELEMENTO DE AUDIO APUNTANDO A TU ARCHIVO REAL -->
       <div class="control-audio">
-        <button id="btnAudio" onclick="toggleAudio()">🔊 Música de Fondo</button>
+        <button id="btnAudio" onclick="toggleAudio()">▶️ Reproducir Ambiente Cyber</button>
         <audio id="musicaFondo" loop preload="auto">
-          <source src="https://raw.githubusercontent.com/skoter58/miguel/main/fondo-ciberseguridad.mp3" type="audio/mpeg">
+          <source src="https://raw.githubusercontent.com/skoter58/miguel/main/fondo%20cibernetico.mp3" type="audio/mpeg">
+          Tu navegador no soporta el elemento de audio.
         </audio>
       </div>
     </nav>
@@ -376,7 +374,6 @@
         <article class="tarjeta">
           <h2>Galería de Operaciones</h2>
 
-          <!-- MINIATURAS DE LA GALERÍA -->
           <div class="galeria">
             <div class="mini-imagen">
               <img src="https://raw.githubusercontent.com/skoter58/miguel/main/candado%20cibernetico.jpg" alt="Centro de operaciones de ciberseguridad">
@@ -418,20 +415,23 @@
 
   </div>
 
-  <!-- SCRIPT PARA ACTIVAR/PAUSAR EL AUDIO -->
+  <!-- CONTROL JAVASCRIPT CON REPRODUCCIÓN INTERACTIVA -->
   <script>
     function toggleAudio() {
       var audio = document.getElementById("musicaFondo");
       var btn = document.getElementById("btnAudio");
 
       if (audio.paused) {
-        audio.play();
-        btn.innerHTML = "⏸️ Pausar Música";
-        btn.style.borderColor = "#00f2fe";
-        btn.style.color = "#00f2fe";
+        audio.play().then(function() {
+          btn.innerHTML = "⏸️ Pausar Ambiente";
+          btn.style.borderColor = "#00f2fe";
+          btn.style.color = "#00f2fe";
+        }).catch(function(error) {
+          console.log("Error al reproducir audio:", error);
+        });
       } else {
         audio.pause();
-        btn.innerHTML = "🔊 Música de Fondo";
+        btn.innerHTML = "▶️ Reproducir Ambiente Cyber";
         btn.style.borderColor = "#38ef7d";
         btn.style.color = "#38ef7d";
       }
@@ -439,4 +439,3 @@
   </script>
 </body>
 </html>
-      
