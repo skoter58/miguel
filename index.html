@@ -335,11 +335,11 @@
         <li><a href="#contacto">Contacto</a></li>
       </ul>
 
-      <!-- RUTA CORREGIDA AL ARCHIVO MP4 QUE EXISTE EN TU GITHUB -->
+      <!-- RUTA DIRECTA AL ARCHIVO SUBIDO FONDO-CIBERSEGURIDAD.MP4 -->
       <div class="control-audio">
         <button id="btnAudio" onclick="toggleAudio()">▶️ Reproducir Ambiente Cyber</button>
         <audio id="musicaFondo" loop preload="auto">
-          <source src="https://raw.githubusercontent.com/skoter58/miguel/main/fondo%20cibernetico.mp4" type="audio/mp4">
+          <source src="https://raw.githubusercontent.com/skoter58/miguel/main/fondo-ciberseguridad.mp4" type="video/mp4">
         </audio>
       </div>
     </nav>
@@ -414,7 +414,7 @@
 
   </div>
 
-  <!-- SCRIPT DE CONTROL CON MANEJO DE ERRORES -->
+  <!-- SCRIPT DE CONTROL PARA LA REPRODUCCIÓN INTERACTIVA -->
   <script>
     function toggleAudio() {
       var audio = document.getElementById("musicaFondo");
@@ -426,7 +426,7 @@
           btn.style.borderColor = "#00f2fe";
           btn.style.color = "#00f2fe";
         }).catch(function(e) {
-          alert("Error al intentar reproducir audio. Haz clic de nuevo.");
+          console.log("Error al reproducir:", e);
         });
       } else {
         audio.pause();
