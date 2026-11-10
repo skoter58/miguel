@@ -204,27 +204,21 @@
       gap: 12px;
     }
 
-    /* Miniaturas de la galería */
+    /* Miniaturas / Videos de la galería */
     .galeria .mini-imagen {
-      height: 85px;
+      height: 120px;
       border: 1px solid rgba(0, 242, 254, 0.3);
       border-radius: 6px;
       overflow: hidden;
       background: #0b1329;
     }
 
+    .galeria .mini-imagen video,
     .galeria .mini-imagen img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.4s ease, filter 0.4s ease;
-      filter: grayscale(40%);
-    }
-
-    .galeria .mini-imagen img:hover {
-      transform: scale(1.1);
-      filter: grayscale(0%);
     }
 
     /* Texto inferior */
@@ -323,9 +317,9 @@
     <main id="inicio">
       <section class="contenido-principal" id="contenido">
 
-        <!-- IMAGEN PRINCIPAL REAL -->
-        <div class="https://github.com/skoter58/miguel/blob/main/candado%20cibernetico.jpg">
-          <img src="https://github.com/skoter58/miguel/blob/main/candado%20cibernetico.jpg" alt="Centro de operaciones de ciberseguridad e innovación tecnológica">
+        <!-- IMAGEN PRINCIPAL ENLACE DIRECTO -->
+        <div class="imagen-principal">
+          <img src="https://raw.githubusercontent.com/skoter58/miguel/main/candado%20cibernetico.jpg" alt="Centro de operaciones de ciberseguridad e innovación tecnológica">
         </div>
 
         <article class="descripcion">
@@ -346,19 +340,27 @@
         <article class="tarjeta">
           <h2>Galería de Operaciones</h2>
 
-          <!-- MINIATURAS DE LA GALERÍA -->
+          <!-- MINIATURAS CON VIDEO EN BUCLE -->
           <div class="galeria">
             <div class="mini-imagen">
-              <img src="https://github.com/skoter58/miguel/blob/main/gif.mp4" alt="Servidores de alta seguridad">
+              <video autoplay loop muted playsinline>
+                <source src="https://raw.githubusercontent.com/skoter58/miguel/main/gif.mp4" type="video/mp4">
+              </video>
             </div>
             <div class="mini-imagen">
-              <img src="https://github.com/skoter58/miguel/blob/main/gif.mp4" alt="Monitoreo de red">
+              <video autoplay loop muted playsinline>
+                <source src="https://raw.githubusercontent.com/skoter58/miguel/main/gif.mp4" type="video/mp4">
+              </video>
             </div>
             <div class="mini-imagen">
-              <img src="https://github.com/skoter58/miguel/blob/main/gif.mp4" alt="Cifrado de datos">
+              <video autoplay loop muted playsinline>
+                <source src="https://raw.githubusercontent.com/skoter58/miguel/main/gif.mp4" type="video/mp4">
+              </video>
             </div>
             <div class="mini-imagen">
-              <img src="https://github.com/skoter58/miguel/blob/main/gif.mp4" alt="Análisis de código">
+              <video autoplay loop muted playsinline>
+                <source src="https://raw.githubusercontent.com/skoter58/miguel/main/gif.mp4" type="video/mp4">
+              </video>
             </div>
           </div>
         </article>
