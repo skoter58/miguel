@@ -335,12 +335,11 @@
         <li><a href="#contacto">Contacto</a></li>
       </ul>
 
-      <!-- ELEMENTO DE AUDIO APUNTANDO A TU ARCHIVO REAL -->
+      <!-- RUTA CORREGIDA AL ARCHIVO MP4 QUE EXISTE EN TU GITHUB -->
       <div class="control-audio">
         <button id="btnAudio" onclick="toggleAudio()">▶️ Reproducir Ambiente Cyber</button>
         <audio id="musicaFondo" loop preload="auto">
-          <source src="https://raw.githubusercontent.com/skoter58/miguel/main/fondo%20cibernetico.mp3" type="audio/mpeg">
-          Tu navegador no soporta el elemento de audio.
+          <source src="https://raw.githubusercontent.com/skoter58/miguel/main/fondo%20cibernetico.mp4" type="audio/mp4">
         </audio>
       </div>
     </nav>
@@ -415,7 +414,7 @@
 
   </div>
 
-  <!-- CONTROL JAVASCRIPT CON REPRODUCCIÓN INTERACTIVA -->
+  <!-- SCRIPT DE CONTROL CON MANEJO DE ERRORES -->
   <script>
     function toggleAudio() {
       var audio = document.getElementById("musicaFondo");
@@ -426,8 +425,8 @@
           btn.innerHTML = "⏸️ Pausar Ambiente";
           btn.style.borderColor = "#00f2fe";
           btn.style.color = "#00f2fe";
-        }).catch(function(error) {
-          console.log("Error al reproducir audio:", error);
+        }).catch(function(e) {
+          alert("Error al intentar reproducir audio. Haz clic de nuevo.");
         });
       } else {
         audio.pause();
