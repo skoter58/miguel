@@ -1,17 +1,314 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<title>Mi sitio</title>
-<link rel="stylesheet" href="estilo.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Página web HTML5 inspirada en el boceto proporcionado">
+  <title>Mi Página Web</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #ffffff;
+      color: #222;
+      line-height: 1.5;
+    }
+
+    /* Contenedor general: aproximadamente 1600 px en pantallas grandes */
+    .pagina {
+      width: min(1600px, calc(100% - 40px));
+      margin: 20px auto;
+    }
+
+    /* Encabezado */
+    header {
+      height: 120px;
+      border: 2px solid #333;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Menú */
+    nav {
+      border: 2px solid #333;
+      height: 70px;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .menu-titulo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .menu-links {
+      display: flex;
+      list-style: none;
+      gap: 10px;
+    }
+
+    .menu-links a {
+      display: block;
+      padding: 10px 18px;
+      text-decoration: none;
+      color: #222;
+      border: 1px solid #555;
+      border-radius: 5px;
+      background: #f2f2f2;
+    }
+
+    .menu-links a:hover {
+      background: #ddd;
+    }
+
+    /* Contenido principal */
+    main {
+      margin-top: 20px;
+    }
+
+    .contenido-principal {
+      border: 2px solid #333;
+      min-height: 500px;
+      padding: 25px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .imagen-principal {
+      min-height: 400px;
+      border: 2px solid #555;
+      background:
+        linear-gradient(135deg, #f1f1f1 25%, transparent 25%) -20px 0/40px 40px,
+        linear-gradient(225deg, #f1f1f1 25%, transparent 25%) -20px 0/40px 40px,
+        linear-gradient(315deg, #f1f1f1 25%, transparent 25%) 0 0/40px 40px,
+        linear-gradient(45deg, #f1f1f1 25%, #fff 25%) 0 0/40px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      font-size: 30px;
+      color: #555;
+    }
+
+    .descripcion {
+      border: 2px solid #555;
+      min-height: 300px;
+      padding: 25px;
+    }
+
+    .descripcion h1 {
+      margin-bottom: 15px;
+      font-size: 30px;
+    }
+
+    .descripcion p {
+      font-size: 18px;
+    }
+
+    /* Contenedores secundarios */
+    .contenedores {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .tarjeta {
+      border: 2px solid #333;
+      min-height: 230px;
+      padding: 20px;
+    }
+
+    .tarjeta h2 {
+      margin-bottom: 15px;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .galeria .mini-imagen {
+      height: 75px;
+      border: 1px solid #555;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+    }
+
+    /* Texto inferior */
+    .texto-inferior {
+      margin-top: 20px;
+      border: 2px solid #333;
+      min-height: 140px;
+      padding: 25px;
+    }
+
+    .texto-inferior h2 {
+      margin-bottom: 10px;
+    }
+
+    /* Pie de página */
+    footer {
+      margin-top: 20px;
+      border: 2px solid #333;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Diseño adaptable */
+    @media (max-width: 800px) {
+      .pagina {
+        width: calc(100% - 20px);
+        margin: 10px auto;
+      }
+
+      header {
+        height: auto;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      nav {
+        height: auto;
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+
+      .menu-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .contenido-principal,
+      .contenedores {
+        grid-template-columns: 1fr;
+      }
+
+      .imagen-principal {
+        min-height: 250px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<nav>
-<a href="index.html">Inicio</a> ·
-<a href="catalogo.html">Catalogo</a> ·
-<a href="acerca.html">Acerca</a>
-</nav>
-<h1>Mi primer sitio web</h1>
-<p>Hola, soy Miguel Aguilar. Esta es mi pagina de inicio.</p>
+  <div class="pagina">
+
+    <!-- ENCABEZADO -->
+    <header>
+      <div class="logo">MI PÁGINA WEB</div>
+      <div>HTML5 + CSS3</div>
+    </header>
+
+    <!-- MENÚ -->
+    <nav>
+      <div class="menu-titulo">Menú</div>
+
+      <ul class="menu-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#contenido">Contenido</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main id="inicio">
+      <section class="contenido-principal" id="contenido">
+
+        <div class="imagen-principal">
+          <div>
+            <strong>Contenido<br>principal</strong>
+            <br>
+            <small>Área para colocar una imagen</small>
+          </div>
+        </div>
+
+        <article class="descripcion">
+          <h1>Contenido</h1>
+          <p>
+            Este espacio corresponde al contenido principal de la página.
+            Aquí puedes colocar texto, información, imágenes o cualquier
+            elemento relacionado con el tema de tu proyecto.
+          </p>
+          <br>
+          <p>
+            La estructura está diseñada tomando como referencia el boceto
+            proporcionado: encabezado, menú, contenido principal,
+            contenedores secundarios y sección inferior.
+          </p>
+        </article>
+
+      </section>
+
+      <!-- DOS CONTENEDORES INFERIORES -->
+      <section class="contenedores" id="galeria">
+
+        <article class="tarjeta">
+          <h2>Galería / Imágenes</h2>
+
+          <div class="galeria">
+            <div class="mini-imagen">IMG 1</div>
+            <div class="mini-imagen">IMG 2</div>
+            <div class="mini-imagen">IMG 3</div>
+            <div class="mini-imagen">IMG 4</div>
+          </div>
+        </article>
+
+        <article class="tarjeta">
+          <h2>Información</h2>
+          <p>
+            Aquí puedes colocar información adicional, características,
+            noticias, enlaces o cualquier otro contenido de tu página.
+          </p>
+        </article>
+
+      </section>
+
+      <!-- SECCIÓN INFERIOR -->
+      <section class="texto-inferior" id="contacto">
+        <h2>Visión y misión</h2>
+        <p>
+          Este apartado puede utilizarse para colocar una misión, visión,
+          descripción del proyecto o información complementaria.
+        </p>
+      </section>
+    </main>
+
+    <!-- PIE -->
+    <footer>
+      <p>© 2026 Mi Página Web | Elaborada con HTML5 y CSS3</p>
+    </footer>
+
+  </div>
 </body>
 </html>
