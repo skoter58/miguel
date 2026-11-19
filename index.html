@@ -203,14 +203,18 @@
       box-shadow: inset 0 0 20px rgba(0, 242, 254, 0.2);
     }
 
-    .imagen-principal video,
     .imagen-principal img {
       width: 100%;
       height: 100%;
       min-height: 400px;
       object-fit: cover;
       display: block;
-      filter: brightness(0.9) contrast(1.1);
+      filter: brightness(0.95) contrast(1.15);
+      transition: transform 0.5s ease;
+    }
+
+    .imagen-principal:hover img {
+      transform: scale(1.03);
     }
 
     .descripcion {
@@ -526,7 +530,6 @@
       }
 
       .imagen-principal,
-      .imagen-principal video,
       .imagen-principal img {
         min-height: 250px;
       }
@@ -575,11 +578,9 @@
     <main id="inicio">
       <section class="contenido-principal" id="contenido">
 
-        <!-- VIDEO PRINCIPAL EN BUCLE -->
+        <!-- IMAGEN PRINCIPAL 3D FUTURISTA -->
         <div class="imagen-principal">
-          <video autoplay loop muted playsinline>
-            <source src="https://raw.githubusercontent.com/skoter58/miguel/main/gif.mp4" type="video/mp4">
-          </video>
+          <img src="https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcRkYQx98l-U3Nf8UvT9eU9K9H0y4Wb1Z5Y8X7a0b3c6d9e2f5g8" alt="Representación 3D de Ciberseguridad y Escudo Holográfico">
         </div>
 
         <article class="descripcion">
@@ -634,22 +635,18 @@
         <h2>Galería de Operaciones & Infraestructura</h2>
 
         <div class="galeria-grid">
-          <!-- Imagen 1: Remplazado GIF por imagen futurista de Ethical Hacking -->
           <div class="galeria-card">
             <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcR08_YcSmE5Y_4zR7P2aC3PfxJ0uE8kKmsB0W0G6wNqF0WwTz7P0bF3c6G9lKzYw_1V3x7" alt="Análisis de Código y Ethical Hacking">
             <div class="galeria-caption">Ethical Hacking & Matriz</div>
           </div>
-          <!-- Imagen 2 -->
           <div class="galeria-card">
             <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRT43VuGzKxXtQcWWj5fuDYA1o7kvsgD_wtGlWlXNbzVQmMqeH33HNNdUUb21QP1oz-WHFU57P6fQl7Sx8" alt="Centro de Operaciones SOC">
             <div class="galeria-caption">Centro SOC 24/7</div>
           </div>
-          <!-- Imagen 3 -->
           <div class="galeria-card">
             <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRyDvyAbSO0HVptwLAhaIeYLb8-t8oBtP3gJLPHqVWVasP2SNcF6u7Kg9mGmgdaZG_73gvW8lhjw3Wz9MI" alt="Protección de Red y Firewall">
             <div class="galeria-caption">Infraestructura & Firewall</div>
           </div>
-          <!-- Imagen 4 -->
           <div class="galeria-card">
             <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTrM8bBHicv0oE34l4XjIxZWlDqqaLzIzJHdqNeLshb7J6P0EgWs1zwT20blUMRJx_HR4vLVf75nw5XNlQ" alt="Inteligencia de Amenazas">
             <div class="galeria-caption">Threat Intelligence</div>
