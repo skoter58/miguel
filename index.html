@@ -6,23 +6,23 @@
   <meta name="description" content="CYBERGUARD - Plataforma Elite de Ciberseguridad e Inteligencia de Amenazas">
   <title>CYBERGUARD | Next-Gen Security & Threat Intelligence</title>
 
-  <!-- Fuentes Futuristas y Tipografía Monospace -->
+  <!-- Fuentes Futuristas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-dark: #030712;
-      --bg-card: rgba(15, 23, 42, 0.65);
+      --bg-dark: #020617;
+      --bg-card: rgba(15, 23, 42, 0.75);
       --border-cyan: #00f2fe;
       --border-purple: #7928ca;
       --accent-green: #00ff88;
       --accent-neon: #4facfe;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --glow-cyan: rgba(0, 242, 254, 0.4);
-      --glow-purple: rgba(121, 40, 202, 0.4);
+      --glow-cyan: rgba(0, 242, 254, 0.5);
+      --glow-purple: rgba(121, 40, 202, 0.5);
     }
 
     * {
@@ -35,9 +35,9 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(at 0% 0%, rgba(121, 40, 202, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(0, 242, 254, 0.15) 0px, transparent 50%),
-        radial-gradient(at 50% 50%, rgba(3, 7, 18, 0.9) 0px, transparent 100%);
+        radial-gradient(at 0% 0%, rgba(121, 40, 202, 0.25) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 242, 254, 0.25) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(2, 6, 23, 0.95) 0px, transparent 100%);
       color: var(--text-main);
       line-height: 1.6;
       min-height: 100vh;
@@ -47,13 +47,14 @@
     .pagina {
       width: min(1500px, calc(100% - 40px));
       margin: 0 auto;
-      padding-bottom: 40px;
+      padding-bottom: 50px;
     }
 
-    /* TICKER DE ALERTA DE SEGURIDAD EN TIEMPO REAL */
+    /* BARRA DE ALERTAS EN TIEMPO REAL */
     .threat-ticker {
-      background: rgba(15, 23, 42, 0.9);
-      border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+      background: rgba(3, 7, 18, 0.95);
+      border-bottom: 1px solid var(--border-cyan);
+      box-shadow: 0 0 15px var(--glow-cyan);
       padding: 8px 0;
       font-family: 'Fira Code', monospace;
       font-size: 12px;
@@ -72,25 +73,25 @@
       100% { transform: translateX(-100%); }
     }
 
-    /* ENCABEZADO GLASSMORPHISM */
+    /* ENCABEZADO GLASSMORPHISM ULTRA MODERNO */
     header {
       margin-top: 15px;
       min-height: 90px;
-      border: 1px solid rgba(0, 242, 254, 0.25);
+      border: 1px solid rgba(0, 242, 254, 0.4);
       padding: 15px 30px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
-      background: rgba(15, 23, 42, 0.6);
+      background: rgba(15, 23, 42, 0.65);
       backdrop-filter: blur(16px);
       border-radius: 16px;
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      box-shadow: 0 0 30px rgba(0, 242, 254, 0.15);
       flex-wrap: wrap;
     }
 
     .logo {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 800;
       letter-spacing: 2px;
       background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #00ff88 100%);
@@ -99,12 +100,12 @@
       text-transform: uppercase;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .logo-badge {
       font-size: 10px;
-      padding: 2px 8px;
+      padding: 3px 10px;
       background: rgba(0, 255, 136, 0.15);
       border: 1px solid var(--accent-green);
       color: var(--accent-green);
@@ -116,11 +117,11 @@
       display: none;
       align-items: center;
       gap: 12px;
-      background: rgba(0, 255, 136, 0.08);
+      background: rgba(0, 255, 136, 0.1);
       border: 1px solid var(--accent-green);
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: 30px;
-      box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
     }
 
     .user-status-box.active {
@@ -128,8 +129,8 @@
     }
 
     .status-dot {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       background-color: var(--accent-green);
       border-radius: 50%;
       box-shadow: 0 0 10px var(--accent-green);
@@ -137,15 +138,15 @@
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.2); }
     }
 
     .btn-logout {
       background: transparent;
       border: 1px solid #ff4b5c;
       color: #ff4b5c;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 20px;
       font-size: 11px;
       font-weight: 600;
@@ -156,18 +157,19 @@
     .btn-logout:hover {
       background: #ff4b5c;
       color: #fff;
+      box-shadow: 0 0 10px rgba(255, 75, 92, 0.5);
     }
 
-    /* NAVEGACIÓN FUTURISTA */
+    /* MENÚ DE NAVEGACIÓN */
     nav {
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(121, 40, 202, 0.4);
       min-height: 65px;
       margin-top: 15px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 10px 25px;
-      background: rgba(15, 23, 42, 0.4);
+      background: rgba(15, 23, 42, 0.45);
       backdrop-filter: blur(12px);
       border-radius: 14px;
     }
@@ -181,7 +183,7 @@
 
     .menu-links a, .btn-auth-trigger {
       display: block;
-      padding: 8px 18px;
+      padding: 9px 20px;
       text-decoration: none;
       color: var(--text-muted);
       border: 1px solid transparent;
@@ -194,32 +196,32 @@
 
     .menu-links a:hover {
       color: var(--border-cyan);
-      border-color: rgba(0, 242, 254, 0.3);
-      background: rgba(0, 242, 254, 0.05);
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
+      border-color: var(--border-cyan);
+      background: rgba(0, 242, 254, 0.08);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
     }
 
     .btn-auth-trigger {
-      background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(121, 40, 202, 0.15));
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(121, 40, 202, 0.2));
       border: 1px solid var(--border-cyan);
       color: var(--border-cyan);
-      box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
     }
 
     .btn-auth-trigger:hover {
       background: linear-gradient(135deg, var(--border-cyan), var(--border-purple));
       color: #000;
-      box-shadow: 0 0 20px var(--glow-cyan);
+      box-shadow: 0 0 25px var(--glow-cyan);
       transform: translateY(-2px);
     }
 
-    /* HERO BLOCK / CONTENIDO PRINCIPAL CON CANVAS 3D INTERACTIVO */
+    /* SECCIÓN PRINCIPAL / HERO CON CANVAS 3D INTERACTIVO */
     main {
       margin-top: 20px;
     }
 
     .contenido-principal {
-      border: 1px solid rgba(0, 242, 254, 0.2);
+      border: 1px solid rgba(0, 242, 254, 0.3);
       min-height: 480px;
       padding: 30px;
       display: grid;
@@ -227,20 +229,19 @@
       gap: 30px;
       align-items: center;
       background: var(--bg-card);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
       border-radius: 16px;
-      position: relative;
-      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
 
     .canvas-container {
       width: 100%;
-      height: 380px;
-      border: 1px solid rgba(0, 242, 254, 0.3);
+      height: 400px;
+      border: 1px solid var(--border-cyan);
       border-radius: 12px;
       position: relative;
       background: #020617;
-      box-shadow: inset 0 0 30px rgba(0, 242, 254, 0.15);
+      box-shadow: inset 0 0 30px rgba(0, 242, 254, 0.2), 0 0 20px rgba(0, 242, 254, 0.15);
       overflow: hidden;
     }
 
@@ -257,23 +258,19 @@
       font-family: 'Fira Code', monospace;
       font-size: 11px;
       color: var(--accent-green);
-      background: rgba(3, 7, 18, 0.8);
-      padding: 6px 12px;
+      background: rgba(3, 7, 18, 0.85);
+      padding: 6px 14px;
       border-radius: 6px;
-      border: 1px solid rgba(0, 255, 136, 0.3);
+      border: 1px solid rgba(0, 255, 136, 0.4);
       pointer-events: none;
     }
 
-    .descripcion {
-      padding: 20px;
-    }
-
     .descripcion h1 {
-      font-size: 36px;
+      font-size: 38px;
       font-weight: 800;
-      line-height: 1.2;
+      line-height: 1.25;
       margin-bottom: 20px;
-      background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -290,7 +287,6 @@
       margin-bottom: 20px;
     }
 
-    /* BADGES DE SEGURIDAD MODERNA */
     .security-badges {
       display: flex;
       gap: 12px;
@@ -305,29 +301,26 @@
       font-size: 12px;
       font-family: 'Fira Code', monospace;
       color: var(--text-main);
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      padding: 6px 14px;
       border-radius: 8px;
-    }
-
-    .badge-item icon {
-      color: var(--accent-green);
     }
 
     /* LOS 7 MÓDULOS DE SEGURIDAD */
     .seccion-modulos {
       margin-top: 25px;
-      border: 1px solid rgba(121, 40, 202, 0.3);
+      border: 1px solid rgba(121, 40, 202, 0.4);
       padding: 35px;
       background: var(--bg-card);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
       border-radius: 16px;
+      box-shadow: 0 0 30px rgba(121, 40, 202, 0.15);
     }
 
     .seccion-modulos h2 {
       color: var(--text-main);
-      font-size: 26px;
+      font-size: 28px;
       margin-bottom: 25px;
       text-align: center;
       letter-spacing: 1px;
@@ -344,18 +337,17 @@
     }
 
     .modulo-card {
-      background: rgba(3, 7, 18, 0.6);
+      background: rgba(3, 7, 18, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 12px;
-      padding: 22px;
+      padding: 24px;
       transition: all 0.3s ease;
-      position: relative;
     }
 
     .modulo-card:hover {
       border-color: var(--border-cyan);
-      box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
-      transform: translateY(-4px);
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
+      transform: translateY(-5px);
     }
 
     .modulo-card .modulo-num {
@@ -372,11 +364,152 @@
     }
 
     .modulo-card p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    /* GALERÍA DE OPERACIONES CON ILUSTRACIONES VECTORIALES SVG INLINE */
+    .seccion-galeria {
+      margin-top: 25px;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      padding: 35px;
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      border-radius: 16px;
+    }
+
+    .seccion-galeria h2 {
+      margin-bottom: 25px;
+      color: var(--border-cyan);
+      font-size: 26px;
+      text-align: center;
+    }
+
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .galeria-card {
+      height: 220px;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #020617;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease;
+    }
+
+    .galeria-card svg {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.4s ease;
+    }
+
+    .galeria-card:hover {
+      border-color: var(--accent-green);
+      box-shadow: 0 0 25px rgba(0, 255, 136, 0.3);
+    }
+
+    .galeria-card:hover svg {
+      transform: scale(1.06);
+    }
+
+    .galeria-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px;
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(6px);
+      color: var(--accent-green);
+      font-size: 12px;
+      font-weight: 700;
+      font-family: 'Fira Code', monospace;
+      text-align: center;
+      border-top: 1px solid rgba(0, 255, 136, 0.3);
+    }
+
+    /* MAPA INTERACTIVO Y CALCULADORA DE RIESGO */
+    .seccion-interactive {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .panel-box {
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      padding: 25px;
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      border-radius: 16px;
+    }
+
+    .panel-box h3 {
+      color: var(--border-cyan);
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .threat-map-simulator {
+      height: 200px;
+      background: #020617;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ping-circle {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border: 1px solid var(--border-cyan);
+      border-radius: 50%;
+      animation: ping 3s infinite;
+    }
+
+    @keyframes ping {
+      0% { transform: scale(0.2); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
+    .calc-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .calc-row label {
       font-size: 13px;
       color: var(--text-muted);
     }
 
-    /* SECCIÓN SEGUNDARIA: TERMINAL Y GALERÍA */
+    .calc-row input[type="range"] {
+      width: 100%;
+      accent-color: var(--border-cyan);
+    }
+
+    .result-score {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-green);
+      font-family: 'Fira Code', monospace;
+    }
+
+    /* CONSOLA TERMINAL INTERACTIVA EN VIVO */
     .contenedores-inferiores {
       margin-top: 25px;
       display: grid;
@@ -384,36 +517,17 @@
       gap: 25px;
     }
 
-    .tarjeta-panel {
-      border: 1px solid rgba(0, 242, 254, 0.2);
-      padding: 25px;
-      background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
-    }
-
-    .tarjeta-panel h2 {
-      font-size: 20px;
-      color: var(--border-cyan);
-      margin-bottom: 15px;
-    }
-
-    /* CONSOLA TERMINAL INTERACTIVA */
     .terminal-box {
       background: #020617;
-      border: 1px solid rgba(0, 255, 136, 0.3);
-      border-radius: 8px;
+      border: 1px solid var(--accent-green);
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+      border-radius: 10px;
       padding: 15px;
       font-family: 'Fira Code', monospace;
       font-size: 12px;
       height: 220px;
       overflow-y: auto;
       color: var(--accent-green);
-    }
-
-    .terminal-output p {
-      margin-bottom: 4px;
-      line-height: 1.4;
     }
 
     .terminal-input-line {
@@ -431,39 +545,37 @@
       width: 100%;
     }
 
-    /* GALERÍA TECH */
-    .galeria-grid-mod {
+    .tech-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
     }
 
-    .tech-box {
+    .tech-card {
       background: rgba(3, 7, 18, 0.8);
       border: 1px solid rgba(255, 255, 255, 0.08);
       padding: 15px;
-      border-radius: 8px;
+      border-radius: 10px;
       text-align: center;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
 
-    .tech-box:hover {
+    .tech-card:hover {
       border-color: var(--accent-green);
       background: rgba(0, 255, 136, 0.05);
     }
 
-    .tech-box h4 {
+    .tech-card h4 {
       color: var(--accent-green);
-      font-size: 14px;
-      margin-bottom: 5px;
+      font-size: 16px;
+      margin-bottom: 4px;
     }
 
-    .tech-box p {
-      font-size: 11px;
+    .tech-card p {
+      font-size: 12px;
       color: var(--text-muted);
     }
 
-    /* FOOTER */
     footer {
       margin-top: 30px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -473,7 +585,7 @@
       font-size: 13px;
     }
 
-    /* MODAL DE AUTENTICACIÓN CON 2FA/MFA */
+    /* MODAL DE AUTENTICACIÓN CON TOTP / 2FA */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -481,7 +593,7 @@
       width: 100%;
       height: 100%;
       background: rgba(2, 6, 23, 0.85);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
       display: none;
       justify-content: center;
       align-items: center;
@@ -491,7 +603,7 @@
     .modal-contenido {
       background: #0b1329;
       border: 1px solid var(--border-cyan);
-      box-shadow: 0 0 30px rgba(0, 242, 254, 0.25);
+      box-shadow: 0 0 35px rgba(0, 242, 254, 0.3);
       border-radius: 16px;
       width: min(440px, 90%);
       padding: 30px;
@@ -585,7 +697,7 @@
     }
 
     @media (max-width: 900px) {
-      .contenido-principal, .contenedores-inferiores {
+      .contenido-principal, .contenedores-inferiores, .seccion-interactive, .galeria-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -596,123 +708,213 @@
   <!-- TICKER DE SEGURIDAD EN TIEMPO REAL -->
   <div class="threat-ticker">
     <div class="ticker-content">
-      [SISTEMA OK] Nodos globales operando al 100% &nbsp;&nbsp;|&nbsp;&nbsp; 
-      [MITIGADO] Ataque DDoS de 1.2 Tbps bloqueado por AI Shield &nbsp;&nbsp;|&nbsp;&nbsp; 
-      [ALERTA SOC] Nueva firma de vulnerabilidad Zero-Day detectada y parcheada &nbsp;&nbsp;|&nbsp;&nbsp;
-      [CERT] Cumplimiento de estándar ISO/IEC 27001 & SOC2 verificado.
+      [SISTEMA GLOBAL OK] Nodos SOC operando al 100% &nbsp;&nbsp;|&nbsp;&nbsp; 
+      [DEFENSA EN TIEMPO REAL] Ataque DDoS de 1.4 Tbps mitigado exitosamente &nbsp;&nbsp;|&nbsp;&nbsp; 
+      [ALERTA ZERO-DAY] Parche heurístico desplegado en 4,200 servidores &nbsp;&nbsp;|&nbsp;&nbsp;
+      [AUDITORÍA CERTIFICADA] Cumplimiento de estándares ISO/IEC 27001 & SOC2 Tipo II.
     </div>
   </div>
 
   <div class="pagina">
 
-    <!-- HEADER -->
+    <!-- ENCABEZADO -->
     <header>
       <div class="logo">
         CYBERGUARD
-        <span class="logo-badge">v3.0 Secure</span>
+        <span class="logo-badge">v3.5 Active</span>
       </div>
 
-      <!-- ESTADO DE SESIÓN DENTRO DE CABECERA -->
+      <!-- ESTADO DE SESIÓN -->
       <div class="user-status-box" id="userStatusBox">
         <div class="status-dot"></div>
         <div style="font-size: 13px; color: var(--text-main);">
-          Autenticado: <strong id="userNameDisplay" style="color: var(--border-cyan);">Admin</strong>
+          Sesión iniciada: <strong id="userNameDisplay" style="color: var(--border-cyan);">Admin</strong>
         </div>
         <button class="btn-logout" id="btnLogout">Cerrar Sesión</button>
       </div>
     </header>
 
-    <!-- NAVEGACIÓN -->
+    <!-- BARRA DE NAVEGACIÓN -->
     <nav>
-      <div style="font-weight: 700; font-size: 15px; color: var(--text-main);">Console Navigation</div>
+      <div style="font-weight: 700; font-size: 15px; color: var(--text-main);">Panel de Control</div>
       <ul class="menu-links">
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#modulos">7 Módulos</a></li>
-        <li><a href="#terminal">Terminal SOC</a></li>
-        <li><button class="btn-auth-trigger" id="openAuthModal">Iniciar Sesión / Registro</button></li>
+        <li><a href="#galeria">Infraestructura</a></li>
+        <li><a href="#simulador">Analítica SOC</a></li>
+        <li><button class="btn-auth-trigger" id="openAuthModal">Acceso / Registro</button></li>
       </ul>
     </nav>
 
-    <!-- MAIN HERO CONTENT -->
+    <!-- BLOQUE PRINCIPAL CON CANVAS 3D INTERACTIVO -->
     <main id="inicio">
       <section class="contenido-principal">
         
-        <!-- NODO 3D INTERACTIVO CANVAS (Sustituye imágenes externas caídas) -->
+        <!-- NODO CIBERNÉTICO 3D (Renderizado en Canvas HTML5 nativo) -->
         <div class="canvas-container">
           <canvas id="cyberCanvas"></canvas>
           <div class="canvas-overlay-text">
-            &gt; REAL-TIME THREAT MATRIX ENGINE | ACTIVE NODES: 85
+            &gt; REAL-TIME THREAT MATRIX ENGINE | ACTIVE NODES: 96
           </div>
         </div>
 
         <article class="descripcion">
-          <h1>Protección Autónomo-Predictiva <span>Next-Gen</span></h1>
+          <h1>Plataforma de Defensa <span>Cibernética Autónoma</span></h1>
           <p>
-            Salvaguardamos la infraestructura crítica mediante inteligencia artificial adaptativa y análisis conductual capaz de neutralizing amenazas antes de su ejecución.
+            Implementamos modelos heurísticos avanzadados e inteligencia artificial para interceptar vectores de ataque complejos y salvaguardar su infraestructura crítica en milisegundos.
           </p>
           
           <div class="security-badges">
-            <div class="badge-item">🔒 Zero-Trust Core</div>
+            <div class="badge-item">🛡️ Zero-Trust Core</div>
             <div class="badge-item">⚡ SOC 24/7 AI-Response</div>
-            <div class="badge-item">🛡️ Quantum AES-256</div>
+            <div class="badge-item">🔒 Quantum-Proof AES-256</div>
           </div>
         </article>
 
       </section>
 
-      <!-- SECCIÓN: LOS 7 MÓDULOS DE SEGURIDAD -->
+      <!-- SECCIÓN: LOS 7 MÓDULOS FUNDAMENTALES DE CIBERSEGURIDAD -->
       <section class="seccion-modulos" id="modulos">
-        <h2>Los <span>7 Módulos de Seguridad</span> Integral</h2>
+        <h2>Los <span>7 Módulos Fundamentales</span> de Seguridad</h2>
         <div class="grid-modulos">
           <article class="modulo-card">
             <div class="modulo-num">MOD_01 // IAM</div>
-            <h3>Gestión de Identidad (IAM)</h3>
-            <p>Control dinámico de accesos Zero-Trust, MFA adaptativo y gestión centralizada de privilegios.</p>
+            <h3>Gestión IAM Zero-Trust</h3>
+            <p>Control de acceso basado en roles (RBAC), autenticación multifactor adaptativa (MFA) y verificación continua de identidades.</p>
           </article>
           <article class="modulo-card">
             <div class="modulo-num">MOD_02 // CRYPTO</div>
-            <h3>Cifrado Resistente</h3>
-            <p>Cifrado de datos end-to-end con algoritmos post-cuánticos AES-256 y rotación automatizada de claves.</p>
+            <h3>Cifrado Cuántico de Datos</h3>
+            <p>Protección en reposo y en tránsito mediante algoritmos AES-256 y protocolos criptográficos post-cuánticos.</p>
           </article>
           <article class="modulo-card">
             <div class="modulo-num">MOD_03 // PERIMETER</div>
-            <h3>Defensa Perimetral IPS</h3>
-            <p>Micro-segmentación de red y Firewalls de Nueva Generación (NGFW) impulsados por deep learning.</p>
+            <h3>Seguridad de Red IPS/NGFW</h3>
+            <p>Firewalls de nueva generación con microsegmentación perimetral y mitigación activa de intrusiones.</p>
           </article>
           <article class="modulo-card">
             <div class="modulo-num">MOD_04 // THREATS</div>
-            <h3>Gestión de Vulnerabilidades</h3>
-            <p>Escaneo automatizado en pipelines DevSecOps y remediación basada en riesgos prioritarios.</p>
+            <h3>Gestión de Amenazas 0-Day</h3>
+            <p>Escaneo automatizado de vulnerabilidades en pipelines DevSecOps y parcheo proactivo de fallos de seguridad.</p>
           </article>
           <article class="modulo-card">
             <div class="modulo-num">MOD_05 // SOC</div>
-            <h3>SOC & SIEM Inteligente</h3>
-            <p>Centro de Operaciones con orquestación SOAR para contención de incidentes en tiempo menor a 60 segundos.</p>
+            <h3>Centro SOC & Orquestación SIEM</h3>
+            <p>Monitoreo unificado 24/7 con respuesta automatizada SOAR ante incidentes críticos de infraestructura.</p>
           </article>
           <article class="modulo-card">
             <div class="modulo-num">MOD_06 // CLOUD</div>
-            <h3>Seguridad en la Nube</h3>
-            <p>Protección nativa multi-cloud, monitoreo continuo de posture (CSPM) y seguridad en APIs REST/gRPC.</p>
+            <h3>Protección Cloud & API</h3>
+            <p>Auditoría de posture en entornos multicloud (CSPM) y blindaje de endpoints y APIs públicas/privadas.</p>
           </article>
           <article class="modulo-card">
             <div class="modulo-num">MOD_07 // DRP</div>
-            <h3>Resiliencia & Backup BCP</h3>
-            <p>Copias de seguridad inmutables a prueba de Ransomware y recuperación ante desastres automatizada.</p>
+            <h3>Resiliencia BCP & Backup Inmutable</h3>
+            <p>Continuidad operativa con respaldos anti-ransomware y restauración inmediata ante desastres.</p>
           </article>
         </div>
       </section>
 
-      <!-- CONTENEDORES INFERIORES: TERMINAL Y PLATAFORMA -->
-      <section class="contenedores-inferiores" id="terminal">
+      <!-- SECCIÓN GALERÍA CON ILUSTRACIONES VECTORIALES SVG INLINE ENLUSTRECIDAS (¡SIEMPRE CARGAN!) -->
+      <section class="seccion-galeria" id="galeria">
+        <h2>Galería de Operaciones & Infraestructura</h2>
+
+        <div class="galeria-grid">
+          <!-- Tarjeta 1: Ethical Hacking -->
+          <div class="galeria-card">
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="200" fill="#020617"/>
+              <path d="M50 40 H250 V160 H50 Z" fill="none" stroke="#00f2fe" stroke-width="2"/>
+              <text x="65" y="70" fill="#00ff88" font-family="monospace" font-size="12">&gt; ethical_hacking --scan</text>
+              <text x="65" y="95" fill="#4facfe" font-family="monospace" font-size="11">[+] Exploit vector payload ok</text>
+              <text x="65" y="115" fill="#94a3b8" font-family="monospace" font-size="11">[+] Bypass WAF rule #402</text>
+              <text x="65" y="135" fill="#00ff88" font-family="monospace" font-size="11">[SUCCESS] System Secured</text>
+              <circle cx="230" cy="70" r="6" fill="#00ff88"/>
+            </svg>
+            <div class="galeria-caption">Ethical Hacking & Matrix</div>
+          </div>
+
+          <!-- Tarjeta 2: Centro SOC 24/7 -->
+          <div class="galeria-card">
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="200" fill="#020617"/>
+              <circle cx="150" cy="100" r="70" fill="none" stroke="#7928ca" stroke-width="2"/>
+              <circle cx="150" cy="100" r="45" fill="none" stroke="#00f2fe" stroke-width="1.5" stroke-dasharray="4"/>
+              <line x1="150" y1="30" x2="150" y2="170" stroke="#00f2fe" stroke-opacity="0.4"/>
+              <line x1="80" y1="100" x2="220" y2="100" stroke="#00f2fe" stroke-opacity="0.4"/>
+              <circle cx="170" cy="80" r="4" fill="#00ff88"/>
+              <circle cx="130" cy="125" r="4" fill="#00f2fe"/>
+            </svg>
+            <div class="galeria-caption">Centro SOC Monitor 24/7</div>
+          </div>
+
+          <!-- Tarjeta 3: Infraestructura & Firewall -->
+          <div class="galeria-card">
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="200" fill="#020617"/>
+              <path d="M150 40 L210 70 V120 L150 160 L90 120 V70 Z" fill="rgba(0, 242, 254, 0.1)" stroke="#00f2fe" stroke-width="2"/>
+              <path d="M150 60 L190 80 V115 L150 140 L110 115 V80 Z" fill="rgba(0, 255, 136, 0.15)" stroke="#00ff88" stroke-width="1.5"/>
+              <circle cx="150" cy="100" r="10" fill="#00ff88"/>
+            </svg>
+            <div class="galeria-caption">Infraestructura & Firewall</div>
+          </div>
+
+          <!-- Tarjeta 4: Threat Intelligence -->
+          <div class="galeria-card">
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="200" fill="#020617"/>
+              <polyline points="40,140 90,110 140,130 190,70 250,90" fill="none" stroke="#00f2fe" stroke-width="3"/>
+              <polyline points="40,150 90,130 140,145 190,110 250,120" fill="none" stroke="#7928ca" stroke-width="2" stroke-dasharray="3"/>
+              <circle cx="190" cy="70" r="5" fill="#00ff88"/>
+              <circle cx="250" cy="90" r="5" fill="#00f2fe"/>
+            </svg>
+            <div class="galeria-caption">Threat Intelligence AI</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN INTERACTIVA: MAPA SIMULADO Y CALCULADORA DE RESILIENCIA -->
+      <section class="seccion-interactive" id="simulador">
+        
+        <!-- MONITOREO DE PAQUETES EN VIVO -->
+        <article class="panel-box">
+          <h3>Monitor de Amenazas Globales</h3>
+          <div class="threat-map-simulator">
+            <div class="ping-circle"></div>
+            <div style="font-family: monospace; color: var(--accent-green); font-size: 14px; z-index: 2;">
+              [PKT_BLOCK: 99.98%]
+            </div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 6px; z-index: 2;">
+              Filtro Activo: IPs sospechosas bloqueadas en tiempo real.
+            </div>
+          </div>
+        </article>
+
+        <!-- CALCULADORA DE RESILIENCIA Y RIESGO -->
+        <article class="panel-box">
+          <h3>Calculadora de Madurez en Ciberseguridad</h3>
+          <div class="calc-row">
+            <label for="empRange">Número de Usuarios / Servidores: <span id="empVal" style="color:#00f2fe">50</span></label>
+            <input type="range" id="empRange" min="10" max="1000" value="50">
+          </div>
+          <div class="result-score" id="scoreResult">
+            Nivel de Protección Sugerido: Tier 2 (Shield Plus)
+          </div>
+        </article>
+
+      </section>
+
+      <!-- CONTENEDORES INFERIORES: TERMINAL Y MÉTRICAS -->
+      <section class="contenedores-inferiores">
         
         <!-- TERMINAL INTERACTIVA EN VIVO -->
-        <article class="tarjeta-panel">
-          <h2>Consola de Diagnóstico SOC</h2>
-          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Escribe comandos como <code>help</code>, <code>status</code>, o <code>scan</code>:</p>
+        <article class="panel-box">
+          <h3>Consola de Diagnóstico SOC</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Prueba ingresar comandos como <code>help</code>, <code>status</code>, <code>scan</code> o <code>matrix</code>:</p>
           <div class="terminal-box" id="terminalBox">
-            <div class="terminal-output" id="terminalOutput">
-              <p>[CYBERGUARD OS v3.0 - Terminal de Diagnóstico Init]</p>
-              <p>Type 'help' for a list of available security commands.</p>
+            <div id="terminalOutput">
+              <p>[CYBERGUARD OS v3.5 - Terminal Activa]</p>
+              <p>Escribe 'help' para listar los comandos disponibles.</p>
             </div>
             <div class="terminal-input-line">
               <span>root@cyberguard:~#</span>
@@ -721,39 +923,41 @@
           </div>
         </article>
 
-        <!-- PANELES TECNOLÓGICOS -->
-        <article class="tarjeta-panel">
-          <h2>Métricas del Sistema</h2>
-          <div class="galeria-grid-mod">
-            <div class="tech-box">
+        <!-- MÉTRICAS DE PLATAFORMA -->
+        <article class="panel-box">
+          <h3>Métricas del Sistema</h3>
+          <div class="tech-grid">
+            <div class="tech-card">
               <h4>99.999%</h4>
               <p>Disponibilidad SLA</p>
             </div>
-            <div class="tech-box">
-              <h4>&lt; 15 ms</h4>
-              <p>Latencia de Filtrado</p>
+            <div class="tech-card">
+              <h4>&lt; 10 ms</h4>
+              <p>Latencia de Inspección</p>
             </div>
-            <div class="tech-box">
-              <h4>0-Day Protection</h4>
-              <p>IA Motor Heurístico</p>
+            <div class="tech-card">
+              <h4>0-Day Shield</h4>
+              <p>Heurística Activa</p>
             </div>
-            <div class="tech-box">
-              <h4>2FA Mandatory</h4>
-              <p>Criterio de Acceso</p>
+            <div class="tech-card">
+              <h4>MFA Obligatorio</h4>
+              <p>Políticas Zero-Trust</p>
             </div>
           </div>
         </article>
 
       </section>
+
     </main>
 
+    <!-- PIE DE PÁGINA -->
     <footer>
-      <p>© 2026 CYBERGUARD Platform | ISO 27001 Certified Architecture</p>
+      <p>© 2026 CYBERGUARD Platform | ISO 27001 & SOC2 Certified Architecture</p>
     </footer>
 
   </div>
 
-  <!-- MODAL DE INICIO DE SESIÓN / REGISTRO -->
+  <!-- MODAL DE INICIO DE SESIÓN / REGISTRO (CON 2FA) -->
   <div class="modal-overlay" id="authModal">
     <div class="modal-contenido">
       <span class="cerrar-modal" id="closeAuthModal">&times;</span>
@@ -770,14 +974,14 @@
           <input type="text" id="loginUser" required placeholder="analista@cyberguard.com">
         </div>
         <div class="grupo-input">
-          <label for="loginPass">Contraseña Segura</label>
+          <label for="loginPass">Contraseña Criptográfica</label>
           <input type="password" id="loginPass" required placeholder="••••••••••••">
         </div>
         <div class="grupo-input">
           <label for="loginMfa">Código TOTP / 2FA (6 dígitos)</label>
-          <input type="text" id="loginMfa" placeholder="123 456" maxlength="6">
+          <input type="text" id="loginMfa" placeholder="849 201" maxlength="6">
         </div>
-        <button type="submit" class="btn-submit">Ingresar al Panel</button>
+        <button type="submit" class="btn-submit">Acceder al Panel</button>
       </form>
 
       <!-- FORMULARIO REGISTRO -->
@@ -788,10 +992,10 @@
         </div>
         <div class="grupo-input">
           <label for="regEmail">Correo Corporativo</label>
-          <input type="email" id="regEmail" required placeholder="correo@empresa.com">
+          <input type="email" id="regEmail" required placeholder="usuario@empresa.com">
         </div>
         <div class="grupo-input">
-          <label for="regPass">Contraseña Criptográfica</label>
+          <label for="regPass">Contraseña Segura</label>
           <input type="password" id="regPass" required placeholder="••••••••••••">
         </div>
         <button type="submit" class="btn-submit">Crear Cuenta Segura</button>
@@ -799,7 +1003,7 @@
     </div>
   </div>
 
-  <!-- SCRIPT ENGINE: CANVAS 3D, TERMINAL Y AUTENTICACIÓN -->
+  <!-- SCRIPTS LÓGICA ENGINE -->
   <script>
     /* 1. MOTOR NATIVO HTML5 CANVAS 3D PARA EL BLOQUE PRINCIPAL */
     const canvas = document.getElementById('cyberCanvas');
@@ -813,16 +1017,16 @@
     window.addEventListener('resize', resizeCanvas);
 
     const particles = [];
-    const particleCount = 45;
+    const particleCount = 50;
     let mouse = { x: null, y: null };
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 1.2,
-        vy: (Math.random() - 0.5) * 1.2,
-        radius: Math.random() * 2 + 1
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: (Math.random() - 0.5) * 1.5,
+        radius: Math.random() * 2 + 1.5
       });
     }
 
@@ -835,7 +1039,6 @@
     function animateCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Dibujar partículas y conexiones
       for (let i = 0; i < particles.length; i++) {
         let p = particles[i];
         p.x += p.vx;
@@ -849,32 +1052,30 @@
         ctx.fillStyle = '#00f2fe';
         ctx.fill();
 
-        // Interacción con mouse
         if (mouse.x && mouse.y) {
           let dx = mouse.x - p.x;
           let dy = mouse.y - p.y;
           let dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 100) {
+          if (dist < 110) {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(mouse.x, mouse.y);
-            ctx.strokeStyle = `rgba(0, 255, 136, ${1 - dist / 100})`;
+            ctx.strokeStyle = `rgba(0, 255, 136, ${1 - dist / 110})`;
             ctx.stroke();
           }
         }
 
-        // Conectar puntos cercanos
         for (let j = i + 1; j < particles.length; j++) {
           let p2 = particles[j];
           let dx = p.x - p2.x;
           let dy = p.y - p2.y;
           let dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 90) {
+          if (dist < 95) {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(0, 242, 254, ${0.25 - dist / 360})`;
+            ctx.strokeStyle = `rgba(0, 242, 254, ${0.3 - dist / 315})`;
             ctx.stroke();
           }
         }
@@ -898,23 +1099,42 @@
 
         let res = document.createElement('p');
         if (cmd === 'help') {
-          res.innerHTML = "Comandos disponibles: <br>&nbsp;&nbsp;<b>status</b> - Verifica estado de la red<br>&nbsp;&nbsp;<b>scan</b> - Ejecuta escaneo de vulnerabilidades<br>&nbsp;&nbsp;<b>clear</b> - Limpia la consola";
+          res.innerHTML = "Comandos disponibles: <br>&nbsp;&nbsp;<b>status</b> - Estado de la red<br>&nbsp;&nbsp;<b>scan</b> - Escaneo heurístico de puertos<br>&nbsp;&nbsp;<b>matrix</b> - Efecto cibernético<br>&nbsp;&nbsp;<b>clear</b> - Limpia la pantalla";
         } else if (cmd === 'status') {
-          res.innerHTML = "<span style='color:#00ff88'>[OK] Todos los cortafuegos operativos. 0 amenazas activas.</span>";
+          res.innerHTML = "<span style='color:#00ff88'>[OK] Cortafuegos perimetrales operativos. 0 amenazas detectadas.</span>";
         } else if (cmd === 'scan') {
-          res.innerHTML = "[...] Escaneando puertos... 0 brechas encontradas. Protección al 100%.";
+          res.innerHTML = "[...] Escaneando 65,535 puertos... Sistema 100% Blindado.";
+        } else if (cmd === 'matrix') {
+          res.innerHTML = "<span style='color:#00ff88'>01000011 01011001 01000010 01000101 01010010 01000111 01010101 01000001 01010010 01000100</span>";
         } else if (cmd === 'clear') {
           terminalOutput.innerHTML = '';
           return;
         } else {
-          res.innerHTML = `Comando no reconocido: '${cmd}'. Escribe 'help'.`;
+          res.innerHTML = `Comando desconocido: '${cmd}'. Escribe 'help'.`;
         }
         terminalOutput.appendChild(res);
         terminalOutput.parentElement.scrollTop = terminalOutput.parentElement.scrollHeight;
       }
     });
 
-    /* 3. LÓGICA DE USUARIOS Y MODAL */
+    /* 3. CALCULADORA DINÁMICA DE MADUREZ */
+    const empRange = document.getElementById('empRange');
+    const empVal = document.getElementById('empVal');
+    const scoreResult = document.getElementById('scoreResult');
+
+    empRange.addEventListener('input', (e) => {
+      const val = e.target.value;
+      empVal.textContent = val;
+      if (val < 100) {
+        scoreResult.textContent = "Nivel de Protección Sugerido: Tier 1 (Essential Shield)";
+      } else if (val < 500) {
+        scoreResult.textContent = "Nivel de Protección Sugerido: Tier 2 (Pro SOC 24/7)";
+      } else {
+        scoreResult.textContent = "Nivel de Protección Sugerido: Tier 3 (Enterprise Zero-Trust)";
+      }
+    });
+
+    /* 4. AUTENTICACIÓN Y ESTADO DE USUARIO EN CABECERA */
     const modal = document.getElementById('authModal');
     const openBtn = document.getElementById('openAuthModal');
     const closeBtn = document.getElementById('closeAuthModal');
@@ -963,7 +1183,7 @@
 
     btnLogout.addEventListener('click', () => {
       userStatusBox.classList.remove('active');
-      openBtn.textContent = 'Iniciar Sesión / Registro';
+      openBtn.textContent = 'Acceso / Registro';
     });
   </script>
 </body>
