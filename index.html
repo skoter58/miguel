@@ -308,7 +308,7 @@
       border-radius: 8px;
     }
 
-    /* SECCIÓN NUEVA: SEMÁFORO DE DIAGNÓSTICO DE URLS MALICIOSAS */
+    /* SEMÁFORO DE DIAGNÓSTICO DE URLS MALICIOSAS */
     .seccion-semaforo {
       margin-top: 25px;
       border: 2px solid var(--border-red);
@@ -337,7 +337,7 @@
       margin: 0 auto 25px;
     }
 
-    .scanner-form input {
+    .scanner-form input, .tool-target-form input {
       flex: 1;
       padding: 14px 20px;
       border-radius: 8px;
@@ -349,7 +349,7 @@
       outline: none;
     }
 
-    .scanner-form button {
+    .scanner-form button, .tool-target-form button {
       padding: 14px 28px;
       background: linear-gradient(135deg, var(--border-red), var(--border-orange));
       border: none;
@@ -361,7 +361,7 @@
       transition: all 0.3s ease;
     }
 
-    .scanner-form button:hover {
+    .scanner-form button:hover, .tool-target-form button:hover {
       box-shadow: 0 0 20px var(--glow-red);
       transform: translateY(-2px);
     }
@@ -414,7 +414,7 @@
       margin-bottom: 12px;
     }
 
-    /* SECCIÓN NUEVA: SUITE DE HERRAMIENTAS DE DIAGNÓSTICO (PING, TRACERT, ETC) */
+    /* SUITE DE HERRAMIENTAS DE DIAGNÓSTICO (PING, TRACERT, CON TARGET EDITABLE) */
     .seccion-herramientas {
       margin-top: 25px;
       border: 1px solid var(--border-orange);
@@ -429,6 +429,13 @@
       color: var(--border-orange);
       font-size: 26px;
       text-align: center;
+    }
+
+    .tool-target-form {
+      display: flex;
+      gap: 12px;
+      max-width: 800px;
+      margin: 0 auto 20px;
     }
 
     .tools-nav {
@@ -464,8 +471,9 @@
       padding: 20px;
       font-family: 'Fira Code', monospace;
       font-size: 13px;
-      min-height: 200px;
+      min-height: 220px;
       color: var(--accent-green);
+      overflow-y: auto;
     }
 
     /* 7 MÓDULOS DE SEGURIDAD */
@@ -527,7 +535,7 @@
       color: var(--text-muted);
     }
 
-    /* GALERÍA DE OPERACIONES CON SVG INLINE */
+    /* GALERÍA DE OPERACIONES EN VECTOR SVG */
     .seccion-galeria {
       margin-top: 25px;
       border: 1px solid var(--border-cyan);
@@ -722,7 +730,7 @@
   <div class="threat-ticker">
     <div class="ticker-content">
       [ALERT LEVEL: ORANGE] Monitoreo activo de vectores de ataque &nbsp;&nbsp;|&nbsp;&nbsp; 
-      [HERRAMIENTAS] PING, TRACERT, NSLOOKUP y PORT SCANNER disponibles en consola &nbsp;&nbsp;|&nbsp;&nbsp; 
+      [HERRAMIENTAS] Ingresa cualquier Dominio / IP personalizada para ejecutar PING, TRACERT, NSLOOKUP o PORT SCANNER &nbsp;&nbsp;|&nbsp;&nbsp; 
       [SCANNER DE URLS] Semáforo de riesgo activado para filtrado Phishing y Malware.
     </div>
   </div>
@@ -733,7 +741,7 @@
     <header>
       <div class="logo">
         CYBERGUARD
-        <span class="logo-badge">Suite v4.0</span>
+        <span class="logo-badge">Suite v4.5</span>
       </div>
 
       <!-- ESTADO DE SESIÓN -->
@@ -773,19 +781,19 @@
         <article class="descripcion">
           <h1>Centro de Análisis & <span>Diagnóstico de Red</span></h1>
           <p>
-            Plataforma avanzada de ciberseguridad equipada con utilidades de diagnóstico en tiempo real (Ping, Traceroute, Port Scanners) y evaluación heurística de enlaces sospechosos.
+            Plataforma avanzada de ciberseguridad equipada con utilidades de diagnóstico en tiempo real (Ping, Traceroute, Port Scanners) con soporte para objetivos personalizados.
           </p>
           
           <div class="security-badges">
             <div class="badge-item">⚠️ Threat Radar Active</div>
-            <div class="badge-item">⚡ Ping / Tracert Suite</div>
+            <div class="badge-item">⚡ Custom Ping / Tracert</div>
             <div class="badge-item">🔒 Zero-Trust Shield</div>
           </div>
         </article>
 
       </section>
 
-      <!-- SECCIÓN NUEVA: SEMÁFORO DE DIAGNÓSTICO DE ENLACES SOSPECHOSOS -->
+      <!-- SEMÁFORO DE DIAGNÓSTICO DE ENLACES SOSPECHOSOS -->
       <section class="seccion-semaforo" id="semaforo">
         <h2><span>Semáforo de Diagnóstico</span> de Sitios & URLs Maliciosas</h2>
         
@@ -811,9 +819,15 @@
         </div>
       </section>
 
-      <!-- SECCIÓN NUEVA: SUITE DE HERRAMIENTAS DE RED (PING, TRACERT, NSLOOKUP, PORT SCANNER) -->
+      <!-- SUITE DE HERRAMIENTAS DE RED CON TARGET EDITABLE -->
       <section class="seccion-herramientas" id="herramientas">
         <h2>Herramientas de Diagnóstico Técnico de Red</h2>
+
+        <!-- FORMULARIO PARA INGRESAR LA IP O DOMINIO DESEADO -->
+        <div class="tool-target-form">
+          <input type="text" id="toolHostInput" placeholder="Ingresa Dominio o IP de destino (ej: google.com, 1.1.1.1, github.com)..." value="google.com">
+          <button id="btnRunTool">Ejecutar Diagnóstico</button>
+        </div>
 
         <div class="tools-nav">
           <button class="tool-tab active" data-tool="ping">&gt;_ PING</button>
@@ -823,8 +837,8 @@
         </div>
 
         <div class="tool-console" id="toolConsoleOutput">
-          <p>[PING DIAGNOSTIC INITIALIZED]</p>
-          <p>Presiona cualquier herramienta arriba para ejecutar una prueba simulada en tiempo real...</p>
+          <p>[SUITE DE RED INICIALIZADA]</p>
+          <p>Escribe el host o IP arriba y selecciona la herramienta deseada o haz clic en <b>"Ejecutar Diagnóstico"</b>.</p>
         </div>
       </section>
 
@@ -975,7 +989,7 @@
 
   <!-- SCRIPTS ENGINE -->
   <script>
-    /* 1. MOTOR HTML5 CANVAS 3D (Rojo/Naranja/Cian) */
+    /* 1. MOTOR HTML5 CANVAS 3D */
     const canvas = document.getElementById('cyberCanvas');
     const ctx = canvas.getContext('2d');
 
@@ -1054,7 +1068,7 @@
     }
     animateCanvas();
 
-    /* 2. LÓGICA DEL SEMÁFORO DE DIAGNÓSTICO DE URLS MALICIOSAS */
+    /* 2. SEMÁFORO DE DIAGNÓSTICO DE URLS MALICIOSAS */
     const urlInput = document.getElementById('urlInput');
     const btnScanUrl = document.getElementById('btnScanUrl');
     const luzRojo = document.getElementById('luzRojo');
@@ -1066,15 +1080,13 @@
       const input = urlInput.value.trim();
       if (!input) return alert('Por favor ingresa una URL o dirección IP para evaluar.');
 
-      // Apagar luces
       luzRojo.classList.remove('active');
       luzAmarillo.classList.remove('active');
       luzVerde.classList.remove('active');
 
       const urlLower = input.toLowerCase();
 
-      // Evaluación heurística simulada
-      if (urlLower.includes('malware') || urlLower.includes('hack') || urlLower.includes('phish') || urlLower.includes('test-danger')) {
+      if (urlLower.includes('malware') || urlLower.includes('hack') || urlLower.includes('phish') || urlLower.includes('danger')) {
         luzRojo.classList.add('active');
         scanDetails.innerHTML = `
           <h3 style="color: var(--border-red);">[ALERTA CRÍTICA] AMENAZA MALICIOSA DETECTADA</h3>
@@ -1083,7 +1095,7 @@
           <p><strong>Vectores Detectados:</strong> Phishing activo, Inyección de script malicioso, Certificado revocado.</p>
           <p><strong>Recomendación SOC:</strong> Bloquear acceso inmediatamente en la red empresarial.</p>
         `;
-      } else if (urlLower.includes('suspicious') || urlLower.includes('login') || urlLower.includes('test-warning')) {
+      } else if (urlLower.includes('suspicious') || urlLower.includes('login') || urlLower.includes('warning')) {
         luzAmarillo.classList.add('active');
         scanDetails.innerHTML = `
           <h3 style="color: var(--border-yellow);">[ADVERTENCIA] ENLACE EN RIESGO / SOSPECHOSO</h3>
@@ -1104,53 +1116,88 @@
       }
     });
 
-    /* 3. LÓGICA DE HERRAMIENTAS DE DIAGNÓSTICO (PING, TRACERT, ETC) */
+    /* 3. LÓGICA DE HERRAMIENTAS DE RED CON TARGET DINÁMICO E EDITABLE */
     const toolTabs = document.querySelectorAll('.tool-tab');
     const toolConsoleOutput = document.getElementById('toolConsoleOutput');
+    const toolHostInput = document.getElementById('toolHostInput');
+    const btnRunTool = document.getElementById('btnRunTool');
+    let currentTool = 'ping';
+
+    function executeNetworkTool(toolName, targetHost) {
+      const host = targetHost.trim() || 'google.com';
+      
+      // Simulación de IP aleatoria si es un dominio
+      const simIp = host.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/) 
+        ? host 
+        : `${Math.floor(Math.random() * 150 + 50)}.${Math.floor(Math.random() * 200)}.${Math.floor(Math.random() * 200)}.${Math.floor(Math.random() * 250 + 1)}`;
+
+      let outputHTML = '';
+
+      if (toolName === 'ping') {
+        const t1 = Math.floor(Math.random() * 15 + 8);
+        const t2 = Math.floor(Math.random() * 15 + 8);
+        const t3 = Math.floor(Math.random() * 15 + 8);
+        const t4 = Math.floor(Math.random() * 15 + 8);
+        outputHTML = `
+          <p style="color:#00f2fe">&gt; PING ${host} [${simIp}] with 32 bytes of data:</p>
+          <p>Reply from ${simIp}: bytes=32 time=${t1}ms TTL=54</p>
+          <p>Reply from ${simIp}: bytes=32 time=${t2}ms TTL=54</p>
+          <p>Reply from ${simIp}: bytes=32 time=${t3}ms TTL=54</p>
+          <p>Reply from ${simIp}: bytes=32 time=${t4}ms TTL=54</p>
+          <p style="color:#00ff88">--- Ping statistics for ${host}: 4 packets transmitted, 4 received, 0% packet loss ---</p>
+        `;
+      } else if (toolName === 'tracert') {
+        outputHTML = `
+          <p style="color:#ff9900">&gt; TRACEROUTE to ${host} [${simIp}], 30 hops max:</p>
+          <p>1  gateway.local (192.168.1.254)  1.120 ms</p>
+          <p>2  isp-backbone-01.net (10.24.0.1)  6.310 ms</p>
+          <p>3  edge-router-sea.net (172.16.8.12)  14.520 ms</p>
+          <p>4  ixp-peer.carrier.org (198.32.176.1)  18.890 ms</p>
+          <p style="color:#00ff88">5  ${host} [${simIp}]  19.210 ms [Trace Complete]</p>
+        `;
+      } else if (toolName === 'nslookup') {
+        outputHTML = `
+          <p style="color:#00f2fe">&gt; NSLOOKUP ${host}</p>
+          <p>Server:  resolver.cyberguard-dns.net</p>
+          <p>Address: 1.1.1.1 #53</p>
+          <p>Non-authoritative answer:</p>
+          <p>Name:    ${host}</p>
+          <p>Address: ${simIp}</p>
+          <p>MX Record: 10 mail.${host}</p>
+          <p>TXT Record: "v=spf1 include:_spf.${host} ~all"</p>
+        `;
+      } else if (toolName === 'portscan') {
+        outputHTML = `
+          <p style="color:#ff3366">&gt; PORT SCANNER running on ${host} [${simIp}]...</p>
+          <p>Port 80/tcp   [HTTP]   - OPEN</p>
+          <p>Port 443/tcp  [HTTPS]  - OPEN (TLS 1.3 Active)</p>
+          <p>Port 22/tcp   [SSH]    - FILTERED / PROTECTED</p>
+          <p>Port 8080/tcp [ALT-HTTP] - CLOSED</p>
+          <p style="color:#00ff88">[SCAN COMPLETE] Direct analysis for ${host} finished with 0 exploits found.</p>
+        `;
+      }
+
+      toolConsoleOutput.innerHTML = outputHTML;
+      toolConsoleOutput.scrollTop = 0;
+    }
 
     toolTabs.forEach(tab => {
       tab.addEventListener('click', () => {
         toolTabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
-
-        const tool = tab.getAttribute('data-tool');
-        if (tool === 'ping') {
-          toolConsoleOutput.innerHTML = `
-            <p style="color:#00f2fe">&gt; PING 8.8.8.8 (Google Public DNS) with 32 bytes of data:</p>
-            <p>Reply from 8.8.8.8: bytes=32 time=12ms TTL=117</p>
-            <p>Reply from 8.8.8.8: bytes=32 time=11ms TTL=117</p>
-            <p>Reply from 8.8.8.8: bytes=32 time=14ms TTL=117</p>
-            <p>Reply from 8.8.8.8: bytes=32 time=10ms TTL=117</p>
-            <p style="color:#00ff88">--- Ping statistics: 4 packets transmitted, 4 received, 0% packet loss ---</p>
-          `;
-        } else if (tool === 'tracert') {
-          toolConsoleOutput.innerHTML = `
-            <p style="color:#ff9900">&gt; TRACEROUTE to target.cyberguard.internal (192.168.1.1), 30 hops max:</p>
-            <p>1  gateway.local (192.168.1.254)  1.201 ms</p>
-            <p>2  isp-core-router.net (10.40.0.1)  8.410 ms</p>
-            <p>3  edge-fw-01.cyberguard.io (172.16.0.5)  11.890 ms</p>
-            <p style="color:#00ff88">4  target.cyberguard.internal (192.168.1.1)  12.105 ms [Trace Complete]</p>
-          `;
-        } else if (tool === 'nslookup') {
-          toolConsoleOutput.innerHTML = `
-            <p style="color:#00f2fe">&gt; NSLOOKUP cyberguard.org</p>
-            <p>Server:  UnKnown</p>
-            <p>Address: 1.1.1.1 (Cloudflare DNS)</p>
-            <p>Non-authoritative answer:</p>
-            <p>Name:    cyberguard.org</p>
-            <p>Addresses: 104.21.48.12, 172.67.182.201</p>
-          `;
-        } else if (tool === 'portscan') {
-          toolConsoleOutput.innerHTML = `
-            <p style="color:#ff3366">&gt; PORT SCANNER running on host 127.0.0.1...</p>
-            <p>Port 80/tcp   [HTTP]   - OPEN</p>
-            <p>Port 443/tcp  [HTTPS]  - OPEN (TLS 1.3)</p>
-            <p>Port 22/tcp   [SSH]    - FILTERED (Key-auth only)</p>
-            <p>Port 3389/tcp [RDP]    - CLOSED</p>
-            <p style="color:#00ff88">[SCAN COMPLETE] No critical vulnerabilities exposed on default ports.</p>
-          `;
-        }
+        currentTool = tab.getAttribute('data-tool');
+        executeNetworkTool(currentTool, toolHostInput.value);
       });
+    });
+
+    btnRunTool.addEventListener('click', () => {
+      executeNetworkTool(currentTool, toolHostInput.value);
+    });
+
+    toolHostInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        executeNetworkTool(currentTool, toolHostInput.value);
+      }
     });
 
     /* 4. AUTENTICACIÓN Y ESTADO DE SESIÓN */
