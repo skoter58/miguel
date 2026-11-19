@@ -3,79 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Plataforma de Ciberseguridad, Tecnología e Innovación">
-  <title>CYBERGUARD | Ciberseguridad & Innovación</title>
+  <meta name="description" content="CYBERGUARD - Plataforma Elite de Ciberseguridad e Inteligencia de Amenazas">
+  <title>CYBERGUARD | Next-Gen Security & Threat Intelligence</title>
+
+  <!-- Fuentes Futuristas y Tipografía Monospace -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 
   <style>
-    /* Reset global */
+    :root {
+      --bg-dark: #030712;
+      --bg-card: rgba(15, 23, 42, 0.65);
+      --border-cyan: #00f2fe;
+      --border-purple: #7928ca;
+      --accent-green: #00ff88;
+      --accent-neon: #4facfe;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --glow-cyan: rgba(0, 242, 254, 0.4);
+      --glow-purple: rgba(121, 40, 202, 0.4);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    /* Fondo oscuro cibernético */
     body {
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background: #080d1a;
-      background: radial-gradient(circle at top center, #0f172a 0%, #030712 100%);
-      color: #94a3b8;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(121, 40, 202, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 242, 254, 0.15) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(3, 7, 18, 0.9) 0px, transparent 100%);
+      color: var(--text-main);
       line-height: 1.6;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     .pagina {
-      width: min(1600px, calc(100% - 40px));
-      margin: 20px auto;
+      width: min(1500px, calc(100% - 40px));
+      margin: 0 auto;
+      padding-bottom: 40px;
     }
 
-    /* Encabezado */
+    /* TICKER DE ALERTA DE SEGURIDAD EN TIEMPO REAL */
+    .threat-ticker {
+      background: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+      padding: 8px 0;
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      color: var(--accent-green);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .ticker-content {
+      display: inline-block;
+      animation: ticker 35s linear infinite;
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* ENCABEZADO GLASSMORPHISM */
     header {
-      min-height: 120px;
-      border: 1px solid rgba(0, 242, 254, 0.3);
-      padding: 20px 30px;
+      margin-top: 15px;
+      min-height: 90px;
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      padding: 15px 30px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
       background: rgba(15, 23, 42, 0.6);
-      backdrop-filter: blur(12px);
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+      backdrop-filter: blur(16px);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
       flex-wrap: wrap;
     }
 
-    .logo-container {
-      display: flex;
-      flex-direction: column;
-    }
-
     .logo {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 800;
       letter-spacing: 2px;
-      color: #00f2fe;
-      text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
-    }
-
-    .subtitulo-header {
-      color: #38ef7d;
-      font-size: 14px;
-      letter-spacing: 1.5px;
+      background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #00ff88 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       text-transform: uppercase;
-      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    /* Indicador de Usuario en el Header */
+    .logo-badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      background: rgba(0, 255, 136, 0.15);
+      border: 1px solid var(--accent-green);
+      color: var(--accent-green);
+      border-radius: 20px;
+      letter-spacing: 1px;
+    }
+
     .user-status-box {
       display: none;
       align-items: center;
-      gap: 15px;
-      background: rgba(56, 239, 125, 0.1);
-      border: 1px solid #38ef7d;
-      padding: 10px 18px;
-      border-radius: 8px;
-      box-shadow: 0 0 12px rgba(56, 239, 125, 0.2);
+      gap: 12px;
+      background: rgba(0, 255, 136, 0.08);
+      border: 1px solid var(--accent-green);
+      padding: 8px 16px;
+      border-radius: 30px;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
     }
 
     .user-status-box.active {
@@ -83,180 +128,213 @@
     }
 
     .status-dot {
-      width: 10px;
-      height: 10px;
-      background-color: #38ef7d;
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-green);
       border-radius: 50%;
-      box-shadow: 0 0 8px #38ef7d;
+      box-shadow: 0 0 10px var(--accent-green);
+      animation: pulse 2s infinite;
     }
 
-    .user-info-text {
-      font-size: 14px;
-      color: #f8fafc;
-    }
-
-    .user-info-text span {
-      color: #00f2fe;
-      font-weight: 700;
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
     }
 
     .btn-logout {
       background: transparent;
-      border: 1px solid #ef4444;
-      color: #ef4444;
-      padding: 5px 10px;
-      border-radius: 4px;
-      font-size: 12px;
+      border: 1px solid #ff4b5c;
+      color: #ff4b5c;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
     .btn-logout:hover {
-      background: #ef4444;
-      color: #ffffff;
+      background: #ff4b5c;
+      color: #fff;
     }
 
-    /* Menú */
+    /* NAVEGACIÓN FUTURISTA */
     nav {
-      border: 1px solid rgba(0, 242, 254, 0.2);
-      min-height: 70px;
-      margin-top: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      min-height: 65px;
+      margin-top: 15px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 30px;
-      background: rgba(15, 23, 42, 0.5);
-      backdrop-filter: blur(10px);
-      border-radius: 12px;
-    }
-
-    .menu-titulo {
-      font-size: 18px;
-      font-weight: 700;
-      color: #f8fafc;
-      letter-spacing: 1px;
+      padding: 10px 25px;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(12px);
+      border-radius: 14px;
     }
 
     .menu-links {
       display: flex;
       list-style: none;
-      gap: 12px;
+      gap: 15px;
       align-items: center;
     }
 
     .menu-links a, .btn-auth-trigger {
       display: block;
-      padding: 10px 20px;
+      padding: 8px 18px;
       text-decoration: none;
-      color: #cbd5e1;
-      border: 1px solid rgba(56, 239, 125, 0.3);
+      color: var(--text-muted);
+      border: 1px solid transparent;
       border-radius: 8px;
-      background: rgba(15, 23, 42, 0.8);
       font-size: 14px;
       font-weight: 600;
       transition: all 0.3s ease;
       cursor: pointer;
     }
 
-    .menu-links a:hover, .btn-auth-trigger:hover {
-      background: #00f2fe;
-      color: #030712;
-      border-color: #00f2fe;
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
-      transform: translateY(-2px);
+    .menu-links a:hover {
+      color: var(--border-cyan);
+      border-color: rgba(0, 242, 254, 0.3);
+      background: rgba(0, 242, 254, 0.05);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
     }
 
     .btn-auth-trigger {
-      background: rgba(0, 242, 254, 0.1);
-      border-color: #00f2fe;
-      color: #00f2fe;
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(121, 40, 202, 0.15));
+      border: 1px solid var(--border-cyan);
+      color: var(--border-cyan);
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
     }
 
-    /* Contenido principal */
+    .btn-auth-trigger:hover {
+      background: linear-gradient(135deg, var(--border-cyan), var(--border-purple));
+      color: #000;
+      box-shadow: 0 0 20px var(--glow-cyan);
+      transform: translateY(-2px);
+    }
+
+    /* HERO BLOCK / CONTENIDO PRINCIPAL CON CANVAS 3D INTERACTIVO */
     main {
       margin-top: 20px;
     }
 
     .contenido-principal {
       border: 1px solid rgba(0, 242, 254, 0.2);
-      min-height: 500px;
+      min-height: 480px;
       padding: 30px;
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 1.2fr 1fr;
       gap: 30px;
       align-items: center;
-      background: rgba(15, 23, 42, 0.4);
-      backdrop-filter: blur(8px);
-      border-radius: 12px;
-    }
-
-    .imagen-principal {
-      min-height: 400px;
-      border: 1px solid rgba(0, 242, 254, 0.4);
-      border-radius: 10px;
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      position: relative;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #0b1329;
-      box-shadow: inset 0 0 20px rgba(0, 242, 254, 0.2);
     }
 
-    .imagen-principal img {
+    .canvas-container {
+      width: 100%;
+      height: 380px;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      border-radius: 12px;
+      position: relative;
+      background: #020617;
+      box-shadow: inset 0 0 30px rgba(0, 242, 254, 0.15);
+      overflow: hidden;
+    }
+
+    #cyberCanvas {
       width: 100%;
       height: 100%;
-      min-height: 400px;
-      object-fit: cover;
       display: block;
-      filter: brightness(0.95) contrast(1.15);
-      transition: transform 0.5s ease;
     }
 
-    .imagen-principal:hover img {
-      transform: scale(1.03);
+    .canvas-overlay-text {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      color: var(--accent-green);
+      background: rgba(3, 7, 18, 0.8);
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      pointer-events: none;
     }
 
     .descripcion {
-      border: 1px solid rgba(56, 239, 125, 0.2);
-      min-height: 300px;
-      padding: 30px;
-      background: rgba(11, 19, 41, 0.6);
-      border-radius: 10px;
+      padding: 20px;
     }
 
     .descripcion h1 {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.2;
       margin-bottom: 20px;
-      font-size: 32px;
-      color: #f8fafc;
-      background: linear-gradient(90deg, #00f2fe, #38ef7d);
+      background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .descripcion h1 span {
+      background: linear-gradient(90deg, var(--border-cyan), var(--accent-green));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .descripcion p {
-      font-size: 16px;
-      color: #94a3b8;
-      margin-bottom: 15px;
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
     }
 
-    /* Sección 7 Módulos de Seguridad */
+    /* BADGES DE SEGURIDAD MODERNA */
+    .security-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    .badge-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: 'Fira Code', monospace;
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+
+    .badge-item icon {
+      color: var(--accent-green);
+    }
+
+    /* LOS 7 MÓDULOS DE SEGURIDAD */
     .seccion-modulos {
-      margin-top: 20px;
-      border: 1px solid rgba(0, 242, 254, 0.2);
-      padding: 30px;
-      background: rgba(15, 23, 42, 0.4);
-      backdrop-filter: blur(8px);
-      border-radius: 12px;
+      margin-top: 25px;
+      border: 1px solid rgba(121, 40, 202, 0.3);
+      padding: 35px;
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
     }
 
     .seccion-modulos h2 {
-      color: #00f2fe;
+      color: var(--text-main);
       font-size: 26px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       text-align: center;
-      text-transform: uppercase;
       letter-spacing: 1px;
+    }
+
+    .seccion-modulos h2 span {
+      color: var(--border-cyan);
     }
 
     .grid-modulos {
@@ -266,133 +344,144 @@
     }
 
     .modulo-card {
-      background: rgba(11, 19, 41, 0.7);
-      border: 1px solid rgba(56, 239, 125, 0.3);
-      border-radius: 10px;
-      padding: 20px;
-      transition: all 0.3s ease;
-    }
-
-    .modulo-card:hover {
-      border-color: #00f2fe;
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
-      transform: translateY(-3px);
-    }
-
-    .modulo-card h3 {
-      color: #38ef7d;
-      font-size: 18px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .modulo-card p {
-      font-size: 14px;
-      color: #94a3b8;
-    }
-
-    /* Sección Galería de Operaciones */
-    .seccion-galeria {
-      margin-top: 20px;
-      border: 1px solid rgba(0, 242, 254, 0.2);
-      padding: 30px;
-      background: rgba(15, 23, 42, 0.4);
-      backdrop-filter: blur(8px);
+      background: rgba(3, 7, 18, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 12px;
-    }
-
-    .seccion-galeria h2 {
-      margin-bottom: 20px;
-      color: #00f2fe;
-      font-size: 24px;
-      text-align: center;
-    }
-
-    .galeria-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    .galeria-card {
-      height: 200px;
-      border: 1px solid rgba(0, 242, 254, 0.3);
-      border-radius: 8px;
-      overflow: hidden;
-      background: #0b1329;
+      padding: 22px;
+      transition: all 0.3s ease;
       position: relative;
     }
 
-    .galeria-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s ease;
+    .modulo-card:hover {
+      border-color: var(--border-cyan);
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+      transform: translateY(-4px);
     }
 
-    .galeria-card:hover img {
-      transform: scale(1.08);
-    }
-
-    .galeria-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 8px;
-      background: rgba(3, 7, 18, 0.75);
-      backdrop-filter: blur(4px);
-      color: #38ef7d;
+    .modulo-card .modulo-num {
+      font-family: 'Fira Code', monospace;
       font-size: 12px;
-      font-weight: 600;
-      text-align: center;
+      color: var(--border-cyan);
+      margin-bottom: 8px;
     }
 
-    /* Texto inferior */
-    .texto-inferior {
-      margin-top: 20px;
+    .modulo-card h3 {
+      color: var(--text-main);
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .modulo-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* SECCIÓN SEGUNDARIA: TERMINAL Y GALERÍA */
+    .contenedores-inferiores {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .tarjeta-panel {
       border: 1px solid rgba(0, 242, 254, 0.2);
-      min-height: 140px;
-      padding: 30px;
-      background: rgba(15, 23, 42, 0.4);
-      backdrop-filter: blur(8px);
-      border-radius: 12px;
+      padding: 25px;
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
     }
 
-    .texto-inferior h2 {
-      margin-bottom: 12px;
-      color: #38ef7d;
-      font-size: 22px;
+    .tarjeta-panel h2 {
+      font-size: 20px;
+      color: var(--border-cyan);
+      margin-bottom: 15px;
     }
 
-    /* Pie de página */
-    footer {
-      margin-top: 20px;
-      border: 1px solid rgba(0, 242, 254, 0.2);
-      min-height: 80px;
+    /* CONSOLA TERMINAL INTERACTIVA */
+    .terminal-box {
+      background: #020617;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      border-radius: 8px;
+      padding: 15px;
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      height: 220px;
+      overflow-y: auto;
+      color: var(--accent-green);
+    }
+
+    .terminal-output p {
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .terminal-input-line {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-      background: rgba(15, 23, 42, 0.7);
-      border-radius: 12px;
-      color: #64748b;
-      font-size: 14px;
+      gap: 8px;
+      margin-top: 8px;
     }
 
-    /* Estilos del Modal de Autenticación */
+    .terminal-input-line input {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-family: 'Fira Code', monospace;
+      outline: none;
+      width: 100%;
+    }
+
+    /* GALERÍA TECH */
+    .galeria-grid-mod {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .tech-box {
+      background: rgba(3, 7, 18, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .tech-box:hover {
+      border-color: var(--accent-green);
+      background: rgba(0, 255, 136, 0.05);
+    }
+
+    .tech-box h4 {
+      color: var(--accent-green);
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .tech-box p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 25px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* MODAL DE AUTENTICACIÓN CON 2FA/MFA */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(3, 7, 18, 0.85);
-      backdrop-filter: blur(8px);
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(12px);
       display: none;
       justify-content: center;
       align-items: center;
@@ -400,11 +489,11 @@
     }
 
     .modal-contenido {
-      background: #0f172a;
-      border: 1px solid #00f2fe;
-      box-shadow: 0 0 25px rgba(0, 242, 254, 0.3);
-      border-radius: 12px;
-      width: min(420px, 90%);
+      background: #0b1329;
+      border: 1px solid var(--border-cyan);
+      box-shadow: 0 0 30px rgba(0, 242, 254, 0.25);
+      border-radius: 16px;
+      width: min(440px, 90%);
       padding: 30px;
       position: relative;
     }
@@ -413,7 +502,7 @@
       position: absolute;
       top: 15px;
       right: 20px;
-      color: #94a3b8;
+      color: var(--text-muted);
       font-size: 24px;
       cursor: pointer;
     }
@@ -422,7 +511,7 @@
       display: flex;
       gap: 10px;
       margin-bottom: 20px;
-      border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .tab-btn {
@@ -430,16 +519,16 @@
       padding: 10px;
       background: none;
       border: none;
-      color: #94a3b8;
-      font-size: 16px;
+      color: var(--text-muted);
+      font-size: 15px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
     .tab-btn.active {
-      color: #00f2fe;
-      border-bottom: 2px solid #00f2fe;
+      color: var(--border-cyan);
+      border-bottom: 2px solid var(--border-cyan);
     }
 
     .form-auth {
@@ -459,32 +548,32 @@
     }
 
     .grupo-input label {
-      font-size: 14px;
-      color: #cbd5e1;
+      font-size: 13px;
+      color: var(--text-muted);
     }
 
     .grupo-input input {
       padding: 10px 14px;
-      border-radius: 6px;
-      border: 1px solid rgba(56, 239, 125, 0.3);
-      background: rgba(3, 7, 18, 0.6);
-      color: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(3, 7, 18, 0.7);
+      color: var(--text-main);
       font-size: 14px;
       outline: none;
     }
 
     .grupo-input input:focus {
-      border-color: #00f2fe;
-      box-shadow: 0 0 8px rgba(0, 242, 254, 0.4);
+      border-color: var(--border-cyan);
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
     }
 
     .btn-submit {
       margin-top: 10px;
       padding: 12px;
-      background: linear-gradient(90deg, #00f2fe, #38ef7d);
+      background: linear-gradient(135deg, var(--border-cyan), var(--border-purple));
       border: none;
-      border-radius: 6px;
-      color: #030712;
+      border-radius: 8px;
+      color: #fff;
       font-weight: 700;
       font-size: 15px;
       cursor: pointer;
@@ -496,176 +585,170 @@
     }
 
     @media (max-width: 900px) {
-      .galeria-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 800px) {
-      .pagina {
-        width: calc(100% - 20px);
-        margin: 10px auto;
-      }
-
-      header {
-        height: auto;
-        flex-direction: column;
-        text-align: center;
-      }
-
-      nav {
-        height: auto;
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px;
-      }
-
-      .menu-links {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .contenido-principal {
-        grid-template-columns: 1fr;
-      }
-
-      .imagen-principal,
-      .imagen-principal img {
-        min-height: 250px;
-      }
-
-      .galeria-grid {
+      .contenido-principal, .contenedores-inferiores {
         grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
-
 <body>
+
+  <!-- TICKER DE SEGURIDAD EN TIEMPO REAL -->
+  <div class="threat-ticker">
+    <div class="ticker-content">
+      [SISTEMA OK] Nodos globales operando al 100% &nbsp;&nbsp;|&nbsp;&nbsp; 
+      [MITIGADO] Ataque DDoS de 1.2 Tbps bloqueado por AI Shield &nbsp;&nbsp;|&nbsp;&nbsp; 
+      [ALERTA SOC] Nueva firma de vulnerabilidad Zero-Day detectada y parcheada &nbsp;&nbsp;|&nbsp;&nbsp;
+      [CERT] Cumplimiento de estándar ISO/IEC 27001 & SOC2 verificado.
+    </div>
+  </div>
+
   <div class="pagina">
 
-    <!-- ENCABEZADO -->
+    <!-- HEADER -->
     <header>
-      <div class="logo-container">
-        <div class="logo">CYBERGUARD</div>
-        <div class="subtitulo-header">Innovación & Ciberseguridad</div>
+      <div class="logo">
+        CYBERGUARD
+        <span class="logo-badge">v3.0 Secure</span>
       </div>
 
-      <!-- ESTADO DE SESIÓN -->
+      <!-- ESTADO DE SESIÓN DENTRO DE CABECERA -->
       <div class="user-status-box" id="userStatusBox">
         <div class="status-dot"></div>
-        <div class="user-info-text">
-          Sesión iniciada: <span id="userNameDisplay">Usuario</span>
+        <div style="font-size: 13px; color: var(--text-main);">
+          Autenticado: <strong id="userNameDisplay" style="color: var(--border-cyan);">Admin</strong>
         </div>
         <button class="btn-logout" id="btnLogout">Cerrar Sesión</button>
       </div>
     </header>
 
-    <!-- MENÚ -->
+    <!-- NAVEGACIÓN -->
     <nav>
-      <div class="menu-titulo">Panel de Navegación</div>
-
+      <div style="font-weight: 700; font-size: 15px; color: var(--text-main);">Console Navigation</div>
       <ul class="menu-links">
         <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#modulos">Módulos de Seguridad</a></li>
-        <li><a href="#galeria">Infraestructura</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-        <li><button class="btn-auth-trigger" id="openAuthModal">Acceso / Registro</button></li>
+        <li><a href="#modulos">7 Módulos</a></li>
+        <li><a href="#terminal">Terminal SOC</a></li>
+        <li><button class="btn-auth-trigger" id="openAuthModal">Iniciar Sesión / Registro</button></li>
       </ul>
     </nav>
 
-    <!-- CONTENIDO PRINCIPAL -->
+    <!-- MAIN HERO CONTENT -->
     <main id="inicio">
-      <section class="contenido-principal" id="contenido">
-
-        <!-- IMAGEN PRINCIPAL 3D FUTURISTA -->
-        <div class="imagen-principal">
-          <img src="https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcRkYQx98l-U3Nf8UvT9eU9K9H0y4Wb1Z5Y8X7a0b3c6d9e2f5g8" alt="Representación 3D de Ciberseguridad y Escudo Holográfico">
+      <section class="contenido-principal">
+        
+        <!-- NODO 3D INTERACTIVO CANVAS (Sustituye imágenes externas caídas) -->
+        <div class="canvas-container">
+          <canvas id="cyberCanvas"></canvas>
+          <div class="canvas-overlay-text">
+            &gt; REAL-TIME THREAT MATRIX ENGINE | ACTIVE NODES: 85
+          </div>
         </div>
 
         <article class="descripcion">
-          <h1>Protección de Nueva Generación</h1>
+          <h1>Protección Autónomo-Predictiva <span>Next-Gen</span></h1>
           <p>
-            Implementamos inteligencia artificial avanzada y análisis predictivo para resguardar su infraestructura crítica contra amenazas cibernéticas emergentes.
+            Salvaguardamos la infraestructura crítica mediante inteligencia artificial adaptativa y análisis conductual capaz de neutralizing amenazas antes de su ejecución.
           </p>
-          <p>
-            Nuestras soluciones de ciberseguridad integran monitoreo continuo en tiempo real, cifrado cuántico y defensa proactiva adaptada a los estándares de la industria moderna.
-          </p>
+          
+          <div class="security-badges">
+            <div class="badge-item">🔒 Zero-Trust Core</div>
+            <div class="badge-item">⚡ SOC 24/7 AI-Response</div>
+            <div class="badge-item">🛡️ Quantum AES-256</div>
+          </div>
         </article>
 
       </section>
 
       <!-- SECCIÓN: LOS 7 MÓDULOS DE SEGURIDAD -->
       <section class="seccion-modulos" id="modulos">
-        <h2>7 Módulos Fundamentales de Ciberseguridad</h2>
+        <h2>Los <span>7 Módulos de Seguridad</span> Integral</h2>
         <div class="grid-modulos">
           <article class="modulo-card">
-            <h3>01. Gestión IAM</h3>
-            <p>Control de acceso basado en roles (RBAC), autenticación multifactor (MFA) y verificación continua de identidades zero-trust.</p>
+            <div class="modulo-num">MOD_01 // IAM</div>
+            <h3>Gestión de Identidad (IAM)</h3>
+            <p>Control dinámico de accesos Zero-Trust, MFA adaptativo y gestión centralizada de privilegios.</p>
           </article>
           <article class="modulo-card">
-            <h3>02. Cifrado & Datos</h3>
-            <p>Protección de datos en reposo y en tránsito con algoritmos AES-256 y protocolos de gestión segura de llaves criptográficas.</p>
+            <div class="modulo-num">MOD_02 // CRYPTO</div>
+            <h3>Cifrado Resistente</h3>
+            <p>Cifrado de datos end-to-end con algoritmos post-cuánticos AES-256 y rotación automatizada de claves.</p>
           </article>
           <article class="modulo-card">
-            <h3>03. Seguridad de Red</h3>
-            <p>Firewalls de nueva generación (NGFW), segmentación de red micro-perimetral y prevención de intrusiones (IPS/IDS).</p>
+            <div class="modulo-num">MOD_03 // PERIMETER</div>
+            <h3>Defensa Perimetral IPS</h3>
+            <p>Micro-segmentación de red y Firewalls de Nueva Generación (NGFW) impulsados por deep learning.</p>
           </article>
           <article class="modulo-card">
-            <h3>04. Gestión de Amenazas</h3>
-            <p>Escaneo continuo de vulnerabilidades, pruebas de penetración automatizadas y parcheo de seguridad priorizado.</p>
+            <div class="modulo-num">MOD_04 // THREATS</div>
+            <h3>Gestión de Vulnerabilidades</h3>
+            <p>Escaneo automatizado en pipelines DevSecOps y remediación basada en riesgos prioritarios.</p>
           </article>
           <article class="modulo-card">
-            <h3>05. Centro SOC</h3>
-            <p>Monitoreo 24/7 con SIEM/SOAR, detección y respuesta automatizada ante incidentes críticos de seguridad.</p>
+            <div class="modulo-num">MOD_05 // SOC</div>
+            <h3>SOC & SIEM Inteligente</h3>
+            <p>Centro de Operaciones con orquestación SOAR para contención de incidentes en tiempo menor a 60 segundos.</p>
           </article>
           <article class="modulo-card">
-            <h3>06. Seguridad Cloud</h3>
-            <p>Protección de aplicaciones nativas de la nube, auditoría DevSecOps y seguridad en APIs públicas y privadas.</p>
+            <div class="modulo-num">MOD_06 // CLOUD</div>
+            <h3>Seguridad en la Nube</h3>
+            <p>Protección nativa multi-cloud, monitoreo continuo de posture (CSPM) y seguridad en APIs REST/gRPC.</p>
           </article>
           <article class="modulo-card">
-            <h3>07. Resiliencia & BCP</h3>
-            <p>Planes de continuidad del negocio, respaldos inmutables anti-ransomware y recuperación rápida ante desastres (DRP).</p>
+            <div class="modulo-num">MOD_07 // DRP</div>
+            <h3>Resiliencia & Backup BCP</h3>
+            <p>Copias de seguridad inmutables a prueba de Ransomware y recuperación ante desastres automatizada.</p>
           </article>
         </div>
       </section>
 
-      <!-- GALERÍA DE OPERACIONES -->
-      <section class="seccion-galeria" id="galeria">
-        <h2>Galería de Operaciones & Infraestructura</h2>
+      <!-- CONTENEDORES INFERIORES: TERMINAL Y PLATAFORMA -->
+      <section class="contenedores-inferiores" id="terminal">
+        
+        <!-- TERMINAL INTERACTIVA EN VIVO -->
+        <article class="tarjeta-panel">
+          <h2>Consola de Diagnóstico SOC</h2>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Escribe comandos como <code>help</code>, <code>status</code>, o <code>scan</code>:</p>
+          <div class="terminal-box" id="terminalBox">
+            <div class="terminal-output" id="terminalOutput">
+              <p>[CYBERGUARD OS v3.0 - Terminal de Diagnóstico Init]</p>
+              <p>Type 'help' for a list of available security commands.</p>
+            </div>
+            <div class="terminal-input-line">
+              <span>root@cyberguard:~#</span>
+              <input type="text" id="terminalInput" autocomplete="off">
+            </div>
+          </div>
+        </article>
 
-        <div class="galeria-grid">
-          <div class="galeria-card">
-            <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcR08_YcSmE5Y_4zR7P2aC3PfxJ0uE8kKmsB0W0G6wNqF0WwTz7P0bF3c6G9lKzYw_1V3x7" alt="Análisis de Código y Ethical Hacking">
-            <div class="galeria-caption">Ethical Hacking & Matriz</div>
+        <!-- PANELES TECNOLÓGICOS -->
+        <article class="tarjeta-panel">
+          <h2>Métricas del Sistema</h2>
+          <div class="galeria-grid-mod">
+            <div class="tech-box">
+              <h4>99.999%</h4>
+              <p>Disponibilidad SLA</p>
+            </div>
+            <div class="tech-box">
+              <h4>&lt; 15 ms</h4>
+              <p>Latencia de Filtrado</p>
+            </div>
+            <div class="tech-box">
+              <h4>0-Day Protection</h4>
+              <p>IA Motor Heurístico</p>
+            </div>
+            <div class="tech-box">
+              <h4>2FA Mandatory</h4>
+              <p>Criterio de Acceso</p>
+            </div>
           </div>
-          <div class="galeria-card">
-            <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRT43VuGzKxXtQcWWj5fuDYA1o7kvsgD_wtGlWlXNbzVQmMqeH33HNNdUUb21QP1oz-WHFU57P6fQl7Sx8" alt="Centro de Operaciones SOC">
-            <div class="galeria-caption">Centro SOC 24/7</div>
-          </div>
-          <div class="galeria-card">
-            <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRyDvyAbSO0HVptwLAhaIeYLb8-t8oBtP3gJLPHqVWVasP2SNcF6u7Kg9mGmgdaZG_73gvW8lhjw3Wz9MI" alt="Protección de Red y Firewall">
-            <div class="galeria-caption">Infraestructura & Firewall</div>
-          </div>
-          <div class="galeria-card">
-            <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTrM8bBHicv0oE34l4XjIxZWlDqqaLzIzJHdqNeLshb7J6P0EgWs1zwT20blUMRJx_HR4vLVf75nw5XNlQ" alt="Inteligencia de Amenazas">
-            <div class="galeria-caption">Threat Intelligence</div>
-          </div>
-        </div>
-      </section>
+        </article>
 
-      <!-- SECCIÓN INFERIOR -->
-      <section class="texto-inferior" id="contacto">
-        <h2>Visión Tecnológica</h2>
-        <p>
-          Liderar la transformación digital segura mediante el desarrollo de tecnologías defensivas de vanguardia que garanticen la integridad, confidencialidad y disponibilidad de la información a nivel global.
-        </p>
       </section>
     </main>
 
-    <!-- PIE DE PÁGINA -->
     <footer>
-      <p>© 2026 CYBERGUARD | Plataforma de Seguridad Informática & Innovación</p>
+      <p>© 2026 CYBERGUARD Platform | ISO 27001 Certified Architecture</p>
     </footer>
 
   </div>
@@ -683,37 +766,155 @@
       <!-- FORMULARIO LOGIN -->
       <form class="form-auth active" id="formLogin">
         <div class="grupo-input">
-          <label for="loginUser">Usuario / Email</label>
-          <input type="text" id="loginUser" required placeholder="admin@cyberguard.com">
+          <label for="loginUser">Usuario / Email Corporativo</label>
+          <input type="text" id="loginUser" required placeholder="analista@cyberguard.com">
         </div>
         <div class="grupo-input">
-          <label for="loginPass">Contraseña</label>
-          <input type="password" id="loginPass" required placeholder="••••••••">
+          <label for="loginPass">Contraseña Segura</label>
+          <input type="password" id="loginPass" required placeholder="••••••••••••">
         </div>
-        <button type="submit" class="btn-submit">Ingresar</button>
+        <div class="grupo-input">
+          <label for="loginMfa">Código TOTP / 2FA (6 dígitos)</label>
+          <input type="text" id="loginMfa" placeholder="123 456" maxlength="6">
+        </div>
+        <button type="submit" class="btn-submit">Ingresar al Panel</button>
       </form>
 
       <!-- FORMULARIO REGISTRO -->
       <form class="form-auth" id="formRegister">
         <div class="grupo-input">
-          <label for="regUser">Usuario</label>
-          <input type="text" id="regUser" required placeholder="Nombre de usuario">
+          <label for="regUser">Nombre de Usuario</label>
+          <input type="text" id="regUser" required placeholder="OperadorSOC">
         </div>
         <div class="grupo-input">
-          <label for="regEmail">Correo Electrónico</label>
+          <label for="regEmail">Correo Corporativo</label>
           <input type="email" id="regEmail" required placeholder="correo@empresa.com">
         </div>
         <div class="grupo-input">
-          <label for="regPass">Contraseña</label>
-          <input type="password" id="regPass" required placeholder="••••••••">
+          <label for="regPass">Contraseña Criptográfica</label>
+          <input type="password" id="regPass" required placeholder="••••••••••••">
         </div>
-        <button type="submit" class="btn-submit">Crear Cuenta</button>
+        <button type="submit" class="btn-submit">Crear Cuenta Segura</button>
       </form>
     </div>
   </div>
 
-  <!-- SCRIPT LÓGICA DE USUARIOS Y MODAL -->
+  <!-- SCRIPT ENGINE: CANVAS 3D, TERMINAL Y AUTENTICACIÓN -->
   <script>
+    /* 1. MOTOR NATIVO HTML5 CANVAS 3D PARA EL BLOQUE PRINCIPAL */
+    const canvas = document.getElementById('cyberCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const particles = [];
+    const particleCount = 45;
+    let mouse = { x: null, y: null };
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 1.2,
+        vy: (Math.random() - 0.5) * 1.2,
+        radius: Math.random() * 2 + 1
+      });
+    }
+
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+
+    function animateCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Dibujar partículas y conexiones
+      for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#00f2fe';
+        ctx.fill();
+
+        // Interacción con mouse
+        if (mouse.x && mouse.y) {
+          let dx = mouse.x - p.x;
+          let dy = mouse.y - p.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = `rgba(0, 255, 136, ${1 - dist / 100})`;
+            ctx.stroke();
+          }
+        }
+
+        // Conectar puntos cercanos
+        for (let j = i + 1; j < particles.length; j++) {
+          let p2 = particles[j];
+          let dx = p.x - p2.x;
+          let dy = p.y - p2.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 90) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(0, 242, 254, ${0.25 - dist / 360})`;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateCanvas);
+    }
+    animateCanvas();
+
+    /* 2. CONSOLA TERMINAL INTERACTIVA EN VIVO */
+    const terminalInput = document.getElementById('terminalInput');
+    const terminalOutput = document.getElementById('terminalOutput');
+
+    terminalInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const cmd = terminalInput.value.trim().toLowerCase();
+        terminalInput.value = '';
+
+        const line = document.createElement('p');
+        line.innerHTML = `<span style="color:#00f2fe">root@cyberguard:~#</span> ${cmd}`;
+        terminalOutput.appendChild(line);
+
+        let res = document.createElement('p');
+        if (cmd === 'help') {
+          res.innerHTML = "Comandos disponibles: <br>&nbsp;&nbsp;<b>status</b> - Verifica estado de la red<br>&nbsp;&nbsp;<b>scan</b> - Ejecuta escaneo de vulnerabilidades<br>&nbsp;&nbsp;<b>clear</b> - Limpia la consola";
+        } else if (cmd === 'status') {
+          res.innerHTML = "<span style='color:#00ff88'>[OK] Todos los cortafuegos operativos. 0 amenazas activas.</span>";
+        } else if (cmd === 'scan') {
+          res.innerHTML = "[...] Escaneando puertos... 0 brechas encontradas. Protección al 100%.";
+        } else if (cmd === 'clear') {
+          terminalOutput.innerHTML = '';
+          return;
+        } else {
+          res.innerHTML = `Comando no reconocido: '${cmd}'. Escribe 'help'.`;
+        }
+        terminalOutput.appendChild(res);
+        terminalOutput.parentElement.scrollTop = terminalOutput.parentElement.scrollHeight;
+      }
+    });
+
+    /* 3. LÓGICA DE USUARIOS Y MODAL */
     const modal = document.getElementById('authModal');
     const openBtn = document.getElementById('openAuthModal');
     const closeBtn = document.getElementById('closeAuthModal');
@@ -721,74 +922,48 @@
     const tabRegister = document.getElementById('tabRegister');
     const formLogin = document.getElementById('formLogin');
     const formRegister = document.getElementById('formRegister');
-    
-    // Elementos del Header para Estado de Sesión
     const userStatusBox = document.getElementById('userStatusBox');
     const userNameDisplay = document.getElementById('userNameDisplay');
     const btnLogout = document.getElementById('btnLogout');
 
-    // Control de Modal
-    openBtn.addEventListener('click', () => {
-      modal.style.display = 'flex';
-    });
+    openBtn.addEventListener('click', () => modal.style.display = 'flex');
+    closeBtn.addEventListener('click', () => modal.style.display = 'none');
+    window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
 
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-
-    // Pestañas Login/Registro
     tabLogin.addEventListener('click', () => {
-      tabLogin.classList.add('active');
-      tabRegister.classList.remove('active');
-      formLogin.classList.add('active');
-      formRegister.classList.remove('active');
+      tabLogin.classList.add('active'); tabRegister.classList.remove('active');
+      formLogin.classList.add('active'); formRegister.classList.remove('active');
     });
 
     tabRegister.addEventListener('click', () => {
-      tabRegister.classList.add('active');
-      tabLogin.classList.remove('active');
-      formRegister.classList.add('active');
-      formLogin.classList.remove('active');
+      tabRegister.classList.add('active'); tabLogin.classList.remove('active');
+      formRegister.classList.add('active'); formLogin.classList.remove('active');
     });
 
-    // Función para Iniciar Sesión Visualmente
     function setSession(username) {
       userNameDisplay.textContent = username;
       userStatusBox.classList.add('active');
       openBtn.textContent = 'Mi Cuenta (' + username + ')';
     }
 
-    // Procesar Inicio de Sesión
     formLogin.addEventListener('submit', (e) => {
       e.preventDefault();
-      const inputVal = document.getElementById('loginUser').value.trim();
-      const username = inputVal ? inputVal.split('@')[0] : 'Usuario';
-      
-      setSession(username);
+      const val = document.getElementById('loginUser').value.trim();
+      const user = val ? val.split('@')[0] : 'Usuario';
+      setSession(user);
       modal.style.display = 'none';
     });
 
-    // Procesar Registro
     formRegister.addEventListener('submit', (e) => {
       e.preventDefault();
-      const username = document.getElementById('regUser').value.trim() || 'NuevoUsuario';
-      
-      setSession(username);
+      const user = document.getElementById('regUser').value.trim() || 'NuevoUsuario';
+      setSession(user);
       modal.style.display = 'none';
     });
 
-    // Cerrar Sesión
     btnLogout.addEventListener('click', () => {
       userStatusBox.classList.remove('active');
-      openBtn.textContent = 'Acceso / Registro';
-      document.getElementById('loginUser').value = '';
-      document.getElementById('loginPass').value = '';
+      openBtn.textContent = 'Iniciar Sesión / Registro';
     });
   </script>
 </body>
