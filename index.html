@@ -7,7 +7,7 @@
   <title>CYBERGUARD | Ciberseguridad & Innovación</title>
 
   <style>
-    /* Reset global corregido */
+    /* Reset global */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -31,7 +31,7 @@
 
     /* Encabezado */
     header {
-      height: 120px;
+      min-height: 120px;
       border: 1px solid rgba(0, 242, 254, 0.3);
       padding: 20px 30px;
       display: flex;
@@ -42,6 +42,12 @@
       backdrop-filter: blur(12px);
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+      flex-wrap: wrap;
+    }
+
+    .logo-container {
+      display: flex;
+      flex-direction: column;
     }
 
     .logo {
@@ -58,6 +64,57 @@
       letter-spacing: 1.5px;
       text-transform: uppercase;
       font-weight: 600;
+    }
+
+    /* Indicador de Usuario en el Header */
+    .user-status-box {
+      display: none;
+      align-items: center;
+      gap: 15px;
+      background: rgba(56, 239, 125, 0.1);
+      border: 1px solid #38ef7d;
+      padding: 10px 18px;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(56, 239, 125, 0.2);
+    }
+
+    .user-status-box.active {
+      display: flex;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      background-color: #38ef7d;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #38ef7d;
+    }
+
+    .user-info-text {
+      font-size: 14px;
+      color: #f8fafc;
+    }
+
+    .user-info-text span {
+      color: #00f2fe;
+      font-weight: 700;
+    }
+
+    .btn-logout {
+      background: transparent;
+      border: 1px solid #ef4444;
+      color: #ef4444;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-logout:hover {
+      background: #ef4444;
+      color: #ffffff;
     }
 
     /* Menú */
@@ -136,580 +193,4 @@
 
     .imagen-principal {
       min-height: 400px;
-      border: 1px solid rgba(0, 242, 254, 0.4);
-      border-radius: 10px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #0b1329;
-      box-shadow: inset 0 0 20px rgba(0, 242, 254, 0.2);
-    }
-
-    .imagen-principal video,
-    .imagen-principal img {
-      width: 100%;
-      height: 100%;
-      min-height: 400px;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.9) contrast(1.1);
-    }
-
-    .descripcion {
-      border: 1px solid rgba(56, 239, 125, 0.2);
-      min-height: 300px;
-      padding: 30px;
-      background: rgba(11, 19, 41, 0.6);
-      border-radius: 10px;
-    }
-
-    .descripcion h1 {
-      margin-bottom: 20px;
-      font-size: 32px;
-      color: #f8fafc;
-      background: linear-gradient(90deg, #00f2fe, #38ef7d);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .descripcion p {
-      font-size: 16px;
-      color: #94a3b8;
-      margin-bottom: 15px;
-    }
-
-    /* Sección 7 Módulos de Seguridad */
-    .seccion-modulos {
-      margin-top: 20px;
-      border: 1px solid rgba(0, 242, 254, 0.2);
-      padding: 30px;
-      background: rgba(15, 23, 42, 0.4);
-      backdrop-filter: blur(8px);
-      border-radius: 12px;
-    }
-
-    .seccion-modulos h2 {
-      color: #00f2fe;
-      font-size: 26px;
-      margin-bottom: 20px;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .grid-modulos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .modulo-card {
-      background: rgba(11, 19, 41, 0.7);
-      border: 1px solid rgba(56, 239, 125, 0.3);
-      border-radius: 10px;
-      padding: 20px;
-      transition: all 0.3s ease;
-    }
-
-    .modulo-card:hover {
-      border-color: #00f2fe;
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
-      transform: translateY(-3px);
-    }
-
-    .modulo-card h3 {
-      color: #38ef7d;
-      font-size: 18px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .modulo-card p {
-      font-size: 14px;
-      color: #94a3b8;
-    }
-
-    /* Contenedores secundarios */
-    .contenedores {
-      margin-top: 20px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .tarjeta {
-      border: 1px solid rgba(0, 242, 254, 0.2);
-      min-height: 230px;
-      padding: 25px;
-      background: rgba(15, 23, 42, 0.4);
-      backdrop-filter: blur(8px);
-      border-radius: 12px;
-      transition: border-color 0.3s ease;
-    }
-
-    .tarjeta:hover {
-      border-color: rgba(56, 239, 125, 0.5);
-    }
-
-    .tarjeta h2 {
-      margin-bottom: 15px;
-      color: #00f2fe;
-      font-size: 22px;
-    }
-
-    .galeria {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .galeria .mini-imagen {
-      height: 120px;
-      border: 1px solid rgba(0, 242, 254, 0.3);
-      border-radius: 6px;
-      overflow: hidden;
-      background: #0b1329;
-    }
-
-    .galeria .mini-imagen img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.3s ease;
-    }
-
-    .galeria .mini-imagen img:hover {
-      transform: scale(1.05);
-    }
-
-    .contenedor-youtube {
-      margin-top: 15px;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid rgba(0, 242, 254, 0.3);
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
-    }
-
-    /* Texto inferior */
-    .texto-inferior {
-      margin-top: 20px;
-      border: 1px solid rgba(0, 242, 254, 0.2);
-      min-height: 140px;
-      padding: 30px;
-      background: rgba(15, 23, 42, 0.4);
-      backdrop-filter: blur(8px);
-      border-radius: 12px;
-    }
-
-    .texto-inferior h2 {
-      margin-bottom: 12px;
-      color: #38ef7d;
-      font-size: 22px;
-    }
-
-    /* Pie de página */
-    footer {
-      margin-top: 20px;
-      border: 1px solid rgba(0, 242, 254, 0.2);
-      min-height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-      background: rgba(15, 23, 42, 0.7);
-      border-radius: 12px;
-      color: #64748b;
-      font-size: 14px;
-    }
-
-    /* Estilos del Modal de Autenticación */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(3, 7, 18, 0.85);
-      backdrop-filter: blur(8px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .modal-contenido {
-      background: #0f172a;
-      border: 1px solid #00f2fe;
-      box-shadow: 0 0 25px rgba(0, 242, 254, 0.3);
-      border-radius: 12px;
-      width: min(420px, 90%);
-      padding: 30px;
-      position: relative;
-    }
-
-    .cerrar-modal {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      color: #94a3b8;
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    .tabs-auth {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-      border-bottom: 1px solid rgba(0, 242, 254, 0.2);
-    }
-
-    .tab-btn {
-      flex: 1;
-      padding: 10px;
-      background: none;
-      border: none;
-      color: #94a3b8;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .tab-btn.active {
-      color: #00f2fe;
-      border-bottom: 2px solid #00f2fe;
-    }
-
-    .form-auth {
-      display: none;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .form-auth.active {
-      display: flex;
-    }
-
-    .grupo-input {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .grupo-input label {
-      font-size: 14px;
-      color: #cbd5e1;
-    }
-
-    .grupo-input input {
-      padding: 10px 14px;
-      border-radius: 6px;
-      border: 1px solid rgba(56, 239, 125, 0.3);
-      background: rgba(3, 7, 18, 0.6);
-      color: #f8fafc;
-      font-size: 14px;
-      outline: none;
-    }
-
-    .grupo-input input:focus {
-      border-color: #00f2fe;
-      box-shadow: 0 0 8px rgba(0, 242, 254, 0.4);
-    }
-
-    .btn-submit {
-      margin-top: 10px;
-      padding: 12px;
-      background: linear-gradient(90deg, #00f2fe, #38ef7d);
-      border: none;
-      border-radius: 6px;
-      color: #030712;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      transition: opacity 0.3s ease;
-    }
-
-    .btn-submit:hover {
-      opacity: 0.9;
-    }
-
-    @media (max-width: 800px) {
-      .pagina {
-        width: calc(100% - 20px);
-        margin: 10px auto;
-      }
-
-      header {
-        height: auto;
-        flex-direction: column;
-        text-align: center;
-      }
-
-      nav {
-        height: auto;
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px;
-      }
-
-      .menu-links {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .contenido-principal,
-      .contenedores {
-        grid-template-columns: 1fr;
-      }
-
-      .imagen-principal,
-      .imagen-principal video,
-      .imagen-principal img {
-        min-height: 250px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="pagina">
-
-    <!-- ENCABEZADO -->
-    <header>
-      <div class="logo">CYBERGUARD</div>
-      <div class="subtitulo-header">Innovación & Ciberseguridad</div>
-    </header>
-
-    <!-- MENÚ -->
-    <nav>
-      <div class="menu-titulo">Panel de Navegación</div>
-
-      <ul class="menu-links">
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#modulos">Módulos de Seguridad</a></li>
-        <li><a href="#galeria">Infraestructura</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-        <li><button class="btn-auth-trigger" id="openAuthModal">Acceso / Registro</button></li>
-      </ul>
-    </nav>
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <main id="inicio">
-      <section class="contenido-principal" id="contenido">
-
-        <!-- VIDEO PRINCIPAL EN BUCLE -->
-        <div class="imagen-principal">
-          <video autoplay loop muted playsinline>
-            <source src="https://raw.githubusercontent.com/skoter58/miguel/main/gif.mp4" type="video/mp4">
-          </video>
-        </div>
-
-        <article class="descripcion">
-          <h1>Protección de Nueva Generación</h1>
-          <p>
-            Implementamos inteligencia artificial avanzada y análisis predictivo para resguardar su infraestructura crítica contra amenazas cibernéticas emergentes.
-          </p>
-          <p>
-            Nuestras soluciones de ciberseguridad integran monitoreo continuo en tiempo real, cifrado cuántico y defensa proactiva adaptada a los estándares de la industria moderna.
-          </p>
-        </article>
-
-      </section>
-
-      <!-- SECCIÓN: LOS 7 MÓDULOS DE SEGURIDAD -->
-      <section class="seccion-modulos" id="modulos">
-        <h2>7 Módulos Fundamentales de Ciberseguridad</h2>
-        <div class="grid-modulos">
-          <article class="modulo-card">
-            <h3>01. Gestión IAM</h3>
-            <p>Control de acceso basado en roles (RBAC), autenticación multifactor (MFA) y verificación continua de identidades zero-trust.</p>
-          </article>
-          <article class="modulo-card">
-            <h3>02. Cifrado & Datos</h3>
-            <p>Protección de datos en reposo y en tránsito con algoritmos AES-256 y protocolos de gestión segura de llaves criptográficas.</p>
-          </article>
-          <article class="modulo-card">
-            <h3>03. Seguridad de Red</h3>
-            <p>Firewalls de nueva generación (NGFW), segmentación de red micro-perimetral y prevención de intrusiones (IPS/IDS).</p>
-          </article>
-          <article class="modulo-card">
-            <h3>04. Gestión de Amenazas</h3>
-            <p>Escaneo continuo de vulnerabilidades, pruebas de penetración automatizadas y parcheo de seguridad priorizado.</p>
-          </article>
-          <article class="modulo-card">
-            <h3>05. Centro SOC</h3>
-            <p>Monitoreo 24/7 con SIEM/SOAR, detección y respuesta automatizada ante incidentes críticos de seguridad.</p>
-          </article>
-          <article class="modulo-card">
-            <h3>06. Seguridad Cloud</h3>
-            <p>Protección de aplicaciones nativas de la nube, auditoría DevSecOps y seguridad en APIs públicas y privadas.</p>
-          </article>
-          <article class="modulo-card">
-            <h3>07. Resiliencia & BCP</h3>
-            <p>Planes de continuidad del negocio, respaldos inmutables anti-ransomware y recuperación rápida ante desastres (DRP).</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- DOS CONTENEDORES INFERIORES -->
-      <section class="contenedores" id="galeria">
-
-        <article class="tarjeta">
-          <h2>Galería de Operaciones</h2>
-
-          <div class="galeria">
-            <div class="mini-imagen">
-              <img src="https://raw.githubusercontent.com/skoter58/miguel/main/kifoku%20glasses-17902.gif" alt="Animación cibernética">
-            </div>
-            <div class="mini-imagen">
-              <img src="https://raw.githubusercontent.com/skoter58/miguel/main/candado%20cibernetico.jpg" alt="Centro de operaciones de ciberseguridad">
-            </div>
-            <div class="mini-imagen">
-              <img src="https://raw.githubusercontent.com/skoter58/miguel/main/candado%20cibernetico.jpg" alt="Centro de operaciones de ciberseguridad">
-            </div>
-            <div class="mini-imagen">
-              <img src="https://raw.githubusercontent.com/skoter58/miguel/main/candado%20cibernetico.jpg" alt="Centro de operaciones de ciberseguridad">
-            </div>
-          </div>
-        </article>
-
-        <!-- TARJETA CON REPRODUCTOR DE YOUTUBE INCRUSTADO -->
-        <article class="tarjeta">
-          <h2>Música Ambiental</h2>
-          <p>
-            Haz clic en reproducir para iniciar la pista temática de ciberseguridad:
-          </p>
-          <div class="contenedor-youtube">
-            <iframe 
-              width="100%" 
-              height="160" 
-              src="https://www.youtube.com/embed/XiMrrleH_hI" 
-              title="Música de Ambiente Ciberseguridad" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-            </iframe>
-          </div>
-        </article>
-
-      </section>
-
-      <!-- SECCIÓN INFERIOR -->
-      <section class="texto-inferior" id="contacto">
-        <h2>Visión Tecnológica</h2>
-        <p>
-          Liderar la transformación digital segura mediante el desarrollo de tecnologías defensivas de vanguardia que garanticen la integridad, confidencialidad y disponibilidad de la información a nivel global.
-        </p>
-      </section>
-    </main>
-
-    <!-- PIE DE PÁGINA -->
-    <footer>
-      <p>© 2026 CYBERGUARD | Plataforma de Seguridad Informática & Innovación</p>
-    </footer>
-
-  </div>
-
-  <!-- MODAL DE INICIO DE SESIÓN / REGISTRO -->
-  <div class="modal-overlay" id="authModal">
-    <div class="modal-contenido">
-      <span class="cerrar-modal" id="closeAuthModal">&times;</span>
-      
-      <div class="tabs-auth">
-        <button class="tab-btn active" id="tabLogin">Iniciar Sesión</button>
-        <button class="tab-btn" id="tabRegister">Registrarse</button>
-      </div>
-
-      <!-- FORMULARIO LOGIN -->
-      <form class="form-auth active" id="formLogin">
-        <div class="grupo-input">
-          <label for="loginUser">Usuario / Email</label>
-          <input type="text" id="loginUser" required placeholder="admin@cyberguard.com">
-        </div>
-        <div class="grupo-input">
-          <label for="loginPass">Contraseña</label>
-          <input type="password" id="loginPass" required placeholder="••••••••">
-        </div>
-        <button type="submit" class="btn-submit">Ingresar</button>
-      </form>
-
-      <!-- FORMULARIO REGISTRO -->
-      <form class="form-auth" id="formRegister">
-        <div class="grupo-input">
-          <label for="regUser">Usuario</label>
-          <input type="text" id="regUser" required placeholder="Nombre de usuario">
-        </div>
-        <div class="grupo-input">
-          <label for="regEmail">Correo Electrónico</label>
-          <input type="email" id="regEmail" required placeholder="correo@empresa.com">
-        </div>
-        <div class="grupo-input">
-          <label for="regPass">Contraseña</label>
-          <input type="password" id="regPass" required placeholder="••••••••">
-        </div>
-        <button type="submit" class="btn-submit">Crear Cuenta</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- SCRIPT PARA INTERACCIONES Y MODAL -->
-  <script>
-    const modal = document.getElementById('authModal');
-    const openBtn = document.getElementById('openAuthModal');
-    const closeBtn = document.getElementById('closeAuthModal');
-    const tabLogin = document.getElementById('tabLogin');
-    const tabRegister = document.getElementById('tabRegister');
-    const formLogin = document.getElementById('formLogin');
-    const formRegister = document.getElementById('formRegister');
-
-    // Abrir modal
-    openBtn.addEventListener('click', () => {
-      modal.style.display = 'flex';
-    });
-
-    // Cerrar modal
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-
-    // Cambiar entre pestañas
-    tabLogin.addEventListener('click', () => {
-      tabLogin.classList.add('active');
-      tabRegister.classList.remove('active');
-      formLogin.classList.add('active');
-      formRegister.classList.remove('active');
-    });
-
-    tabRegister.addEventListener('click', () => {
-      tabRegister.classList.add('active');
-      tabLogin.classList.remove('active');
-      formRegister.classList.add('active');
-      formLogin.classList.remove('active');
-    });
-
-    // Simulación de envío de formularios
-    formLogin.addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Autenticación exitosa. Bienvenido a CYBERGUARD.');
-      modal.style.display = 'none';
-    });
-
-    formRegister.addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Registro completado correctamente. Ahora puedes iniciar sesión.');
-      tabLogin.click();
-    });
-  </script>
-</body>
-</html>
+      border: 1px solid
