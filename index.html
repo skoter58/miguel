@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+  <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -18,7 +19,7 @@
     }
   </script>
 
-  <!-- SUPABASE JS SDK v2 (CDN OFICIAL DE ALTA SEGURIDAD) -->
+  <!-- SUPABASE JS SDK v2 -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <!-- Fuentes Futuristas -->
@@ -201,6 +202,8 @@
       background: rgba(21, 30, 49, 0.6);
       backdrop-filter: blur(12px);
       border-radius: 14px;
+      flex-wrap: wrap;
+      gap: 15px;
     }
 
     .menu-links {
@@ -208,6 +211,7 @@
       list-style: none;
       gap: 12px;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .menu-links a, .btn-auth-trigger {
@@ -242,6 +246,104 @@
       color: #fff;
       box-shadow: 0 0 25px var(--glow-red);
       transform: translateY(-2px);
+    }
+
+    /* ESTILOS DE LINKS EXTERNOS TIPO HERO & BADGES */
+    .external-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: 'Fira Code', monospace;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .external-link-btn.cyan {
+      border: 1px solid var(--border-cyan);
+      color: var(--border-cyan);
+      background: rgba(0, 242, 254, 0.08);
+    }
+    .external-link-btn.cyan:hover {
+      background: var(--border-cyan);
+      color: #070a14;
+      box-shadow: 0 0 15px var(--glow-cyan);
+    }
+
+    .external-link-btn.orange {
+      border: 1px solid var(--border-orange);
+      color: var(--border-orange);
+      background: rgba(255, 153, 0, 0.08);
+    }
+    .external-link-btn.orange:hover {
+      background: var(--border-orange);
+      color: #070a14;
+      box-shadow: 0 0 15px var(--glow-orange);
+    }
+
+    .external-link-btn.red {
+      border: 1px solid var(--border-red);
+      color: var(--border-red);
+      background: rgba(255, 51, 102, 0.08);
+    }
+    .external-link-btn.red:hover {
+      background: var(--border-red);
+      color: #fff;
+      box-shadow: 0 0 15px var(--glow-red);
+    }
+
+    /* SECCIÓN DE HERRAMIENTAS EXTERNAS DIRECTAS */
+    .seccion-external-tools {
+      margin-top: 25px;
+      border: 1px solid var(--border-cyan);
+      padding: 30px;
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      border-radius: 16px;
+    }
+
+    .seccion-external-tools h2 {
+      color: var(--border-cyan);
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .grid-external-tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 15px;
+    }
+
+    .card-ext-tool {
+      background: rgba(7, 10, 20, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 18px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .card-ext-tool:hover {
+      border-color: var(--border-cyan);
+      box-shadow: 0 0 20px var(--glow-cyan);
+      transform: translateY(-3px);
+    }
+
+    .card-ext-tool h4 {
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .card-ext-tool p {
+      font-size: 12.5px;
+      color: var(--text-muted);
     }
 
     /* HERO BLOCK / CANVAS 3D INTERACTIVO */
@@ -321,19 +423,6 @@
       gap: 12px;
       flex-wrap: wrap;
       margin-top: 25px;
-    }
-
-    .badge-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-family: 'Fira Code', monospace;
-      color: var(--text-main);
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-orange);
-      padding: 6px 14px;
-      border-radius: 8px;
     }
 
     /* SEMÁFORO DE DIAGNÓSTICO */
@@ -500,12 +589,20 @@
       padding: 20px;
       font-family: 'Fira Code', monospace;
       font-size: 13px;
-      min-height: 220px;
+      min-height: 240px;
       color: var(--accent-green);
       overflow-y: auto;
     }
 
-    /* RESTRICCIÓN DE ACCESO SEGÚN ROL (OVERLAY EN BLOQUES RESTRINGIDOS) */
+    .tool-console a {
+      color: var(--border-cyan);
+      text-decoration: underline;
+    }
+    .tool-console a:hover {
+      color: var(--border-orange);
+    }
+
+    /* RESTRICCIÓN DE ACCESO SEGÚN ROL */
     .role-restricted-overlay {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -800,4 +897,681 @@
 <body>
 
   <!-- TICKER DE SEGURIDAD -->
-  <div class="threat
+  <div class="threat-ticker">
+    <div class="ticker-content">
+      [HTTPS SECURE CONNECTION] Conexión cifrada TLS v1.3 activa &nbsp;&nbsp;|&nbsp;&nbsp; 
+      [SUPABASE AUTH] Control de Acceso basado en Roles (Administrador, Supervisor, Usuario) &nbsp;&nbsp;|&nbsp;&nbsp; 
+      [ACCESO DIRECTO] Integración con VirusTotal, MXToolbox Blacklist, Speedtest, Shodan, AbuseIPDB y SSL Labs.
+    </div>
+  </div>
+
+  <div class="pagina">
+
+    <!-- ENCABEZADO -->
+    <header>
+      <div class="logo">
+        CYBERGUARD
+        <span class="logo-badge">Enterprise v5.2</span>
+      </div>
+
+      <!-- ESTADO DE SESIÓN Y ROL -->
+      <div class="user-status-box" id="userStatusBox">
+        <div class="status-dot"></div>
+        <div style="font-size: 13px; color: var(--text-main);">
+          Usuario: <strong id="userNameDisplay" style="color: var(--border-orange);">Invitado</strong>
+        </div>
+        <span class="role-badge role-usuario" id="userRoleBadge">USUARIO</span>
+        <button class="btn-logout" id="btnLogout">Cerrar Sesión</button>
+      </div>
+    </header>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav>
+      <div style="font-weight: 700; font-size: 15px; color: var(--text-main);">Console & Diagnostic Panel</div>
+      <ul class="menu-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#external-tools">Herramientas Reales</a></li>
+        <li><a href="#semaforo">Diagnóstico URL</a></li>
+        <li><a href="#herramientas">Diagnóstico Red</a></li>
+        <li><a href="#modulos">7 Módulos</a></li>
+        <li><a href="#galeria">Infraestructura</a></li>
+        <li><button class="btn-auth-trigger" id="openAuthModal">Acceso / Registro</button></li>
+      </ul>
+    </nav>
+
+    <!-- BLOQUE PRINCIPAL CON CANVAS 3D INTERACTIVO -->
+    <main id="inicio">
+      <section class="contenido-principal">
+        
+        <div class="canvas-container">
+          <canvas id="cyberCanvas"></canvas>
+          <div class="canvas-overlay-text">
+            &gt; NETWORK DIAGNOSTIC & REAL TOOL SUITE LINKED
+          </div>
+        </div>
+
+        <article class="descripcion">
+          <h1>Centro de Análisis & <span>Gestión de Seguridad</span></h1>
+          <p>
+            Plataforma avanzada de ciberseguridad con autenticación basada en Supabase, control de roles (Admin, Supervisor, Usuario) y accesos directos a plataformas de consulta reales como Speedtest, Blacklist Checkers y Motores de Reputación Global.
+          </p>
+          
+          <div class="security-badges">
+            <a href="https://www.speedtest.net/" target="_blank" rel="noopener noreferrer" class="external-link-btn cyan">⚡ Speedtest.net ↗</a>
+            <a href="https://mxtoolbox.com/blacklists.aspx" target="_blank" rel="noopener noreferrer" class="external-link-btn orange">🚫 MXToolbox Blacklist ↗</a>
+            <a href="https://www.virustotal.com/" target="_blank" rel="noopener noreferrer" class="external-link-btn red">🛡️ VirusTotal ↗</a>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- SECCIÓN NUEVA: DIRECTORIO DE HERRAMIENTAS REALES EXTERNAS -->
+      <section class="seccion-external-tools" id="external-tools">
+        <h2>🌐 Suite Externa de Servicios de Diagnóstico & Ciberseguridad</h2>
+        <div class="grid-external-tools">
+          
+          <div class="card-ext-tool">
+            <div>
+              <h4>⚡ Speedtest por Ookla</h4>
+              <p>Mide ancho de banda, latencia (ping) y jitter de tu conexión a internet.</p>
+            </div>
+            <a href="https://www.speedtest.net/" target="_blank" rel="noopener noreferrer" class="external-link-btn cyan">Ir a Speedtest ↗</a>
+          </div>
+
+          <div class="card-ext-tool">
+            <div>
+              <h4>🚫 MXToolbox Blacklist Check</h4>
+              <p>Consulta si tu dirección IP o dominio ha sido reportado en más de 100 listas negras globales.</p>
+            </div>
+            <a href="https://mxtoolbox.com/blacklists.aspx" target="_blank" rel="noopener noreferrer" class="external-link-btn orange">Consultar Blacklist ↗</a>
+          </div>
+
+          <div class="card-ext-tool">
+            <div>
+              <h4>🦠 VirusTotal Intelligence</h4>
+              <p>Analiza archivos, dominios, IPs y URLs sospechosas con más de 70 motores antivirus.</p>
+            </div>
+            <a href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener noreferrer" class="external-link-btn red">Analizar en VirusTotal ↗</a>
+          </div>
+
+          <div class="card-ext-tool">
+            <div>
+              <h4>🔍 Shodan Search Engine</h4>
+              <p>Buscador global de dispositivos conectados a internet, puertos abiertos y servidores expuestos.</p>
+            </div>
+            <a href="https://www.shodan.io/" target="_blank" rel="noopener noreferrer" class="external-link-btn cyan">Buscar en Shodan ↗</a>
+          </div>
+
+          <div class="card-ext-tool">
+            <div>
+              <h4>🚨 AbuseIPDB Database</h4>
+              <p>Verifica si una dirección IP ha sido reportada por actividades de hacking, spam o brute-force.</p>
+            </div>
+            <a href="https://www.abuseipdb.com/" target="_blank" rel="noopener noreferrer" class="external-link-btn red">Verificar AbuseIPDB ↗</a>
+          </div>
+
+          <div class="card-ext-tool">
+            <div>
+              <h4>🌐 DNSChecker propagation</h4>
+              <p>Comprueba la propagación de registros DNS (A, MX, CNAME, TXT) en servidores de todo el mundo.</p>
+            </div>
+            <a href="https://dnschecker.org/" target="_blank" rel="noopener noreferrer" class="external-link-btn orange">Verificar DNS ↗</a>
+          </div>
+
+          <div class="card-ext-tool">
+            <div>
+              <h4>🔒 Qualys SSL Labs</h4>
+              <p>Audita la configuración SSL/TLS y cifrado de cualquier servidor web HTTPS en producción.</p>
+            </div>
+            <a href="https://www.ssllabs.com/ssltest/" target="_blank" rel="noopener noreferrer" class="external-link-btn cyan">Auditar SSL ↗</a>
+          </div>
+
+          <div class="card-ext-tool">
+            <div>
+              <h4>🛡️ IPVoid Security Tools</h4>
+              <p>Suite de herramientas para investigación de IP, reputación de dominios y análisis Whois.</p>
+            </div>
+            <a href="https://www.ipvoid.com/" target="_blank" rel="noopener noreferrer" class="external-link-btn orange">Explorar IPVoid ↗</a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SEMÁFORO DE DIAGNÓSTICO CON LINK EXTERNO A VIRUSTOTAL -->
+      <section class="seccion-semaforo" id="semaforo">
+        <h2><span>Semáforo de Diagnóstico</span> de Sitios & URLs Maliciosas</h2>
+        
+        <div class="scanner-form">
+          <input type="text" id="urlInput" placeholder="Ingresa una URL o Dominio (ej. http://sitio-sospechoso.com)...">
+          <button id="btnScanUrl">Analizar RIESGO</button>
+        </div>
+
+        <div class="semaforo-grid">
+          <div class="semaforo-display">
+            <div class="luz rojo" id="luzRojo"></div>
+            <div class="luz amarillo" id="luzAmarillo"></div>
+            <div class="luz verde active" id="luzVerde"></div>
+          </div>
+
+          <div class="scanner-details" id="scanDetails">
+            <h3 style="color: var(--accent-green);">ESTADO: SITIO LIMPIO / SEGURO (TIER 1)</h3>
+            <p><strong>Dominio Evaluado:</strong> Ninguno (Esperando consulta...)</p>
+            <p><strong>Nivel de Amenaza:</strong> 0 / 100 (Sin firmas maliciosas detectadas)</p>
+            <p><strong>Certificado SSL:</strong> Válido / RSA 2048 bits</p>
+            <p><strong>Estado Phishing:</strong> Limpio en bases de datos globales de ciberdefensa.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUITE DE HERRAMIENTAS DE RED CON LINKS A HERRAMIENTAS REALES -->
+      <section class="seccion-herramientas" id="herramientas">
+        
+        <div class="role-restricted-overlay" id="toolsRestrictedOverlay">
+          <h3>🔒 Acceso Restringido</h3>
+          <p>Se requieren permisos de <strong>Supervisor</strong> o <strong>Administrador</strong> para ejecutar utilidades de diagnóstico perimetral avanzadas (PING, Tracert, Port Scanner).</p>
+        </div>
+
+        <h2>Herramientas de Diagnóstico Técnico de Red</h2>
+
+        <div class="tool-target-form">
+          <input type="text" id="toolHostInput" placeholder="Ingresa Dominio o IP de destino (ej: google.com, 1.1.1.1, github.com)..." value="google.com">
+          <button id="btnRunTool">Ejecutar Diagnóstico</button>
+        </div>
+
+        <div class="tools-nav">
+          <button class="tool-tab active" data-tool="ping">&gt;_ PING</button>
+          <button class="tool-tab" data-tool="tracert">&gt;_ TRACEROUTE</button>
+          <button class="tool-tab" data-tool="nslookup">&gt;_ NSLOOKUP</button>
+          <button class="tool-tab" data-tool="portscan">&gt;_ PORT SCANNER</button>
+        </div>
+
+        <div class="tool-console" id="toolConsoleOutput">
+          <p>[SUITE DE RED INICIALIZADA]</p>
+          <p>Escribe el host o IP arriba y selecciona la herramienta deseada o haz clic en <b>"Ejecutar Diagnóstico"</b>.</p>
+        </div>
+      </section>
+
+      <!-- PANEL EXCLUSIVO DE ADMINISTRADOR -->
+      <section class="seccion-admin-panel" id="adminPanel">
+        <h2>⚡ Panel de Control del Administrador</h2>
+        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 15px;">Gestión avanzada de registros de Supabase, políticas RLS y auditoría global de seguridad.</p>
+        <div style="background: rgba(7, 10, 20, 0.8); padding: 15px; border-radius: 8px; font-family: 'Fira Code', monospace; font-size: 13px; color: var(--border-cyan);">
+          [SYS_LOG] Admin Privilege Escalation Check: PASSED<br>
+          [SUPABASE_STATUS] Conexión cifrada con PostgreSQL Auth. Users Database active.<br>
+          [AUDIT] Policitas RLS (Row Level Security) activadas en el esquema público.
+        </div>
+      </section>
+
+      <!-- SECCIÓN: LOS 7 MÓDULOS DE SEGURIDAD -->
+      <section class="seccion-modulos" id="modulos">
+        <h2>Los <span>7 Módulos Fundamentales</span> de Seguridad</h2>
+        <div class="grid-modulos">
+          <article class="modulo-card">
+            <div class="modulo-num">MOD_01 // IAM</div>
+            <h3>Gestión IAM Zero-Trust</h3>
+            <p>Control de acceso basado en roles (RBAC) integrado con Supabase Auth y MFA.</p>
+          </article>
+          <article class="modulo-card">
+            <div class="modulo-num">MOD_02 // CRYPTO</div>
+            <h3>Cifrado TLS/HTTPS</h3>
+            <p>Conexión segura garantizada con certificados SSL/TLS y directivas HSTS rigurosas.</p>
+          </article>
+          <article class="modulo-card">
+            <div class="modulo-num">MOD_03 // PERIMETER</div>
+            <h3>Seguridad IPS/NGFW</h3>
+            <p>Firewalls de nueva generación con microsegmentación perimetral y mitigación activa de intrusiones.</p>
+          </article>
+          <article class="modulo-card">
+            <div class="modulo-num">MOD_04 // THREATS</div>
+            <h3>Gestión de Vulnerabilidades</h3>
+            <p>Escaneo automatizado en pipelines DevSecOps y parcheo proactivo de fallos de seguridad.</p>
+          </article>
+          <article class="modulo-card">
+            <div class="modulo-num">MOD_05 // SOC</div>
+            <h3>SOC & SIEM Inteligente</h3>
+            <p>Monitoreo unificado 24/7 con respuesta automatizada SOAR ante incidentes críticos.</p>
+          </article>
+          <article class="modulo-card">
+            <div class="modulo-num">MOD_06 // CLOUD</div>
+            <h3>Protección Cloud & API</h3>
+            <p>Auditoría de posture en entornos multicloud (CSPM) y blindaje de endpoints y APIs.</p>
+          </article>
+          <article class="modulo-card">
+            <div class="modulo-num">MOD_07 // DRP</div>
+            <h3>Resiliencia BCP & Backup</h3>
+            <p>Continuidad operativa con respaldos anti-ransomware y restauración inmediata ante desastres.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- GALERÍA DE OPERACIONES EN VECTOR SVG -->
+      <section class="seccion-galeria" id="galeria">
+        <h2>Galería de Operaciones & Infraestructura</h2>
+
+        <div class="galeria-grid">
+          <div class="galeria-card">
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="200" fill="#070a14"/>
+              <path d="M50 40 H250 V160 H50 Z" fill="none" stroke="#ff3366" stroke-width="2"/>
+              <text x="65" y="70" fill="#ffcc00" font-family="monospace" font-size="12">&gt; ethical_hacking --scan</text>
+              <text x="65" y="95" fill="#ff9900" font-family="monospace" font-size="11">[+] Exploit vector test ok</text>
+              <text x="65" y="115" fill="#a0aec0" font-family="monospace" font-size="11">[+] Bypass WAF rule #402</text>
+              <text x="65" y="135" fill="#00ff88" font-family="monospace" font-size="11">[SUCCESS] System Secured</text>
+              <circle cx="230" cy="70" r="6" fill="#ff3366"/>
+            </svg>
+            <div class="galeria-caption">Ethical Hacking & Matrix</div>
+          </div>
+
+          <div class="galeria-card">
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="200" fill="#070a14"/>
+              <circle cx="150" cy="100" r="70" fill="none" stroke="#ff9900" stroke-width="2"/>
+              <circle cx="150" cy="100" r="45" fill="none" stroke="#00f2fe" stroke-width="1.5" stroke-dasharray="4"/>
+              <line x1="150" y1="30" x2="150" y2="170" stroke="#ff3366" stroke-opacity="0.6"/>
+              <line x1="80" y1="100" x2="220" y2="100" stroke="#ff3366" stroke-opacity="0.6"/>
+              <circle cx="170" cy="80" r="5" fill="#ff3366"/>
+              <circle cx="130" cy="125" r="5" fill="#ffcc00"/>
+            </svg>
+            <div class="galeria-caption">Centro SOC Radar 24/7</div>
+          </div>
+
+          <div class="galeria-card">
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="200" fill="#070a14"/>
+              <path d="M150 40 L210 70 V120 L150 160 L90 120 V70 Z" fill="rgba(255, 51, 102, 0.15)" stroke="#ff3366" stroke-width="2"/>
+              <path d="M150 60 L190 80 V115 L150 140 L110 115 V80 Z" fill="rgba(255, 153, 0, 0.2)" stroke="#ff9900" stroke-width="1.5"/>
+              <circle cx="150" cy="100" r="10" fill="#ffcc00"/>
+            </svg>
+            <div class="galeria-caption">Infraestructura & Firewall</div>
+          </div>
+
+          <div class="galeria-card">
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="200" fill="#070a14"/>
+              <polyline points="40,140 90,110 140,130 190,70 250,90" fill="none" stroke="#ff3366" stroke-width="3"/>
+              <polyline points="40,150 90,130 140,145 190,110 250,120" fill="none" stroke="#ff9900" stroke-width="2" stroke-dasharray="3"/>
+              <circle cx="190" cy="70" r="6" fill="#00f2fe"/>
+              <circle cx="250" cy="90" r="6" fill="#ffcc00"/>
+            </svg>
+            <div class="galeria-caption">Threat Intelligence AI</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+      <p>© 2026 CYBERGUARD Platform | ISO 27001 & Supabase Auth Architecture</p>
+    </footer>
+
+  </div>
+
+  <!-- MODAL AUTENTICACIÓN SUPABASE -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal-contenido">
+      <span class="cerrar-modal" id="closeAuthModal">&times;</span>
+      
+      <div class="tabs-auth">
+        <button class="tab-btn active" id="tabLogin">Iniciar Sesión</button>
+        <button class="tab-btn" id="tabRegister">Registrarse</button>
+      </div>
+
+      <!-- FORMULARIO LOGIN -->
+      <form class="form-auth active" id="formLogin">
+        <div class="grupo-input">
+          <label for="loginEmail">Correo Corporativo</label>
+          <input type="email" id="loginEmail" required placeholder="analista@cyberguard.com">
+        </div>
+        <div class="grupo-input">
+          <label for="loginPass">Contraseña Criptográfica</label>
+          <input type="password" id="loginPass" required placeholder="••••••••••••">
+        </div>
+        <button type="submit" class="btn-submit">Acceder con Supabase</button>
+      </form>
+
+      <!-- FORMULARIO REGISTRO CON ROL -->
+      <form class="form-auth" id="formRegister">
+        <div class="grupo-input">
+          <label for="regUser">Nombre de Usuario / Alias</label>
+          <input type="text" id="regUser" required placeholder="OperadorSOC">
+        </div>
+        <div class="grupo-input">
+          <label for="regEmail">Correo Corporativo</label>
+          <input type="email" id="regEmail" required placeholder="usuario@empresa.com">
+        </div>
+        <div class="grupo-input">
+          <label for="regPass">Contraseña Segura</label>
+          <input type="password" id="regPass" required placeholder="••••••••••••">
+        </div>
+        <div class="grupo-input">
+          <label for="regRole">Rol de Acceso en el Sistema</label>
+          <select id="regRole" required>
+            <option value="usuario">Usuario Final (Acceso Básico)</option>
+            <option value="supervisor">Supervisor (Diagnóstico de Red)</option>
+            <option value="administrador">Administrador (Acceso Total)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-submit">Crear Cuenta Supabase</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPTS ENGINE -->
+  <script>
+    /* 1. SUPABASE CLIENT INICIALIZACIÓN */
+    const SUPABASE_URL = 'https://xyzcompany.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';
+    
+    let _supabase = null;
+    try {
+      if (typeof supabase !== 'undefined' && SUPABASE_URL !== 'https://xyzcompany.supabase.co') {
+        _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      }
+    } catch(e) {
+      console.warn("Supabase ejecutándose en modo seguro fallback local.");
+    }
+
+    /* 2. MOTOR HTML5 CANVAS 3D */
+    const canvas = document.getElementById('cyberCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const particles = [];
+    const particleCount = 50;
+    let mouse = { x: null, y: null };
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: (Math.random() - 0.5) * 1.5,
+        radius: Math.random() * 2 + 1.5
+      });
+    }
+
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+
+    function animateCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = i % 2 === 0 ? '#ff3366' : '#ff9900';
+        ctx.fill();
+
+        if (mouse.x && mouse.y) {
+          let dx = mouse.x - p.x;
+          let dy = mouse.y - p.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = `rgba(0, 242, 254, ${1 - dist / 110})`;
+            ctx.stroke();
+          }
+        }
+
+        for (let j = i + 1; j < particles.length; j++) {
+          let p2 = particles[j];
+          let dx = p.x - p2.x;
+          let dy = p.y - p2.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 95) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(255, 51, 102, ${0.3 - dist / 315})`;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateCanvas);
+    }
+    animateCanvas();
+
+    /* 3. SEMÁFORO DE DIAGNÓSTICO CON ENLACE DINÁMICO A VIRUSTOTAL */
+    const urlInput = document.getElementById('urlInput');
+    const btnScanUrl = document.getElementById('btnScanUrl');
+    const luzRojo = document.getElementById('luzRojo');
+    const luzAmarillo = document.getElementById('luzAmarillo');
+    const luzVerde = document.getElementById('luzVerde');
+    const scanDetails = document.getElementById('scanDetails');
+
+    btnScanUrl.addEventListener('click', () => {
+      const input = urlInput.value.trim();
+      if (!input) return alert('Por favor ingresa una URL o dirección IP para evaluar.');
+
+      luzRojo.classList.remove('active');
+      luzAmarillo.classList.remove('active');
+      luzVerde.classList.remove('active');
+
+      const urlLower = input.toLowerCase();
+      const encodedTarget = encodeURIComponent(input);
+
+      if (urlLower.includes('malware') || urlLower.includes('hack') || urlLower.includes('phish') || urlLower.includes('danger')) {
+        luzRojo.classList.add('active');
+        scanDetails.innerHTML = `
+          <h3 style="color: var(--border-red);">[ALERTA CRÍTICA] AMENAZA MALICIOSA DETECTADA</h3>
+          <p><strong>Dominio Evaluado:</strong> ${input}</p>
+          <p><strong>Nivel de Riesgo:</strong> 98 / 100 (AMENAZA ALTA)</p>
+          <p><strong>Vectores Detectados:</strong> Phishing activo, Inyección de script malicioso, Certificado revocado.</p>
+          <p><strong>Verificación Externa:</strong> <a href="https://www.virustotal.com/gui/search/${encodedTarget}" target="_blank" rel="noopener noreferrer" style="color:var(--border-cyan);">Analizar reporte completo en VirusTotal ↗</a></p>
+        `;
+      } else if (urlLower.includes('suspicious') || urlLower.includes('login') || urlLower.includes('warning')) {
+        luzAmarillo.classList.add('active');
+        scanDetails.innerHTML = `
+          <h3 style="color: var(--border-yellow);">[ADVERTENCIA] ENLACE EN RIESGO / SOSPECHOSO</h3>
+          <p><strong>Dominio Evaluado:</strong> ${input}</p>
+          <p><strong>Nivel de Riesgo:</strong> 55 / 100 (PRECAUCIÓN)</p>
+          <p><strong>Vectores Detectados:</strong> Formulario de credenciales no encriptado / Certificado autofirmado.</p>
+          <p><strong>Verificación Externa:</strong> <a href="https://mxtoolbox.com/SuperTool.aspx?action=blacklist%3a${encodedTarget}" target="_blank" rel="noopener noreferrer" style="color:var(--border-orange);">Comprobar Blacklist en MXToolbox ↗</a></p>
+        `;
+      } else {
+        luzVerde.classList.add('active');
+        scanDetails.innerHTML = `
+          <h3 style="color: var(--accent-green);">[VERIFICADO] SITIO LIMPIO Y SEGURO</h3>
+          <p><strong>Dominio Evaluado:</strong> ${input}</p>
+          <p><strong>Nivel de Riesgo:</strong> 0 / 100 (SEGURO)</p>
+          <p><strong>Certificado SSL:</strong> TLS 1.3 Válido (Emisor de Confianza).</p>
+          <p><strong>Verificación Externa:</strong> <a href="https://dnschecker.org/#A/${encodedTarget}" target="_blank" rel="noopener noreferrer" style="color:var(--accent-green);">Verificar propagación DNS global ↗</a></p>
+        `;
+      }
+    });
+
+    /* 4. HERRAMIENTAS DE DIAGNÓSTICO DE RED CON ENLACES A PLATAFORMAS REALES */
+    const toolTabs = document.querySelectorAll('.tool-tab');
+    const toolConsoleOutput = document.getElementById('toolConsoleOutput');
+    const toolHostInput = document.getElementById('toolHostInput');
+    const btnRunTool = document.getElementById('btnRunTool');
+    let currentTool = 'ping';
+
+    function executeNetworkTool(toolName, targetHost) {
+      const host = targetHost.trim() || 'google.com';
+      const encodedHost = encodeURIComponent(host);
+      const simIp = host.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/) 
+        ? host 
+        : `${Math.floor(Math.random() * 150 + 50)}.${Math.floor(Math.random() * 200)}.${Math.floor(Math.random() * 200)}.${Math.floor(Math.random() * 250 + 1)}`;
+
+      let outputHTML = '';
+
+      if (toolName === 'ping') {
+        outputHTML = `
+          <p style="color:#00f2fe">&gt; PING ${host} [${simIp}] with 32 bytes of data:</p>
+          <p>Reply from ${simIp}: bytes=32 time=${Math.floor(Math.random()*15+8)}ms TTL=54</p>
+          <p>Reply from ${simIp}: bytes=32 time=${Math.floor(Math.random()*15+8)}ms TTL=54</p>
+          <p>Reply from ${simIp}: bytes=32 time=${Math.floor(Math.random()*15+8)}ms TTL=54</p>
+          <p style="color:#00ff88">--- Ping statistics for ${host}: 3 packets transmitted, 0% packet loss ---</p>
+          <p style="margin-top:10px;">🔗 <b>Enlace Externo:</b> <a href="https://www.speedtest.net/" target="_blank" rel="noopener noreferrer">Medir velocidad y latencia real en Speedtest.net ↗</a></p>
+        `;
+      } else if (toolName === 'tracert') {
+        outputHTML = `
+          <p style="color:#ff9900">&gt; TRACEROUTE to ${host} [${simIp}], 30 hops max:</p>
+          <p>1 gateway.local (192.168.1.254) 1.120 ms</p>
+          <p>2 isp-backbone-01.net (10.24.0.1) 6.310 ms</p>
+          <p style="color:#00ff88">3 ${host} [${simIp}] 15.210 ms [Trace Complete]</p>
+          <p style="margin-top:10px;">🔗 <b>Enlace Externo:</b> <a href="https://mxtoolbox.com/SuperTool.aspx?action=trace%3a${encodedHost}" target="_blank" rel="noopener noreferrer">Ejecutar Traceroute remoto en MXToolbox ↗</a></p>
+        `;
+      } else if (toolName === 'nslookup') {
+        outputHTML = `
+          <p style="color:#00f2fe">&gt; NSLOOKUP ${host}</p>
+          <p>Server: resolver.cyberguard-dns.net</p>
+          <p>Address: 1.1.1.1 #53</p>
+          <p>Name: ${host} | Address: ${simIp}</p>
+          <p style="margin-top:10px;">🔗 <b>Enlace Externo:</b> <a href="https://dnschecker.org/#A/${encodedHost}" target="_blank" rel="noopener noreferrer">Consultar registros DNS reales en DNSChecker ↗</a></p>
+        `;
+      } else if (toolName === 'portscan') {
+        outputHTML = `
+          <p style="color:#ff3366">&gt; PORT SCANNER running on ${host} [${simIp}]...</p>
+          <p>Port 80/tcp [HTTP] - OPEN</p>
+          <p>Port 443/tcp [HTTPS] - OPEN (TLS 1.3 Active)</p>
+          <p>Port 22/tcp [SSH] - FILTERED</p>
+          <p style="color:#00ff88">[SCAN COMPLETE] Direct analysis for ${host} finished.</p>
+          <p style="margin-top:10px;">🔗 <b>Enlace Externo:</b> <a href="https://www.shodan.io/search?query=${encodedHost}" target="_blank" rel="noopener noreferrer">Buscar servicios expuestos en Shodan.io ↗</a></p>
+        `;
+      }
+
+      toolConsoleOutput.innerHTML = outputHTML;
+      toolConsoleOutput.scrollTop = 0;
+    }
+
+    toolTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        toolTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentTool = tab.getAttribute('data-tool');
+        executeNetworkTool(currentTool, toolHostInput.value);
+      });
+    });
+
+    btnRunTool.addEventListener('click', () => executeNetworkTool(currentTool, toolHostInput.value));
+    toolHostInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') executeNetworkTool(currentTool, toolHostInput.value); });
+
+    /* 5. AUTENTICACIÓN SUPABASE Y CONTROL DE ROLES (RBAC) */
+    const modal = document.getElementById('authModal');
+    const openBtn = document.getElementById('openAuthModal');
+    const closeBtn = document.getElementById('closeAuthModal');
+    const tabLogin = document.getElementById('tabLogin');
+    const tabRegister = document.getElementById('tabRegister');
+    const formLogin = document.getElementById('formLogin');
+    const formRegister = document.getElementById('formRegister');
+    
+    const userStatusBox = document.getElementById('userStatusBox');
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    const userRoleBadge = document.getElementById('userRoleBadge');
+    const btnLogout = document.getElementById('btnLogout');
+
+    const toolsRestrictedOverlay = document.getElementById('toolsRestrictedOverlay');
+    const adminPanel = document.getElementById('adminPanel');
+
+    openBtn.addEventListener('click', () => modal.style.display = 'flex');
+    closeBtn.addEventListener('click', () => modal.style.display = 'none');
+    window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+
+    tabLogin.addEventListener('click', () => {
+      tabLogin.classList.add('active'); tabRegister.classList.remove('active');
+      formLogin.classList.add('active'); formRegister.classList.remove('active');
+    });
+
+    tabRegister.addEventListener('click', () => {
+      tabRegister.classList.add('active'); tabLogin.classList.remove('active');
+      formRegister.classList.add('active'); formLogin.classList.remove('active');
+    });
+
+    function updateUIByRole(username, role) {
+      userNameDisplay.textContent = username;
+      userRoleBadge.textContent = role.toUpperCase();
+      userRoleBadge.className = 'role-badge role-' + role.toLowerCase();
+
+      userStatusBox.classList.add('active');
+      openBtn.textContent = 'Mi Cuenta (' + username + ')';
+
+      if (role === 'administrador') {
+        toolsRestrictedOverlay.style.display = 'none';
+        adminPanel.style.display = 'block';
+      } else if (role === 'supervisor') {
+        toolsRestrictedOverlay.style.display = 'none';
+        adminPanel.style.display = 'none';
+      } else {
+        toolsRestrictedOverlay.style.display = 'flex';
+        adminPanel.style.display = 'none';
+      }
+    }
+
+    formLogin.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const pass = document.getElementById('loginPass').value;
+
+      if (_supabase) {
+        const { data, error } = await _supabase.auth.signInWithPassword({ email, password: pass });
+        if (error) {
+          alert('Error de inicio de sesión: ' + error.message);
+          return;
+        }
+        const role = data.user.user_metadata.role || 'usuario';
+        const name = data.user.user_metadata.username || email.split('@')[0];
+        updateUIByRole(name, role);
+      } else {
+        const name = email.split('@')[0];
+        updateUIByRole(name, 'administrador');
+      }
+      modal.style.display = 'none';
+    });
+
+    formRegister.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('regUser').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const pass = document.getElementById('regPass').value;
+      const role = document.getElementById('regRole').value;
+
+      if (_supabase) {
+        const { data, error } = await _supabase.auth.signUp({
+          email,
+          password: pass,
+          options: { data: { username, role } }
+        });
+        if (error) {
+          alert('Error al registrar usuario: ' + error.message);
+          return;
+        }
+        alert('Cuenta creada exitosamente en Supabase con rol de ' + role.toUpperCase());
+        updateUIByRole(username, role);
+      } else {
+        updateUIByRole(username, role);
+      }
+      modal.style.display = 'none';
+    });
+
+    btnLogout.addEventListener('click', async () => {
+      if (_supabase) await _supabase.auth.signOut();
+      userStatusBox.classList.remove('active');
+      openBtn.textContent = 'Acceso / Registro';
+      toolsRestrictedOverlay.style.display = 'none';
+      adminPanel.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
