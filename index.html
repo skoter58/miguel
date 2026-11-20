@@ -4,7 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="CYBERGUARD - Plataforma de Ciberseguridad, Diagnóstico de Red y Análisis de Amenazas">
-  <title>CYBERGUARD | Threat Diagnostic & Network Suite</title>
+  <title>CYBERGUARD | Threat Diagnostic & Network Suite (Supabase RBAC)</title>
+
+  <!-- REFORZAMIENTO DE SEGURIDAD (HTTPS & HEADERS) -->
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- FORZAR HTTPS EN CLIENTE -->
+  <script>
+    if (window.location.protocol === 'http:' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      window.location.href = window.location.href.replace('http:', 'https:');
+    }
+  </script>
+
+  <!-- SUPABASE JS SDK v2 (CDN OFICIAL DE ALTA SEGURIDAD) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <!-- Fuentes Futuristas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -138,6 +153,19 @@
       box-shadow: 0 0 10px var(--accent-green);
       animation: pulse 2s infinite;
     }
+
+    .role-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-family: 'Fira Code', monospace;
+    }
+
+    .role-admin { background: rgba(255, 51, 102, 0.2); color: var(--border-red); border: 1px solid var(--border-red); }
+    .role-supervisor { background: rgba(255, 153, 0, 0.2); color: var(--border-orange); border: 1px solid var(--border-orange); }
+    .role-usuario { background: rgba(0, 242, 254, 0.2); color: var(--border-cyan); border: 1px solid var(--border-cyan); }
 
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
@@ -308,7 +336,7 @@
       border-radius: 8px;
     }
 
-    /* SEMÁFORO DE DIAGNÓSTICO DE URLS MALICIOSAS */
+    /* SEMÁFORO DE DIAGNÓSTICO */
     .seccion-semaforo {
       margin-top: 25px;
       border: 2px solid var(--border-red);
@@ -337,7 +365,7 @@
       margin: 0 auto 25px;
     }
 
-    .scanner-form input, .tool-target-form input {
+    .scanner-form input, .tool-target-form input, .grupo-input select {
       flex: 1;
       padding: 14px 20px;
       border-radius: 8px;
@@ -414,7 +442,7 @@
       margin-bottom: 12px;
     }
 
-    /* SUITE DE HERRAMIENTAS DE DIAGNÓSTICO (PING, TRACERT, CON TARGET EDITABLE) */
+    /* SUITE DE HERRAMIENTAS DE DIAGNÓSTICO DE RED */
     .seccion-herramientas {
       margin-top: 25px;
       border: 1px solid var(--border-orange);
@@ -422,6 +450,7 @@
       background: var(--bg-card);
       backdrop-filter: blur(14px);
       border-radius: 16px;
+      position: relative;
     }
 
     .seccion-herramientas h2 {
@@ -474,6 +503,50 @@
       min-height: 220px;
       color: var(--accent-green);
       overflow-y: auto;
+    }
+
+    /* RESTRICCIÓN DE ACCESO SEGÚN ROL (OVERLAY EN BLOQUES RESTRINGIDOS) */
+    .role-restricted-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(7, 10, 20, 0.92);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .role-restricted-overlay h3 {
+      color: var(--border-red);
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .role-restricted-overlay p {
+      color: var(--text-muted);
+      font-size: 14px;
+      max-width: 500px;
+    }
+
+    /* SECCIÓN EXCLUSIVA DE ADMINISTRADOR */
+    .seccion-admin-panel {
+      margin-top: 25px;
+      border: 2px dashed var(--border-red);
+      padding: 30px;
+      background: rgba(255, 51, 102, 0.05);
+      border-radius: 16px;
+      display: none;
+    }
+
+    .seccion-admin-panel h2 {
+      color: var(--border-red);
+      font-size: 24px;
+      margin-bottom: 15px;
     }
 
     /* 7 MÓDULOS DE SEGURIDAD */
@@ -535,7 +608,7 @@
       color: var(--text-muted);
     }
 
-    /* GALERÍA DE OPERACIONES EN VECTOR SVG */
+    /* GALERÍA DE OPERACIONES */
     .seccion-galeria {
       margin-top: 25px;
       border: 1px solid var(--border-cyan);
@@ -690,7 +763,7 @@
       color: var(--text-muted);
     }
 
-    .grupo-input input {
+    .grupo-input input, .grupo-input select {
       padding: 10px 14px;
       border-radius: 8px;
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -700,7 +773,7 @@
       outline: none;
     }
 
-    .grupo-input input:focus {
+    .grupo-input input:focus, .grupo-input select:focus {
       border-color: var(--border-red);
       box-shadow: 0 0 10px var(--glow-red);
     }
@@ -727,530 +800,4 @@
 <body>
 
   <!-- TICKER DE SEGURIDAD -->
-  <div class="threat-ticker">
-    <div class="ticker-content">
-      [ALERT LEVEL: ORANGE] Monitoreo activo de vectores de ataque &nbsp;&nbsp;|&nbsp;&nbsp; 
-      [HERRAMIENTAS] Ingresa cualquier Dominio / IP personalizada para ejecutar PING, TRACERT, NSLOOKUP o PORT SCANNER &nbsp;&nbsp;|&nbsp;&nbsp; 
-      [SCANNER DE URLS] Semáforo de riesgo activado para filtrado Phishing y Malware.
-    </div>
-  </div>
-
-  <div class="pagina">
-
-    <!-- ENCABEZADO -->
-    <header>
-      <div class="logo">
-        CYBERGUARD
-        <span class="logo-badge">Suite v4.5</span>
-      </div>
-
-      <!-- ESTADO DE SESIÓN -->
-      <div class="user-status-box" id="userStatusBox">
-        <div class="status-dot"></div>
-        <div style="font-size: 13px; color: var(--text-main);">
-          Sesión iniciada: <strong id="userNameDisplay" style="color: var(--border-orange);">Admin</strong>
-        </div>
-        <button class="btn-logout" id="btnLogout">Cerrar Sesión</button>
-      </div>
-    </header>
-
-    <!-- BARRA DE NAVEGACIÓN -->
-    <nav>
-      <div style="font-weight: 700; font-size: 15px; color: var(--text-main);">Console & Diagnostic Panel</div>
-      <ul class="menu-links">
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#semaforo">Diagnóstico URL</a></li>
-        <li><a href="#herramientas">Herramientas Red</a></li>
-        <li><a href="#modulos">7 Módulos</a></li>
-        <li><a href="#galeria">Infraestructura</a></li>
-        <li><button class="btn-auth-trigger" id="openAuthModal">Acceso / Registro</button></li>
-      </ul>
-    </nav>
-
-    <!-- BLOQUE PRINCIPAL CON CANVAS 3D INTERACTIVO -->
-    <main id="inicio">
-      <section class="contenido-principal">
-        
-        <div class="canvas-container">
-          <canvas id="cyberCanvas"></canvas>
-          <div class="canvas-overlay-text">
-            &gt; NETWORK DIAGNOSTIC & THREAT MATRIX ENGINE
-          </div>
-        </div>
-
-        <article class="descripcion">
-          <h1>Centro de Análisis & <span>Diagnóstico de Red</span></h1>
-          <p>
-            Plataforma avanzada de ciberseguridad equipada con utilidades de diagnóstico en tiempo real (Ping, Traceroute, Port Scanners) con soporte para objetivos personalizados.
-          </p>
-          
-          <div class="security-badges">
-            <div class="badge-item">⚠️ Threat Radar Active</div>
-            <div class="badge-item">⚡ Custom Ping / Tracert</div>
-            <div class="badge-item">🔒 Zero-Trust Shield</div>
-          </div>
-        </article>
-
-      </section>
-
-      <!-- SEMÁFORO DE DIAGNÓSTICO DE ENLACES SOSPECHOSOS -->
-      <section class="seccion-semaforo" id="semaforo">
-        <h2><span>Semáforo de Diagnóstico</span> de Sitios & URLs Maliciosas</h2>
-        
-        <div class="scanner-form">
-          <input type="text" id="urlInput" placeholder="Ingresa una URL o Dominio (ej. http://sitio-sospechoso.com)...">
-          <button id="btnScanUrl">Analizar RIESGO</button>
-        </div>
-
-        <div class="semaforo-grid">
-          <div class="semaforo-display">
-            <div class="luz rojo" id="luzRojo"></div>
-            <div class="luz amarillo" id="luzAmarillo"></div>
-            <div class="luz verde active" id="luzVerde"></div>
-          </div>
-
-          <div class="scanner-details" id="scanDetails">
-            <h3 style="color: var(--accent-green);">ESTADO: SITIO LIMPIO / SEGURO (TIER 1)</h3>
-            <p><strong>Dominio Evaluado:</strong> Ninguno (Esperando consulta...)</p>
-            <p><strong>Nivel de Amenaza:</strong> 0 / 100 (Sin firmas maliciosas detectadas)</p>
-            <p><strong>Certificado SSL:</strong> Válido / RSA 2048 bits</p>
-            <p><strong>Estado Phishing:</strong> Limpio en bases de datos globales de ciberdefensa.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SUITE DE HERRAMIENTAS DE RED CON TARGET EDITABLE -->
-      <section class="seccion-herramientas" id="herramientas">
-        <h2>Herramientas de Diagnóstico Técnico de Red</h2>
-
-        <!-- FORMULARIO PARA INGRESAR LA IP O DOMINIO DESEADO -->
-        <div class="tool-target-form">
-          <input type="text" id="toolHostInput" placeholder="Ingresa Dominio o IP de destino (ej: google.com, 1.1.1.1, github.com)..." value="google.com">
-          <button id="btnRunTool">Ejecutar Diagnóstico</button>
-        </div>
-
-        <div class="tools-nav">
-          <button class="tool-tab active" data-tool="ping">&gt;_ PING</button>
-          <button class="tool-tab" data-tool="tracert">&gt;_ TRACEROUTE</button>
-          <button class="tool-tab" data-tool="nslookup">&gt;_ NSLOOKUP</button>
-          <button class="tool-tab" data-tool="portscan">&gt;_ PORT SCANNER</button>
-        </div>
-
-        <div class="tool-console" id="toolConsoleOutput">
-          <p>[SUITE DE RED INICIALIZADA]</p>
-          <p>Escribe el host o IP arriba y selecciona la herramienta deseada o haz clic en <b>"Ejecutar Diagnóstico"</b>.</p>
-        </div>
-      </section>
-
-      <!-- SECCIÓN: LOS 7 MÓDULOS DE SEGURIDAD -->
-      <section class="seccion-modulos" id="modulos">
-        <h2>Los <span>7 Módulos Fundamentales</span> de Seguridad</h2>
-        <div class="grid-modulos">
-          <article class="modulo-card">
-            <div class="modulo-num">MOD_01 // IAM</div>
-            <h3>Gestión IAM Zero-Trust</h3>
-            <p>Control de acceso basado en roles (RBAC), autenticación multifactor adaptativa (MFA) y verificación de identidades.</p>
-          </article>
-          <article class="modulo-card">
-            <div class="modulo-num">MOD_02 // CRYPTO</div>
-            <h3>Cifrado Cuántico</h3>
-            <p>Protección en reposo y tránsito mediante algoritmos AES-256 y protocolos criptográficos post-cuánticos.</p>
-          </article>
-          <article class="modulo-card">
-            <div class="modulo-num">MOD_03 // PERIMETER</div>
-            <h3>Seguridad IPS/NGFW</h3>
-            <p>Firewalls de nueva generación con microsegmentación perimetral y mitigación activa de intrusiones.</p>
-          </article>
-          <article class="modulo-card">
-            <div class="modulo-num">MOD_04 // THREATS</div>
-            <h3>Gestión de Vulnerabilidades</h3>
-            <p>Escaneo automatizado en pipelines DevSecOps y parcheo proactivo de fallos de seguridad.</p>
-          </article>
-          <article class="modulo-card">
-            <div class="modulo-num">MOD_05 // SOC</div>
-            <h3>SOC & SIEM Inteligente</h3>
-            <p>Monitoreo unificado 24/7 con respuesta automatizada SOAR ante incidentes críticos.</p>
-          </article>
-          <article class="modulo-card">
-            <div class="modulo-num">MOD_06 // CLOUD</div>
-            <h3>Protección Cloud & API</h3>
-            <p>Auditoría de posture en entornos multicloud (CSPM) y blindaje de endpoints y APIs.</p>
-          </article>
-          <article class="modulo-card">
-            <div class="modulo-num">MOD_07 // DRP</div>
-            <h3>Resiliencia BCP & Backup</h3>
-            <p>Continuidad operativa con respaldos anti-ransomware y restauración inmediata ante desastres.</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- GALERÍA DE OPERACIONES EN VECTOR SVG -->
-      <section class="seccion-galeria" id="galeria">
-        <h2>Galería de Operaciones & Infraestructura</h2>
-
-        <div class="galeria-grid">
-          <div class="galeria-card">
-            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="200" fill="#070a14"/>
-              <path d="M50 40 H250 V160 H50 Z" fill="none" stroke="#ff3366" stroke-width="2"/>
-              <text x="65" y="70" fill="#ffcc00" font-family="monospace" font-size="12">&gt; ethical_hacking --scan</text>
-              <text x="65" y="95" fill="#ff9900" font-family="monospace" font-size="11">[+] Exploit vector test ok</text>
-              <text x="65" y="115" fill="#a0aec0" font-family="monospace" font-size="11">[+] Bypass WAF rule #402</text>
-              <text x="65" y="135" fill="#00ff88" font-family="monospace" font-size="11">[SUCCESS] System Secured</text>
-              <circle cx="230" cy="70" r="6" fill="#ff3366"/>
-            </svg>
-            <div class="galeria-caption">Ethical Hacking & Matrix</div>
-          </div>
-
-          <div class="galeria-card">
-            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="200" fill="#070a14"/>
-              <circle cx="150" cy="100" r="70" fill="none" stroke="#ff9900" stroke-width="2"/>
-              <circle cx="150" cy="100" r="45" fill="none" stroke="#00f2fe" stroke-width="1.5" stroke-dasharray="4"/>
-              <line x1="150" y1="30" x2="150" y2="170" stroke="#ff3366" stroke-opacity="0.6"/>
-              <line x1="80" y1="100" x2="220" y2="100" stroke="#ff3366" stroke-opacity="0.6"/>
-              <circle cx="170" cy="80" r="5" fill="#ff3366"/>
-              <circle cx="130" cy="125" r="5" fill="#ffcc00"/>
-            </svg>
-            <div class="galeria-caption">Centro SOC Radar 24/7</div>
-          </div>
-
-          <div class="galeria-card">
-            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="200" fill="#070a14"/>
-              <path d="M150 40 L210 70 V120 L150 160 L90 120 V70 Z" fill="rgba(255, 51, 102, 0.15)" stroke="#ff3366" stroke-width="2"/>
-              <path d="M150 60 L190 80 V115 L150 140 L110 115 V80 Z" fill="rgba(255, 153, 0, 0.2)" stroke="#ff9900" stroke-width="1.5"/>
-              <circle cx="150" cy="100" r="10" fill="#ffcc00"/>
-            </svg>
-            <div class="galeria-caption">Infraestructura & Firewall</div>
-          </div>
-
-          <div class="galeria-card">
-            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="200" fill="#070a14"/>
-              <polyline points="40,140 90,110 140,130 190,70 250,90" fill="none" stroke="#ff3366" stroke-width="3"/>
-              <polyline points="40,150 90,130 140,145 190,110 250,120" fill="none" stroke="#ff9900" stroke-width="2" stroke-dasharray="3"/>
-              <circle cx="190" cy="70" r="6" fill="#00f2fe"/>
-              <circle cx="250" cy="90" r="6" fill="#ffcc00"/>
-            </svg>
-            <div class="galeria-caption">Threat Intelligence AI</div>
-          </div>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- PIE DE PÁGINA -->
-    <footer>
-      <p>© 2026 CYBERGUARD Platform | ISO 27001 & Threat Suite Architecture</p>
-    </footer>
-
-  </div>
-
-  <!-- MODAL AUTENTICACIÓN -->
-  <div class="modal-overlay" id="authModal">
-    <div class="modal-contenido">
-      <span class="cerrar-modal" id="closeAuthModal">&times;</span>
-      
-      <div class="tabs-auth">
-        <button class="tab-btn active" id="tabLogin">Iniciar Sesión</button>
-        <button class="tab-btn" id="tabRegister">Registrarse</button>
-      </div>
-
-      <form class="form-auth active" id="formLogin">
-        <div class="grupo-input">
-          <label for="loginUser">Usuario / Email Corporativo</label>
-          <input type="text" id="loginUser" required placeholder="analista@cyberguard.com">
-        </div>
-        <div class="grupo-input">
-          <label for="loginPass">Contraseña Criptográfica</label>
-          <input type="password" id="loginPass" required placeholder="••••••••••••">
-        </div>
-        <button type="submit" class="btn-submit">Acceder al Panel</button>
-      </form>
-
-      <form class="form-auth" id="formRegister">
-        <div class="grupo-input">
-          <label for="regUser">Nombre de Usuario</label>
-          <input type="text" id="regUser" required placeholder="OperadorSOC">
-        </div>
-        <div class="grupo-input">
-          <label for="regEmail">Correo Corporativo</label>
-          <input type="email" id="regEmail" required placeholder="usuario@empresa.com">
-        </div>
-        <div class="grupo-input">
-          <label for="regPass">Contraseña Segura</label>
-          <input type="password" id="regPass" required placeholder="••••••••••••">
-        </div>
-        <button type="submit" class="btn-submit">Crear Cuenta Segura</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- SCRIPTS ENGINE -->
-  <script>
-    /* 1. MOTOR HTML5 CANVAS 3D */
-    const canvas = document.getElementById('cyberCanvas');
-    const ctx = canvas.getContext('2d');
-
-    function resizeCanvas() {
-      canvas.width = canvas.parentElement.clientWidth;
-      canvas.height = canvas.parentElement.clientHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    const particles = [];
-    const particleCount = 50;
-    let mouse = { x: null, y: null };
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 1.5,
-        vy: (Math.random() - 0.5) * 1.5,
-        radius: Math.random() * 2 + 1.5
-      });
-    }
-
-    canvas.addEventListener('mousemove', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
-    });
-
-    function animateCanvas() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      for (let i = 0; i < particles.length; i++) {
-        let p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = i % 2 === 0 ? '#ff3366' : '#ff9900';
-        ctx.fill();
-
-        if (mouse.x && mouse.y) {
-          let dx = mouse.x - p.x;
-          let dy = mouse.y - p.y;
-          let dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 110) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(mouse.x, mouse.y);
-            ctx.strokeStyle = `rgba(0, 242, 254, ${1 - dist / 110})`;
-            ctx.stroke();
-          }
-        }
-
-        for (let j = i + 1; j < particles.length; j++) {
-          let p2 = particles[j];
-          let dx = p.x - p2.x;
-          let dy = p.y - p2.y;
-          let dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 95) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(255, 51, 102, ${0.3 - dist / 315})`;
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(animateCanvas);
-    }
-    animateCanvas();
-
-    /* 2. SEMÁFORO DE DIAGNÓSTICO DE URLS MALICIOSAS */
-    const urlInput = document.getElementById('urlInput');
-    const btnScanUrl = document.getElementById('btnScanUrl');
-    const luzRojo = document.getElementById('luzRojo');
-    const luzAmarillo = document.getElementById('luzAmarillo');
-    const luzVerde = document.getElementById('luzVerde');
-    const scanDetails = document.getElementById('scanDetails');
-
-    btnScanUrl.addEventListener('click', () => {
-      const input = urlInput.value.trim();
-      if (!input) return alert('Por favor ingresa una URL o dirección IP para evaluar.');
-
-      luzRojo.classList.remove('active');
-      luzAmarillo.classList.remove('active');
-      luzVerde.classList.remove('active');
-
-      const urlLower = input.toLowerCase();
-
-      if (urlLower.includes('malware') || urlLower.includes('hack') || urlLower.includes('phish') || urlLower.includes('danger')) {
-        luzRojo.classList.add('active');
-        scanDetails.innerHTML = `
-          <h3 style="color: var(--border-red);">[ALERTA CRÍTICA] AMENAZA MALICIOSA DETECTADA</h3>
-          <p><strong>Dominio Evaluado:</strong> ${input}</p>
-          <p><strong>Nivel de Riesgo:</strong> 98 / 100 (AMENAZA ALTA)</p>
-          <p><strong>Vectores Detectados:</strong> Phishing activo, Inyección de script malicioso, Certificado revocado.</p>
-          <p><strong>Recomendación SOC:</strong> Bloquear acceso inmediatamente en la red empresarial.</p>
-        `;
-      } else if (urlLower.includes('suspicious') || urlLower.includes('login') || urlLower.includes('warning')) {
-        luzAmarillo.classList.add('active');
-        scanDetails.innerHTML = `
-          <h3 style="color: var(--border-yellow);">[ADVERTENCIA] ENLACE EN RIESGO / SOSPECHOSO</h3>
-          <p><strong>Dominio Evaluado:</strong> ${input}</p>
-          <p><strong>Nivel de Riesgo:</strong> 55 / 100 (PRECAUCIÓN)</p>
-          <p><strong>Vectores Detectados:</strong> Formulario de credenciales no encriptado / Certificado autofirmado.</p>
-          <p><strong>Recomendación SOC:</strong> No ingresar contraseñas ni datos sensibles.</p>
-        `;
-      } else {
-        luzVerde.classList.add('active');
-        scanDetails.innerHTML = `
-          <h3 style="color: var(--accent-green);">[VERIFICADO] SITIO LIMPIO Y SEGURO</h3>
-          <p><strong>Dominio Evaluado:</strong> ${input}</p>
-          <p><strong>Nivel de Riesgo:</strong> 0 / 100 (SEGURO)</p>
-          <p><strong>Certificado SSL:</strong> TLS 1.3 Válido (Emisor de Confianza).</p>
-          <p><strong>Estado Phishing:</strong> Limpio en más de 70 motores de reputación.</p>
-        `;
-      }
-    });
-
-    /* 3. LÓGICA DE HERRAMIENTAS DE RED CON TARGET DINÁMICO E EDITABLE */
-    const toolTabs = document.querySelectorAll('.tool-tab');
-    const toolConsoleOutput = document.getElementById('toolConsoleOutput');
-    const toolHostInput = document.getElementById('toolHostInput');
-    const btnRunTool = document.getElementById('btnRunTool');
-    let currentTool = 'ping';
-
-    function executeNetworkTool(toolName, targetHost) {
-      const host = targetHost.trim() || 'google.com';
-      
-      // Simulación de IP aleatoria si es un dominio
-      const simIp = host.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/) 
-        ? host 
-        : `${Math.floor(Math.random() * 150 + 50)}.${Math.floor(Math.random() * 200)}.${Math.floor(Math.random() * 200)}.${Math.floor(Math.random() * 250 + 1)}`;
-
-      let outputHTML = '';
-
-      if (toolName === 'ping') {
-        const t1 = Math.floor(Math.random() * 15 + 8);
-        const t2 = Math.floor(Math.random() * 15 + 8);
-        const t3 = Math.floor(Math.random() * 15 + 8);
-        const t4 = Math.floor(Math.random() * 15 + 8);
-        outputHTML = `
-          <p style="color:#00f2fe">&gt; PING ${host} [${simIp}] with 32 bytes of data:</p>
-          <p>Reply from ${simIp}: bytes=32 time=${t1}ms TTL=54</p>
-          <p>Reply from ${simIp}: bytes=32 time=${t2}ms TTL=54</p>
-          <p>Reply from ${simIp}: bytes=32 time=${t3}ms TTL=54</p>
-          <p>Reply from ${simIp}: bytes=32 time=${t4}ms TTL=54</p>
-          <p style="color:#00ff88">--- Ping statistics for ${host}: 4 packets transmitted, 4 received, 0% packet loss ---</p>
-        `;
-      } else if (toolName === 'tracert') {
-        outputHTML = `
-          <p style="color:#ff9900">&gt; TRACEROUTE to ${host} [${simIp}], 30 hops max:</p>
-          <p>1  gateway.local (192.168.1.254)  1.120 ms</p>
-          <p>2  isp-backbone-01.net (10.24.0.1)  6.310 ms</p>
-          <p>3  edge-router-sea.net (172.16.8.12)  14.520 ms</p>
-          <p>4  ixp-peer.carrier.org (198.32.176.1)  18.890 ms</p>
-          <p style="color:#00ff88">5  ${host} [${simIp}]  19.210 ms [Trace Complete]</p>
-        `;
-      } else if (toolName === 'nslookup') {
-        outputHTML = `
-          <p style="color:#00f2fe">&gt; NSLOOKUP ${host}</p>
-          <p>Server:  resolver.cyberguard-dns.net</p>
-          <p>Address: 1.1.1.1 #53</p>
-          <p>Non-authoritative answer:</p>
-          <p>Name:    ${host}</p>
-          <p>Address: ${simIp}</p>
-          <p>MX Record: 10 mail.${host}</p>
-          <p>TXT Record: "v=spf1 include:_spf.${host} ~all"</p>
-        `;
-      } else if (toolName === 'portscan') {
-        outputHTML = `
-          <p style="color:#ff3366">&gt; PORT SCANNER running on ${host} [${simIp}]...</p>
-          <p>Port 80/tcp   [HTTP]   - OPEN</p>
-          <p>Port 443/tcp  [HTTPS]  - OPEN (TLS 1.3 Active)</p>
-          <p>Port 22/tcp   [SSH]    - FILTERED / PROTECTED</p>
-          <p>Port 8080/tcp [ALT-HTTP] - CLOSED</p>
-          <p style="color:#00ff88">[SCAN COMPLETE] Direct analysis for ${host} finished with 0 exploits found.</p>
-        `;
-      }
-
-      toolConsoleOutput.innerHTML = outputHTML;
-      toolConsoleOutput.scrollTop = 0;
-    }
-
-    toolTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        toolTabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        currentTool = tab.getAttribute('data-tool');
-        executeNetworkTool(currentTool, toolHostInput.value);
-      });
-    });
-
-    btnRunTool.addEventListener('click', () => {
-      executeNetworkTool(currentTool, toolHostInput.value);
-    });
-
-    toolHostInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        executeNetworkTool(currentTool, toolHostInput.value);
-      }
-    });
-
-    /* 4. AUTENTICACIÓN Y ESTADO DE SESIÓN */
-    const modal = document.getElementById('authModal');
-    const openBtn = document.getElementById('openAuthModal');
-    const closeBtn = document.getElementById('closeAuthModal');
-    const tabLogin = document.getElementById('tabLogin');
-    const tabRegister = document.getElementById('tabRegister');
-    const formLogin = document.getElementById('formLogin');
-    const formRegister = document.getElementById('formRegister');
-    const userStatusBox = document.getElementById('userStatusBox');
-    const userNameDisplay = document.getElementById('userNameDisplay');
-    const btnLogout = document.getElementById('btnLogout');
-
-    openBtn.addEventListener('click', () => modal.style.display = 'flex');
-    closeBtn.addEventListener('click', () => modal.style.display = 'none');
-    window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
-
-    tabLogin.addEventListener('click', () => {
-      tabLogin.classList.add('active'); tabRegister.classList.remove('active');
-      formLogin.classList.add('active'); formRegister.classList.remove('active');
-    });
-
-    tabRegister.addEventListener('click', () => {
-      tabRegister.classList.add('active'); tabLogin.classList.remove('active');
-      formRegister.classList.add('active'); formLogin.classList.remove('active');
-    });
-
-    function setSession(username) {
-      userNameDisplay.textContent = username;
-      userStatusBox.classList.add('active');
-      openBtn.textContent = 'Mi Cuenta (' + username + ')';
-    }
-
-    formLogin.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const val = document.getElementById('loginUser').value.trim();
-      const user = val ? val.split('@')[0] : 'Usuario';
-      setSession(user);
-      modal.style.display = 'none';
-    });
-
-    formRegister.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const user = document.getElementById('regUser').value.trim() || 'NuevoUsuario';
-      setSession(user);
-      modal.style.display = 'none';
-    });
-
-    btnLogout.addEventListener('click', () => {
-      userStatusBox.classList.remove('active');
-      openBtn.textContent = 'Acceso / Registro';
-    });
-  </script>
-</body>
-</html>
+  <div class="threat
