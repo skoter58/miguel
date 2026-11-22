@@ -1,18 +1,17 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CYBERGUARD - Plataforma de Ciberseguridad, Diagnóstico de Red y Análisis de Amenazas">
-  <title>CYBERGUARD | Threat Diagnostic & Network Suite (Supabase RBAC)</title>
+  <meta name="description" content="CYBERGUARD - Plataforma de Ciberseguridad, Diagnóstico de Red, Conceptos y Control de Acceso">
+  <title>CYBERGUARD | Threat Diagnostic & Hacking Suite</title>
 
-  <!-- REFORZAMIENTO DE SEGURIDAD (HTTPS & HEADERS) -->
+  <!-- REFORZAMIENTO DE SEGURIDAD -->
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
-  <!-- FORZAR HTTPS EN CLIENTE -->
+  <!-- FORZAR HTTPS -->
   <script>
     if (window.location.protocol === 'http:' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
       window.location.href = window.location.href.replace('http:', 'https:');
@@ -41,6 +40,7 @@
       --glow-red: rgba(255, 51, 102, 0.4);
       --glow-orange: rgba(255, 153, 0, 0.4);
       --glow-cyan: rgba(0, 242, 254, 0.4);
+      --glow-green: rgba(0, 255, 136, 0.4);
     }
 
     * {
@@ -68,7 +68,7 @@
       padding-bottom: 50px;
     }
 
-    /* BARRA DE ALERTAS EN TIEMPO REAL */
+    /* TICKER DE INFORMACIÓN */
     .threat-ticker {
       background: #070a14;
       border-bottom: 2px solid var(--border-red);
@@ -168,6 +168,17 @@
     .role-supervisor { background: rgba(255, 153, 0, 0.2); color: var(--border-orange); border: 1px solid var(--border-orange); }
     .role-usuario { background: rgba(0, 242, 254, 0.2); color: var(--border-cyan); border: 1px solid var(--border-cyan); }
 
+    .status-badge {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .status-activo { background: rgba(0, 255, 136, 0.2); color: var(--accent-green); border: 1px solid var(--accent-green); }
+    .status-pendiente { background: rgba(255, 204, 0, 0.2); color: var(--border-yellow); border: 1px solid var(--border-yellow); }
+    .status-restringido { background: rgba(255, 51, 102, 0.2); color: var(--border-red); border: 1px solid var(--border-red); }
+
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.4; transform: scale(1.2); }
@@ -248,7 +259,122 @@
       transform: translateY(-2px);
     }
 
-    /* ESTILOS DE LINKS EXTERNOS TIPO HERO & BADGES */
+    /* ESTILOS DE CONCEPTOS E INFOGRAFÍAS (NUEVO) */
+    .seccion-conceptos {
+      margin-top: 25px;
+      border: 1px solid var(--border-cyan);
+      padding: 35px;
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.15);
+    }
+
+    .seccion-conceptos h2 {
+      color: var(--border-cyan);
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .seccion-conceptos .subtitulo {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .grid-conceptos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .concepto-card {
+      background: rgba(7, 10, 20, 0.85);
+      border-left: 4px solid var(--border-cyan);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-right: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 22px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .concepto-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0, 242, 254, 0.2);
+    }
+
+    .concepto-card.red { border-left-color: var(--border-red); }
+    .concepto-card.red:hover { box-shadow: 0 8px 25px var(--glow-red); }
+
+    .concepto-card.orange { border-left-color: var(--border-orange); }
+    .concepto-card.orange:hover { box-shadow: 0 8px 25px var(--glow-orange); }
+
+    .concepto-card.green { border-left-color: var(--accent-green); }
+    .concepto-card.green:hover { box-shadow: 0 8px 25px var(--glow-green); }
+
+    .concepto-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .concepto-icon {
+      font-size: 24px;
+    }
+
+    .concepto-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .concepto-badge-tag {
+      font-family: 'Fira Code', monospace;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    .concepto-def {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .concepto-bullet-list {
+      list-style: none;
+      font-size: 12.5px;
+      font-family: 'Fira Code', monospace;
+    }
+
+    .concepto-bullet-list li {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .concepto-bullet-list li::before {
+      content: "►";
+      color: var(--border-cyan);
+      font-size: 10px;
+      margin-top: 3px;
+    }
+
+    .concepto-card.red .concepto-bullet-list li::before { color: var(--border-red); }
+    .concepto-card.orange .concepto-bullet-list li::before { color: var(--border-orange); }
+    .concepto-card.green .concepto-bullet-list li::before { color: var(--accent-green); }
+
+    /* LINKS EXTERNOS */
     .external-link-btn {
       display: inline-flex;
       align-items: center;
@@ -262,40 +388,16 @@
       transition: all 0.3s ease;
     }
 
-    .external-link-btn.cyan {
-      border: 1px solid var(--border-cyan);
-      color: var(--border-cyan);
-      background: rgba(0, 242, 254, 0.08);
-    }
-    .external-link-btn.cyan:hover {
-      background: var(--border-cyan);
-      color: #070a14;
-      box-shadow: 0 0 15px var(--glow-cyan);
-    }
+    .external-link-btn.cyan { border: 1px solid var(--border-cyan); color: var(--border-cyan); background: rgba(0, 242, 254, 0.08); }
+    .external-link-btn.cyan:hover { background: var(--border-cyan); color: #070a14; box-shadow: 0 0 15px var(--glow-cyan); }
 
-    .external-link-btn.orange {
-      border: 1px solid var(--border-orange);
-      color: var(--border-orange);
-      background: rgba(255, 153, 0, 0.08);
-    }
-    .external-link-btn.orange:hover {
-      background: var(--border-orange);
-      color: #070a14;
-      box-shadow: 0 0 15px var(--glow-orange);
-    }
+    .external-link-btn.orange { border: 1px solid var(--border-orange); color: var(--border-orange); background: rgba(255, 153, 0, 0.08); }
+    .external-link-btn.orange:hover { background: var(--border-orange); color: #070a14; box-shadow: 0 0 15px var(--glow-orange); }
 
-    .external-link-btn.red {
-      border: 1px solid var(--border-red);
-      color: var(--border-red);
-      background: rgba(255, 51, 102, 0.08);
-    }
-    .external-link-btn.red:hover {
-      background: var(--border-red);
-      color: #fff;
-      box-shadow: 0 0 15px var(--glow-red);
-    }
+    .external-link-btn.red { border: 1px solid var(--border-red); color: var(--border-red); background: rgba(255, 51, 102, 0.08); }
+    .external-link-btn.red:hover { background: var(--border-red); color: #fff; box-shadow: 0 0 15px var(--glow-red); }
 
-    /* SECCIÓN DE HERRAMIENTAS EXTERNAS DIRECTAS */
+    /* MÓDULO HERRAMIENTAS EXTERNAS */
     .seccion-external-tools {
       margin-top: 25px;
       border: 1px solid var(--border-cyan);
@@ -336,20 +438,8 @@
       transform: translateY(-3px);
     }
 
-    .card-ext-tool h4 {
-      font-size: 16px;
-      color: #fff;
-    }
-
-    .card-ext-tool p {
-      font-size: 12.5px;
-      color: var(--text-muted);
-    }
-
-    /* HERO BLOCK / CANVAS 3D INTERACTIVO */
-    main {
-      margin-top: 20px;
-    }
+    /* HERO BLOCK / CANVAS 3D */
+    main { margin-top: 20px; }
 
     .contenido-principal {
       border: 1px solid var(--border-cyan);
@@ -376,11 +466,7 @@
       overflow: hidden;
     }
 
-    #cyberCanvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
+    #cyberCanvas { width: 100%; height: 100%; display: block; }
 
     .canvas-overlay-text {
       position: absolute;
@@ -401,9 +487,6 @@
       font-weight: 800;
       line-height: 1.25;
       margin-bottom: 20px;
-      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
     }
 
     .descripcion h1 span {
@@ -436,461 +519,197 @@
       box-shadow: 0 0 30px var(--glow-red);
     }
 
-    .seccion-semaforo h2 {
-      color: var(--text-main);
-      font-size: 26px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
+    .seccion-semaforo h2 { color: var(--text-main); font-size: 26px; margin-bottom: 20px; text-align: center; }
+    .seccion-semaforo h2 span { color: var(--border-red); }
 
-    .seccion-semaforo h2 span {
-      color: var(--border-red);
-    }
-
-    .scanner-form {
-      display: flex;
-      gap: 12px;
-      max-width: 800px;
-      margin: 0 auto 25px;
-    }
-
-    .scanner-form input, .tool-target-form input, .grupo-input select {
-      flex: 1;
-      padding: 14px 20px;
-      border-radius: 8px;
-      border: 1px solid var(--border-cyan);
-      background: rgba(7, 10, 20, 0.8);
-      color: #fff;
-      font-family: 'Fira Code', monospace;
-      font-size: 14px;
-      outline: none;
+    .scanner-form { display: flex; gap: 12px; max-width: 800px; margin: 0 auto 25px; }
+    .scanner-form input, .tool-target-form input {
+      flex: 1; padding: 14px 20px; border-radius: 8px; border: 1px solid var(--border-cyan);
+      background: rgba(7, 10, 20, 0.8); color: #fff; font-family: 'Fira Code', monospace; font-size: 14px; outline: none;
     }
 
     .scanner-form button, .tool-target-form button {
-      padding: 14px 28px;
-      background: linear-gradient(135deg, var(--border-red), var(--border-orange));
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.3s ease;
+      padding: 14px 28px; background: linear-gradient(135deg, var(--border-red), var(--border-orange));
+      border: none; border-radius: 8px; color: #fff; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s ease;
     }
 
     .scanner-form button:hover, .tool-target-form button:hover {
-      box-shadow: 0 0 20px var(--glow-red);
-      transform: translateY(-2px);
+      box-shadow: 0 0 20px var(--glow-red); transform: translateY(-2px);
     }
 
     .semaforo-grid {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 25px;
-      align-items: center;
-      background: rgba(7, 10, 20, 0.7);
-      padding: 25px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: grid; grid-template-columns: 1fr 2fr; gap: 25px; align-items: center;
+      background: rgba(7, 10, 20, 0.7); padding: 25px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .semaforo-display {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      background: #000;
-      padding: 20px;
-      border-radius: 40px;
-      width: 110px;
-      margin: 0 auto;
-      border: 2px solid #333;
+      display: flex; flex-direction: column; align-items: center; gap: 15px; background: #000;
+      padding: 20px; border-radius: 40px; width: 110px; margin: 0 auto; border: 2px solid #333;
     }
 
-    .luz {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      opacity: 0.2;
-      transition: all 0.4s ease;
-    }
-
+    .luz { width: 50px; height: 50px; border-radius: 50%; opacity: 0.2; transition: all 0.4s ease; }
     .luz.rojo { background-color: #ff3366; box-shadow: 0 0 20px #ff3366; }
     .luz.amarillo { background-color: #ffcc00; box-shadow: 0 0 20px #ffcc00; }
     .luz.verde { background-color: #00ff88; box-shadow: 0 0 20px #00ff88; }
-
     .luz.active { opacity: 1; }
 
-    .scanner-details {
-      font-family: 'Fira Code', monospace;
-      font-size: 13px;
-    }
+    .scanner-details { font-family: 'Fira Code', monospace; font-size: 13px; }
 
-    .scanner-details h3 {
-      font-size: 18px;
-      margin-bottom: 12px;
-    }
-
-    /* SUITE DE HERRAMIENTAS DE DIAGNÓSTICO DE RED */
+    /* SUITE DE RED */
     .seccion-herramientas {
-      margin-top: 25px;
-      border: 1px solid var(--border-orange);
-      padding: 35px;
-      background: var(--bg-card);
-      backdrop-filter: blur(14px);
-      border-radius: 16px;
-      position: relative;
+      margin-top: 25px; border: 1px solid var(--border-orange); padding: 35px;
+      background: var(--bg-card); backdrop-filter: blur(14px); border-radius: 16px; position: relative;
     }
 
-    .seccion-herramientas h2 {
-      margin-bottom: 25px;
-      color: var(--border-orange);
-      font-size: 26px;
-      text-align: center;
-    }
+    .seccion-herramientas h2 { margin-bottom: 25px; color: var(--border-orange); font-size: 26px; text-align: center; }
 
-    .tool-target-form {
-      display: flex;
-      gap: 12px;
-      max-width: 800px;
-      margin: 0 auto 20px;
-    }
+    .tool-target-form { display: flex; gap: 12px; max-width: 800px; margin: 0 auto 20px; }
 
-    .tools-nav {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+    .tools-nav { display: flex; gap: 12px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; }
 
     .tool-tab {
-      padding: 10px 20px;
-      background: rgba(7, 10, 20, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      color: var(--text-muted);
-      font-family: 'Fira Code', monospace;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all 0.3s;
+      padding: 10px 20px; background: rgba(7, 10, 20, 0.7); border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px; color: var(--text-muted); font-family: 'Fira Code', monospace; font-size: 13px; cursor: pointer; transition: all 0.3s;
     }
 
     .tool-tab.active, .tool-tab:hover {
-      border-color: var(--border-cyan);
-      color: var(--border-cyan);
-      background: rgba(0, 242, 254, 0.1);
+      border-color: var(--border-cyan); color: var(--border-cyan); background: rgba(0, 242, 254, 0.1);
     }
 
     .tool-console {
-      background: #070a14;
-      border: 1px solid var(--border-cyan);
-      border-radius: 10px;
-      padding: 20px;
-      font-family: 'Fira Code', monospace;
-      font-size: 13px;
-      min-height: 240px;
-      color: var(--accent-green);
-      overflow-y: auto;
+      background: #070a14; border: 1px solid var(--border-cyan); border-radius: 10px;
+      padding: 20px; font-family: 'Fira Code', monospace; font-size: 13px; min-height: 240px; color: var(--accent-green); overflow-y: auto;
     }
 
-    .tool-console a {
-      color: var(--border-cyan);
-      text-decoration: underline;
-    }
-    .tool-console a:hover {
-      color: var(--border-orange);
-    }
-
-    /* RESTRICCIÓN DE ACCESO SEGÚN ROL */
+    /* RESTRICCIÓN POR ROL / APROBACIÓN */
     .role-restricted-overlay {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(7, 10, 20, 0.92);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 50;
-      text-align: center;
-      padding: 20px;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(7, 10, 20, 0.94); backdrop-filter: blur(10px); border-radius: 16px;
+      display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 50; text-align: center; padding: 20px;
     }
 
-    .role-restricted-overlay h3 {
-      color: var(--border-red);
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
+    .role-restricted-overlay h3 { color: var(--border-red); font-size: 24px; margin-bottom: 10px; }
+    .role-restricted-overlay p { color: var(--text-muted); font-size: 14px; max-width: 550px; }
 
-    .role-restricted-overlay p {
-      color: var(--text-muted);
-      font-size: 14px;
-      max-width: 500px;
-    }
-
-    /* SECCIÓN EXCLUSIVA DE ADMINISTRADOR */
+    /* PANEL ADMINISTRADOR DE GESTIÓN DE USUARIOS (MEJORADO) */
     .seccion-admin-panel {
-      margin-top: 25px;
-      border: 2px dashed var(--border-red);
-      padding: 30px;
-      background: rgba(255, 51, 102, 0.05);
-      border-radius: 16px;
-      display: none;
+      margin-top: 25px; border: 2px dashed var(--border-red); padding: 30px;
+      background: rgba(255, 51, 102, 0.05); border-radius: 16px; display: none;
     }
 
-    .seccion-admin-panel h2 {
-      color: var(--border-red);
-      font-size: 24px;
-      margin-bottom: 15px;
+    .seccion-admin-panel h2 { color: var(--border-red); font-size: 24px; margin-bottom: 15px; }
+
+    .tabla-usuarios-container {
+      overflow-x: auto; margin-top: 20px; background: rgba(7, 10, 20, 0.8);
+      border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* 7 MÓDULOS DE SEGURIDAD */
+    .tabla-usuarios {
+      width: 100%; border-collapse: collapse; font-family: 'Fira Code', monospace; font-size: 13px; text-align: left;
+    }
+
+    .tabla-usuarios th, .tabla-usuarios td {
+      padding: 12px 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .tabla-usuarios th {
+      background: rgba(21, 30, 49, 0.9); color: var(--border-cyan); font-weight: 600;
+    }
+
+    .btn-action {
+      padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s;
+    }
+
+    .btn-approve { background: rgba(0, 255, 136, 0.2); color: var(--accent-green); border: 1px solid var(--accent-green); }
+    .btn-approve:hover { background: var(--accent-green); color: #000; }
+
+    .btn-restrict { background: rgba(255, 51, 102, 0.2); color: var(--border-red); border: 1px solid var(--border-red); }
+    .btn-restrict:hover { background: var(--border-red); color: #fff; }
+
+    /* 7 MÓDULOS */
     .seccion-modulos {
-      margin-top: 25px;
-      border: 1px solid var(--border-purple);
-      padding: 35px;
-      background: var(--bg-card);
-      backdrop-filter: blur(14px);
-      border-radius: 16px;
+      margin-top: 25px; border: 1px solid var(--border-purple); padding: 35px;
+      background: var(--bg-card); backdrop-filter: blur(14px); border-radius: 16px;
     }
 
-    .seccion-modulos h2 {
-      color: var(--text-main);
-      font-size: 28px;
-      margin-bottom: 25px;
-      text-align: center;
-    }
+    .seccion-modulos h2 { color: var(--text-main); font-size: 28px; margin-bottom: 25px; text-align: center; }
+    .seccion-modulos h2 span { color: var(--border-cyan); }
 
-    .seccion-modulos h2 span {
-      color: var(--border-cyan);
-    }
-
-    .grid-modulos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
+    .grid-modulos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
 
     .modulo-card {
-      background: rgba(7, 10, 20, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: 24px;
-      transition: all 0.3s ease;
+      background: rgba(7, 10, 20, 0.7); border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px; padding: 24px; transition: all 0.3s ease;
     }
 
-    .modulo-card:hover {
-      border-color: var(--border-orange);
-      box-shadow: 0 0 25px var(--glow-orange);
-      transform: translateY(-5px);
-    }
+    .modulo-card:hover { border-color: var(--border-orange); box-shadow: 0 0 25px var(--glow-orange); transform: translateY(-5px); }
+    .modulo-card .modulo-num { font-family: 'Fira Code', monospace; font-size: 12px; color: var(--border-orange); margin-bottom: 8px; }
 
-    .modulo-card .modulo-num {
-      font-family: 'Fira Code', monospace;
-      font-size: 12px;
-      color: var(--border-orange);
-      margin-bottom: 8px;
-    }
-
-    .modulo-card h3 {
-      color: var(--text-main);
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-
-    .modulo-card p {
-      font-size: 13.5px;
-      color: var(--text-muted);
-    }
-
-    /* GALERÍA DE OPERACIONES */
+    /* GALERÍA */
     .seccion-galeria {
-      margin-top: 25px;
-      border: 1px solid var(--border-cyan);
-      padding: 35px;
-      background: var(--bg-card);
-      backdrop-filter: blur(14px);
-      border-radius: 16px;
+      margin-top: 25px; border: 1px solid var(--border-cyan); padding: 35px;
+      background: var(--bg-card); backdrop-filter: blur(14px); border-radius: 16px;
     }
 
-    .seccion-galeria h2 {
-      margin-bottom: 25px;
-      color: var(--border-cyan);
-      font-size: 26px;
-      text-align: center;
-    }
-
-    .galeria-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
+    .seccion-galeria h2 { margin-bottom: 25px; color: var(--border-cyan); font-size: 26px; text-align: center; }
+    .galeria-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
     .galeria-card {
-      height: 220px;
-      border: 1px solid var(--border-cyan);
-      border-radius: 12px;
-      overflow: hidden;
-      background: #070a14;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.4s ease;
+      height: 220px; border: 1px solid var(--border-cyan); border-radius: 12px; overflow: hidden;
+      background: #070a14; position: relative; display: flex; align-items: center; justify-content: center; transition: all 0.4s ease;
     }
 
-    .galeria-card svg {
-      width: 100%;
-      height: 100%;
-      transition: transform 0.4s ease;
-    }
-
-    .galeria-card:hover {
-      border-color: var(--border-red);
-      box-shadow: 0 0 25px var(--glow-red);
-    }
-
-    .galeria-card:hover svg {
-      transform: scale(1.06);
-    }
+    .galeria-card:hover { border-color: var(--border-red); box-shadow: 0 0 25px var(--glow-red); }
 
     .galeria-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 10px;
-      background: rgba(7, 10, 20, 0.85);
-      backdrop-filter: blur(6px);
-      color: var(--border-yellow);
-      font-size: 12px;
-      font-weight: 700;
-      font-family: 'Fira Code', monospace;
-      text-align: center;
-      border-top: 1px solid rgba(255, 204, 0, 0.3);
+      position: absolute; bottom: 0; left: 0; width: 100%; padding: 10px; background: rgba(7, 10, 20, 0.85);
+      backdrop-filter: blur(6px); color: var(--border-yellow); font-size: 12px; font-weight: 700;
+      font-family: 'Fira Code', monospace; text-align: center; border-top: 1px solid rgba(255, 204, 0, 0.3);
     }
 
-    footer {
-      margin-top: 30px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 25px;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 13px;
-    }
+    footer { margin-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 25px; text-align: center; color: var(--text-muted); font-size: 13px; }
 
     /* MODAL AUTENTICACIÓN */
     .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(7, 10, 20, 0.9);
-      backdrop-filter: blur(14px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(7, 10, 20, 0.9); backdrop-filter: blur(14px); display: none;
+      justify-content: center; align-items: center; z-index: 1000;
     }
 
     .modal-contenido {
-      background: #111827;
-      border: 1px solid var(--border-red);
-      box-shadow: 0 0 35px var(--glow-red);
-      border-radius: 16px;
-      width: min(440px, 90%);
-      padding: 30px;
-      position: relative;
+      background: #111827; border: 1px solid var(--border-red); box-shadow: 0 0 35px var(--glow-red);
+      border-radius: 16px; width: min(440px, 90%); padding: 30px; position: relative;
     }
 
-    .cerrar-modal {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      color: var(--text-muted);
-      font-size: 24px;
-      cursor: pointer;
-    }
+    .cerrar-modal { position: absolute; top: 15px; right: 20px; color: var(--text-muted); font-size: 24px; cursor: pointer; }
 
-    .tabs-auth {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
+    .tabs-auth { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
 
     .tab-btn {
-      flex: 1;
-      padding: 10px;
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
+      flex: 1; padding: 10px; background: none; border: none; color: var(--text-muted);
+      font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;
     }
 
-    .tab-btn.active {
-      color: var(--border-red);
-      border-bottom: 2px solid var(--border-red);
-    }
+    .tab-btn.active { color: var(--border-red); border-bottom: 2px solid var(--border-red); }
 
-    .form-auth {
-      display: none;
-      flex-direction: column;
-      gap: 15px;
-    }
+    .form-auth { display: none; flex-direction: column; gap: 15px; }
+    .form-auth.active { display: flex; }
 
-    .form-auth.active {
-      display: flex;
-    }
-
-    .grupo-input {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .grupo-input label {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
+    .grupo-input { display: flex; flex-direction: column; gap: 6px; }
+    .grupo-input label { font-size: 13px; color: var(--text-muted); }
 
     .grupo-input input, .grupo-input select {
-      padding: 10px 14px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(7, 10, 20, 0.8);
-      color: var(--text-main);
-      font-size: 14px;
-      outline: none;
-    }
-
-    .grupo-input input:focus, .grupo-input select:focus {
-      border-color: var(--border-red);
-      box-shadow: 0 0 10px var(--glow-red);
+      padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(7, 10, 20, 0.8); color: var(--text-main); font-size: 14px; outline: none;
     }
 
     .btn-submit {
-      margin-top: 10px;
-      padding: 12px;
-      background: linear-gradient(135deg, var(--border-red), var(--border-orange));
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
+      margin-top: 10px; padding: 12px; background: linear-gradient(135deg, var(--border-red), var(--border-orange));
+      border: none; border-radius: 8px; color: #fff; font-weight: 700; font-size: 15px; cursor: pointer;
     }
 
     @media (max-width: 900px) {
-      .contenido-principal, .semaforo-grid, .galeria-grid {
-        grid-template-columns: 1fr;
-      }
+      .contenido-principal, .semaforo-grid, .galeria-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -900,8 +719,8 @@
   <div class="threat-ticker">
     <div class="ticker-content">
       [HTTPS SECURE CONNECTION] Conexión cifrada TLS v1.3 activa &nbsp;&nbsp;|&nbsp;&nbsp; 
-      [SUPABASE AUTH] Control de Acceso basado en Roles (Administrador, Supervisor, Usuario) &nbsp;&nbsp;|&nbsp;&nbsp; 
-      [ACCESO DIRECTO] Integración con VirusTotal, MXToolbox Blacklist, Speedtest, Shodan, AbuseIPDB y SSL Labs.
+      [SUPABASE RBAC] Sistema de Registro con Aprobación de Administrador Habilitado &nbsp;&nbsp;|&nbsp;&nbsp; 
+      [ACCESO RESTRICTO] Solo Usuarios Aprobados Tienen Acceso a la Consola Ejecutiva.
     </div>
   </div>
 
@@ -911,7 +730,7 @@
     <header>
       <div class="logo">
         CYBERGUARD
-        <span class="logo-badge">Enterprise v5.2</span>
+        <span class="logo-badge">Enterprise v6.0</span>
       </div>
 
       <!-- ESTADO DE SESIÓN Y ROL -->
@@ -921,55 +740,162 @@
           Usuario: <strong id="userNameDisplay" style="color: var(--border-orange);">Invitado</strong>
         </div>
         <span class="role-badge role-usuario" id="userRoleBadge">USUARIO</span>
+        <span class="status-badge status-pendiente" id="userStatusBadge">PENDIENTE</span>
         <button class="btn-logout" id="btnLogout">Cerrar Sesión</button>
       </div>
     </header>
 
-    <!-- BARRA DE NAVEGACIÓN -->
+    <!-- NAVEGACIÓN -->
     <nav>
       <div style="font-weight: 700; font-size: 15px; color: var(--text-main);">Console & Diagnostic Panel</div>
       <ul class="menu-links">
         <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#conceptos">Conceptos Clave</a></li>
         <li><a href="#external-tools">Herramientas Reales</a></li>
         <li><a href="#semaforo">Diagnóstico URL</a></li>
         <li><a href="#herramientas">Diagnóstico Red</a></li>
         <li><a href="#modulos">7 Módulos</a></li>
-        <li><a href="#galeria">Infraestructura</a></li>
         <li><button class="btn-auth-trigger" id="openAuthModal">Acceso / Registro</button></li>
       </ul>
     </nav>
 
-    <!-- BLOQUE PRINCIPAL CON CANVAS 3D INTERACTIVO -->
+    <!-- BLOQUE PRINCIPAL HERO -->
     <main id="inicio">
       <section class="contenido-principal">
-        
         <div class="canvas-container">
           <canvas id="cyberCanvas"></canvas>
-          <div class="canvas-overlay-text">
-            &gt; NETWORK DIAGNOSTIC & REAL TOOL SUITE LINKED
-          </div>
+          <div class="canvas-overlay-text">&gt; NETWORK DIAGNOSTIC & Threat Intelligence Suite</div>
         </div>
 
         <article class="descripcion">
           <h1>Centro de Análisis & <span>Gestión de Seguridad</span></h1>
           <p>
-            Plataforma avanzada de ciberseguridad con autenticación basada en Supabase, control de roles (Admin, Supervisor, Usuario) y accesos directos a plataformas de consulta reales como Speedtest, Blacklist Checkers y Motores de Reputación Global.
+            Plataforma avanzada de ciberseguridad con autenticación Supabase, control de acceso RBAC y aprobación manual por Administrador para la ejecución de herramientas operativas.
           </p>
-          
           <div class="security-badges">
             <a href="https://www.speedtest.net/" target="_blank" rel="noopener noreferrer" class="external-link-btn cyan">⚡ Speedtest.net ↗</a>
             <a href="https://mxtoolbox.com/blacklists.aspx" target="_blank" rel="noopener noreferrer" class="external-link-btn orange">🚫 MXToolbox Blacklist ↗</a>
             <a href="https://www.virustotal.com/" target="_blank" rel="noopener noreferrer" class="external-link-btn red">🛡️ VirusTotal ↗</a>
           </div>
         </article>
-
       </section>
 
-      <!-- SECCIÓN NUEVA: DIRECTORIO DE HERRAMIENTAS REALES EXTERNAS -->
+      <!-- SECCIÓN NUEVA: CONCEPTOS DE CIBERSEGURIDAD Y HACKING (INFOGRAFÍA / GLOSARIO) -->
+      <section class="seccion-conceptos" id="conceptos">
+        <h2>📚 Conceptos Clave de Ciberseguridad & Hacking Ético</h2>
+        <p class="subtitulo">Fundamentos esenciales para la evaluación de amenazas e infraestructura defensiva</p>
+        
+        <div class="grid-conceptos">
+          
+          <!-- Concepto 1 -->
+          <article class="concepto-card red">
+            <div class="concepto-header">
+              <span class="concepto-icon">⚔️</span>
+              <span class="concepto-title">Red Team (Hacking Ofensivo)</span>
+              <span class="concepto-badge-tag">OFENSIVA</span>
+            </div>
+            <p class="concepto-def">
+              Grupo de profesionales que simula ataques reales adversarios para evaluar la postura de seguridad y respuesta de una organización.
+            </p>
+            <ul class="concepto-bullet-list">
+              <li>Explotación de vulnerabilidades conocidas y Zero-Days.</li>
+              <li>Ingeniería social y Phishing avanzado.</li>
+              <li>Pruebas de evasión de EDR/AV y movimiento lateral.</li>
+            </ul>
+          </article>
+
+          <!-- Concepto 2 -->
+          <article class="concepto-card green">
+            <div class="concepto-header">
+              <span class="concepto-icon">🛡️</span>
+              <span class="concepto-title">Blue Team (Defensa Aumentada)</span>
+              <span class="concepto-badge-tag">DEFENSIVA</span>
+            </div>
+            <p class="concepto-def">
+              Equipo encargado de mantener y fortalecer las defensas cibernéticas, detectando e investigando incidentes en tiempo real.
+            </p>
+            <ul class="concepto-bullet-list">
+              <li>Monitoreo continuo en consolas SIEM/SOC.</li>
+              <li>Hardening (Hardenización) de servidores y endpoints.</li>
+              <li>Respuesta inmediata a incidentes y análisis forense.</li>
+            </ul>
+          </article>
+
+          <!-- Concepto 3 -->
+          <article class="concepto-card orange">
+            <div class="concepto-header">
+              <span class="concepto-icon">🎯</span>
+              <span class="concepto-title">Pentesting (Pruebas de Penetración)</span>
+              <span class="concepto-badge-tag">AUDITORÍA</span>
+            </div>
+            <p class="concepto-def">
+              Simulación autorizada y controlada de un ataque contra un sistema informático para identificar y corregir fallas de seguridad.
+            </p>
+            <ul class="concepto-bullet-list">
+              <li>Fases: Reconocimiento, Escaneo, Explotación y Reporte.</li>
+              <li>Auditorías Caja Negra, Caja Gris y Caja Blanca.</li>
+              <li>Cumplimiento de estándares OWASP Top 10 y PTES.</li>
+            </ul>
+          </article>
+
+          <!-- Concepto 4 -->
+          <article class="concepto-card red">
+            <div class="concepto-header">
+              <span class="concepto-icon">☣️</span>
+              <span class="concepto-title">Vulnerabilidad Zero-Day</span>
+              <span class="concepto-badge-tag">AMENAZA</span>
+            </div>
+            <p class="concepto-def">
+              Falla de software desconocida por el fabricante para la cual no existe parche ni firma de protección al momento del ataque.
+            </p>
+            <ul class="concepto-bullet-list">
+              <li>Alto valor en el mercado negro de exploits.</li>
+              <li>Requiere análisis de comportamiento o sandboxing.</li>
+              <li>Impacto crítico en la infraestructura objetivo.</li>
+            </ul>
+          </article>
+
+          <!-- Concepto 5 -->
+          <article class="concepto-card">
+            <div class="concepto-header">
+              <span class="concepto-icon">👁️‍🗨️</span>
+              <span class="concepto-title">SOC & SIEM (Centro de Operaciones)</span>
+              <span class="concepto-badge-tag">MONITOREO</span>
+            </div>
+            <p class="concepto-def">
+              Plataformas centralizadas de correlación de eventos de seguridad (logs) provenientes de cortafuegos, servidores y redes.
+            </p>
+            <ul class="concepto-bullet-list">
+              <li>Detección automatizada de anomalías mediante IA.</li>
+              <li>Centralización y custodia de registros de auditoría.</li>
+              <li>Reducción de tiempos de detección (MTTD) y respuesta (MTTR).</li>
+            </ul>
+          </article>
+
+          <!-- Concepto 6 -->
+          <article class="concepto-card orange">
+            <div class="concepto-header">
+              <span class="concepto-icon">🔐</span>
+              <span class="concepto-title">Ransomware & Malware</span>
+              <span class="concepto-badge-tag">MALWARE</span>
+            </div>
+            <p class="concepto-def">
+              Código malicioso diseñado para secuestrar información mediante cifrado y exigiéndole un rescate económico a la víctima.
+            </p>
+            <ul class="concepto-bullet-list">
+              <li>Doble extorsión: Cifrado + Exfiltración de datos.</li>
+              <li>Vectores: Archivos adjuntos, RDP expuesto, exploits web.</li>
+              <li>Defensa: Backups 3-2-1 Inmutables y microsegmentación.</li>
+            </ul>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- DIRECTORIO DE HERRAMIENTAS REALES EXTERNAS -->
       <section class="seccion-external-tools" id="external-tools">
         <h2>🌐 Suite Externa de Servicios de Diagnóstico & Ciberseguridad</h2>
         <div class="grid-external-tools">
-          
           <div class="card-ext-tool">
             <div>
               <h4>⚡ Speedtest por Ookla</h4>
@@ -977,224 +903,115 @@
             </div>
             <a href="https://www.speedtest.net/" target="_blank" rel="noopener noreferrer" class="external-link-btn cyan">Ir a Speedtest ↗</a>
           </div>
-
           <div class="card-ext-tool">
             <div>
               <h4>🚫 MXToolbox Blacklist Check</h4>
-              <p>Consulta si tu dirección IP o dominio ha sido reportado en más de 100 listas negras globales.</p>
+              <p>Consulta si tu IP o dominio ha sido reportado en listas negras globales.</p>
             </div>
             <a href="https://mxtoolbox.com/blacklists.aspx" target="_blank" rel="noopener noreferrer" class="external-link-btn orange">Consultar Blacklist ↗</a>
           </div>
-
           <div class="card-ext-tool">
             <div>
               <h4>🦠 VirusTotal Intelligence</h4>
               <p>Analiza archivos, dominios, IPs y URLs sospechosas con más de 70 motores antivirus.</p>
             </div>
-            <a href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener noreferrer" class="external-link-btn red">Analizar en VirusTotal ↗</a>
+            <a href="https://www.virustotal.com/" target="_blank" rel="noopener noreferrer" class="external-link-btn red">Analizar VirusTotal ↗</a>
           </div>
-
           <div class="card-ext-tool">
             <div>
               <h4>🔍 Shodan Search Engine</h4>
-              <p>Buscador global de dispositivos conectados a internet, puertos abiertos y servidores expuestos.</p>
+              <p>Buscador global de dispositivos conectados, puertos abiertos y servidores expuestos.</p>
             </div>
             <a href="https://www.shodan.io/" target="_blank" rel="noopener noreferrer" class="external-link-btn cyan">Buscar en Shodan ↗</a>
           </div>
-
-          <div class="card-ext-tool">
-            <div>
-              <h4>🚨 AbuseIPDB Database</h4>
-              <p>Verifica si una dirección IP ha sido reportada por actividades de hacking, spam o brute-force.</p>
-            </div>
-            <a href="https://www.abuseipdb.com/" target="_blank" rel="noopener noreferrer" class="external-link-btn red">Verificar AbuseIPDB ↗</a>
-          </div>
-
-          <div class="card-ext-tool">
-            <div>
-              <h4>🌐 DNSChecker propagation</h4>
-              <p>Comprueba la propagación de registros DNS (A, MX, CNAME, TXT) en servidores de todo el mundo.</p>
-            </div>
-            <a href="https://dnschecker.org/" target="_blank" rel="noopener noreferrer" class="external-link-btn orange">Verificar DNS ↗</a>
-          </div>
-
-          <div class="card-ext-tool">
-            <div>
-              <h4>🔒 Qualys SSL Labs</h4>
-              <p>Audita la configuración SSL/TLS y cifrado de cualquier servidor web HTTPS en producción.</p>
-            </div>
-            <a href="https://www.ssllabs.com/ssltest/" target="_blank" rel="noopener noreferrer" class="external-link-btn cyan">Auditar SSL ↗</a>
-          </div>
-
-          <div class="card-ext-tool">
-            <div>
-              <h4>🛡️ IPVoid Security Tools</h4>
-              <p>Suite de herramientas para investigación de IP, reputación de dominios y análisis Whois.</p>
-            </div>
-            <a href="https://www.ipvoid.com/" target="_blank" rel="noopener noreferrer" class="external-link-btn orange">Explorar IPVoid ↗</a>
-          </div>
-
         </div>
       </section>
 
-      <!-- SEMÁFORO DE DIAGNÓSTICO CON LINK EXTERNO A VIRUSTOTAL -->
+      <!-- SEMÁFORO DE DIAGNÓSTICO -->
       <section class="seccion-semaforo" id="semaforo">
         <h2><span>Semáforo de Diagnóstico</span> de Sitios & URLs Maliciosas</h2>
-        
         <div class="scanner-form">
           <input type="text" id="urlInput" placeholder="Ingresa una URL o Dominio (ej. http://sitio-sospechoso.com)...">
           <button id="btnScanUrl">Analizar RIESGO</button>
         </div>
-
         <div class="semaforo-grid">
           <div class="semaforo-display">
             <div class="luz rojo" id="luzRojo"></div>
             <div class="luz amarillo" id="luzAmarillo"></div>
             <div class="luz verde active" id="luzVerde"></div>
           </div>
-
           <div class="scanner-details" id="scanDetails">
             <h3 style="color: var(--accent-green);">ESTADO: SITIO LIMPIO / SEGURO (TIER 1)</h3>
             <p><strong>Dominio Evaluado:</strong> Ninguno (Esperando consulta...)</p>
             <p><strong>Nivel de Amenaza:</strong> 0 / 100 (Sin firmas maliciosas detectadas)</p>
-            <p><strong>Certificado SSL:</strong> Válido / RSA 2048 bits</p>
-            <p><strong>Estado Phishing:</strong> Limpio en bases de datos globales de ciberdefensa.</p>
           </div>
         </div>
       </section>
 
-      <!-- SUITE DE HERRAMIENTAS DE RED CON LINKS A HERRAMIENTAS REALES -->
+      <!-- SUITE DE HERRAMIENTAS DE RED (CON CONTROL DE APROBACIÓN) -->
       <section class="seccion-herramientas" id="herramientas">
         
         <div class="role-restricted-overlay" id="toolsRestrictedOverlay">
-          <h3>🔒 Acceso Restringido</h3>
-          <p>Se requieren permisos de <strong>Supervisor</strong> o <strong>Administrador</strong> para ejecutar utilidades de diagnóstico perimetral avanzadas (PING, Tracert, Port Scanner).</p>
+          <h3>🔒 Acceso Restringido / Esperando Aprobación</h3>
+          <p id="restrictionReason">
+            Para ejecutar las utilidades de diagnóstico técnico (PING, Tracert, Nslookup, Port Scanner), debes iniciar sesión y tu cuenta debe ser <strong>Aprobada por el Administrador</strong>.
+          </p>
         </div>
 
         <h2>Herramientas de Diagnóstico Técnico de Red</h2>
-
         <div class="tool-target-form">
-          <input type="text" id="toolHostInput" placeholder="Ingresa Dominio o IP de destino (ej: google.com, 1.1.1.1, github.com)..." value="google.com">
+          <input type="text" id="toolHostInput" placeholder="Ingresa Dominio o IP de destino..." value="google.com">
           <button id="btnRunTool">Ejecutar Diagnóstico</button>
         </div>
-
         <div class="tools-nav">
           <button class="tool-tab active" data-tool="ping">&gt;_ PING</button>
           <button class="tool-tab" data-tool="tracert">&gt;_ TRACEROUTE</button>
           <button class="tool-tab" data-tool="nslookup">&gt;_ NSLOOKUP</button>
           <button class="tool-tab" data-tool="portscan">&gt;_ PORT SCANNER</button>
         </div>
-
         <div class="tool-console" id="toolConsoleOutput">
           <p>[SUITE DE RED INICIALIZADA]</p>
           <p>Escribe el host o IP arriba y selecciona la herramienta deseada o haz clic en <b>"Ejecutar Diagnóstico"</b>.</p>
         </div>
       </section>
 
-      <!-- PANEL EXCLUSIVO DE ADMINISTRADOR -->
+      <!-- PANEL EXCLUSIVO DEL ADMINISTRADOR (APROBACIÓN DE USUARIOS) -->
       <section class="seccion-admin-panel" id="adminPanel">
         <h2>⚡ Panel de Control del Administrador</h2>
-        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 15px;">Gestión avanzada de registros de Supabase, políticas RLS y auditoría global de seguridad.</p>
-        <div style="background: rgba(7, 10, 20, 0.8); padding: 15px; border-radius: 8px; font-family: 'Fira Code', monospace; font-size: 13px; color: var(--border-cyan);">
-          [SYS_LOG] Admin Privilege Escalation Check: PASSED<br>
-          [SUPABASE_STATUS] Conexión cifrada con PostgreSQL Auth. Users Database active.<br>
-          [AUDIT] Policitas RLS (Row Level Security) activadas en el esquema público.
+        <p style="font-size: 14px; color: var(--text-muted);">
+          Acepta nuevos registros, asigna privilegios o restringe usuarios registrados en Supabase.
+        </p>
+
+        <div class="tabla-usuarios-container">
+          <table class="tabla-usuarios">
+            <thead>
+              <tr>
+                <th>Usuario / Email</th>
+                <th>Rol Actual</th>
+                <th>Estado</th>
+                <th>Acciones de Administrador</th>
+              </tr>
+            </thead>
+            <tbody id="adminUsersTableBody">
+              <tr>
+                <td colspan="4" style="text-align: center; color: var(--text-muted);">Cargando usuarios de Supabase...</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
-      <!-- SECCIÓN: LOS 7 MÓDULOS DE SEGURIDAD -->
+      <!-- MÓDULOS -->
       <section class="seccion-modulos" id="modulos">
         <h2>Los <span>7 Módulos Fundamentales</span> de Seguridad</h2>
         <div class="grid-modulos">
-          <article class="modulo-card">
-            <div class="modulo-num">MOD_01 // IAM</div>
-            <h3>Gestión IAM Zero-Trust</h3>
-            <p>Control de acceso basado en roles (RBAC) integrado con Supabase Auth y MFA.</p>
-          </article>
-          <article class="modulo-card">
-            <div class="modulo-num">MOD_02 // CRYPTO</div>
-            <h3>Cifrado TLS/HTTPS</h3>
-            <p>Conexión segura garantizada con certificados SSL/TLS y directivas HSTS rigurosas.</p>
-          </article>
-          <article class="modulo-card">
-            <div class="modulo-num">MOD_03 // PERIMETER</div>
-            <h3>Seguridad IPS/NGFW</h3>
-            <p>Firewalls de nueva generación con microsegmentación perimetral y mitigación activa de intrusiones.</p>
-          </article>
-          <article class="modulo-card">
-            <div class="modulo-num">MOD_04 // THREATS</div>
-            <h3>Gestión de Vulnerabilidades</h3>
-            <p>Escaneo automatizado en pipelines DevSecOps y parcheo proactivo de fallos de seguridad.</p>
-          </article>
-          <article class="modulo-card">
-            <div class="modulo-num">MOD_05 // SOC</div>
-            <h3>SOC & SIEM Inteligente</h3>
-            <p>Monitoreo unificado 24/7 con respuesta automatizada SOAR ante incidentes críticos.</p>
-          </article>
-          <article class="modulo-card">
-            <div class="modulo-num">MOD_06 // CLOUD</div>
-            <h3>Protección Cloud & API</h3>
-            <p>Auditoría de posture en entornos multicloud (CSPM) y blindaje de endpoints y APIs.</p>
-          </article>
-          <article class="modulo-card">
-            <div class="modulo-num">MOD_07 // DRP</div>
-            <h3>Resiliencia BCP & Backup</h3>
-            <p>Continuidad operativa con respaldos anti-ransomware y restauración inmediata ante desastres.</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- GALERÍA DE OPERACIONES EN VECTOR SVG -->
-      <section class="seccion-galeria" id="galeria">
-        <h2>Galería de Operaciones & Infraestructura</h2>
-
-        <div class="galeria-grid">
-          <div class="galeria-card">
-            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="200" fill="#070a14"/>
-              <path d="M50 40 H250 V160 H50 Z" fill="none" stroke="#ff3366" stroke-width="2"/>
-              <text x="65" y="70" fill="#ffcc00" font-family="monospace" font-size="12">&gt; ethical_hacking --scan</text>
-              <text x="65" y="95" fill="#ff9900" font-family="monospace" font-size="11">[+] Exploit vector test ok</text>
-              <text x="65" y="115" fill="#a0aec0" font-family="monospace" font-size="11">[+] Bypass WAF rule #402</text>
-              <text x="65" y="135" fill="#00ff88" font-family="monospace" font-size="11">[SUCCESS] System Secured</text>
-              <circle cx="230" cy="70" r="6" fill="#ff3366"/>
-            </svg>
-            <div class="galeria-caption">Ethical Hacking & Matrix</div>
-          </div>
-
-          <div class="galeria-card">
-            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="200" fill="#070a14"/>
-              <circle cx="150" cy="100" r="70" fill="none" stroke="#ff9900" stroke-width="2"/>
-              <circle cx="150" cy="100" r="45" fill="none" stroke="#00f2fe" stroke-width="1.5" stroke-dasharray="4"/>
-              <line x1="150" y1="30" x2="150" y2="170" stroke="#ff3366" stroke-opacity="0.6"/>
-              <line x1="80" y1="100" x2="220" y2="100" stroke="#ff3366" stroke-opacity="0.6"/>
-              <circle cx="170" cy="80" r="5" fill="#ff3366"/>
-              <circle cx="130" cy="125" r="5" fill="#ffcc00"/>
-            </svg>
-            <div class="galeria-caption">Centro SOC Radar 24/7</div>
-          </div>
-
-          <div class="galeria-card">
-            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="200" fill="#070a14"/>
-              <path d="M150 40 L210 70 V120 L150 160 L90 120 V70 Z" fill="rgba(255, 51, 102, 0.15)" stroke="#ff3366" stroke-width="2"/>
-              <path d="M150 60 L190 80 V115 L150 140 L110 115 V80 Z" fill="rgba(255, 153, 0, 0.2)" stroke="#ff9900" stroke-width="1.5"/>
-              <circle cx="150" cy="100" r="10" fill="#ffcc00"/>
-            </svg>
-            <div class="galeria-caption">Infraestructura & Firewall</div>
-          </div>
-
-          <div class="galeria-card">
-            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="200" fill="#070a14"/>
-              <polyline points="40,140 90,110 140,130 190,70 250,90" fill="none" stroke="#ff3366" stroke-width="3"/>
-              <polyline points="40,150 90,130 140,145 190,110 250,120" fill="none" stroke="#ff9900" stroke-width="2" stroke-dasharray="3"/>
-              <circle cx="190" cy="70" r="6" fill="#00f2fe"/>
-              <circle cx="250" cy="90" r="6" fill="#ffcc00"/>
-            </svg>
-            <div class="galeria-caption">Threat Intelligence AI</div>
-          </div>
+          <article class="modulo-card"><div class="modulo-num">MOD_01 // IAM</div><h3>Gestión IAM Zero-Trust</h3><p>Control RBAC integrado con Supabase Auth.</p></article>
+          <article class="modulo-card"><div class="modulo-num">MOD_02 // CRYPTO</div><h3>Cifrado TLS/HTTPS</h3><p>Protección de datos en tránsito con certificados SSL/TLS.</p></article>
+          <article class="modulo-card"><div class="modulo-num">MOD_03 // PERIMETER</div><h3>Seguridad IPS/NGFW</h3><p>Microsegmentación perimetral y mitigación activa.</p></article>
+          <article class="modulo-card"><div class="modulo-num">MOD_04 // THREATS</div><h3>Gestión Vulnerabilidades</h3><p>Análisis automatizado DevSecOps.</p></article>
+          <article class="modulo-card"><div class="modulo-num">MOD_05 // SOC</div><h3>SOC & SIEM Inteligente</h3><p>Monitoreo 24/7 y SOAR ante incidentes.</p></article>
+          <article class="modulo-card"><div class="modulo-num">MOD_06 // CLOUD</div><h3>Protección Cloud</h3><p>Auditoría multicloud (CSPM) y API Shield.</p></article>
+          <article class="modulo-card"><div class="modulo-num">MOD_07 // DRP</div><h3>Resiliencia BCP</h3><p>Respaldos inmutables anti-ransomware.</p></article>
         </div>
       </section>
 
@@ -1207,7 +1024,7 @@
 
   </div>
 
-  <!-- MODAL AUTENTICACIÓN SUPABASE -->
+  <!-- MODAL AUTENTICACIÓN -->
   <div class="modal-overlay" id="authModal">
     <div class="modal-contenido">
       <span class="cerrar-modal" id="closeAuthModal">&times;</span>
@@ -1220,62 +1037,58 @@
       <!-- FORMULARIO LOGIN -->
       <form class="form-auth active" id="formLogin">
         <div class="grupo-input">
-          <label for="loginEmail">Correo Corporativo</label>
-          <input type="email" id="loginEmail" required placeholder="analista@cyberguard.com">
+          <label for="loginEmail">Correo Electrónico</label>
+          <input type="email" id="loginEmail" required placeholder="usuario@empresa.com">
         </div>
         <div class="grupo-input">
-          <label for="loginPass">Contraseña Criptográfica</label>
+          <label for="loginPass">Contraseña</label>
           <input type="password" id="loginPass" required placeholder="••••••••••••">
         </div>
-        <button type="submit" class="btn-submit">Acceder con Supabase</button>
+        <button type="submit" class="btn-submit">Ingresar</button>
       </form>
 
-      <!-- FORMULARIO REGISTRO CON ROL -->
+      <!-- FORMULARIO REGISTRO -->
       <form class="form-auth" id="formRegister">
         <div class="grupo-input">
-          <label for="regUser">Nombre de Usuario / Alias</label>
-          <input type="text" id="regUser" required placeholder="OperadorSOC">
+          <label for="regUser">Nombre / Alias</label>
+          <input type="text" id="regUser" required placeholder="Ej: AlexCyber">
         </div>
         <div class="grupo-input">
-          <label for="regEmail">Correo Corporativo</label>
+          <label for="regEmail">Correo Electrónico</label>
           <input type="email" id="regEmail" required placeholder="usuario@empresa.com">
         </div>
         <div class="grupo-input">
-          <label for="regPass">Contraseña Segura</label>
+          <label for="regPass">Contraseña</label>
           <input type="password" id="regPass" required placeholder="••••••••••••">
         </div>
-        <div class="grupo-input">
-          <label for="regRole">Rol de Acceso en el Sistema</label>
-          <select id="regRole" required>
-            <option value="usuario">Usuario Final (Acceso Básico)</option>
-            <option value="supervisor">Supervisor (Diagnóstico de Red)</option>
-            <option value="administrador">Administrador (Acceso Total)</option>
-          </select>
-        </div>
-        <button type="submit" class="btn-submit">Crear Cuenta Supabase</button>
+        <p style="font-size:11px; color:var(--border-yellow); margin-top:5px;">
+          * Nota: Al registrarte, tu cuenta estará en estado <strong>Pendiente</strong> hasta que el Administrador la apruebe.
+        </p>
+        <button type="submit" class="btn-submit">Solicitar Registro</button>
       </form>
     </div>
   </div>
 
   <!-- SCRIPTS ENGINE -->
   <script>
-    /* 1. SUPABASE CLIENT INICIALIZACIÓN */
-    const SUPABASE_URL = 'https://xyzcompany.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';
+    /* 1. CONFIGURACIÓN SUPABASE DE TU PROYECTO */
+    const SUPABASE_URL = 'https://xyzcompany.supabase.co'; // <--- Reemplaza con tu URL
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // <--- Reemplaza con tu Anon Key
     
     let _supabase = null;
+    let currentUserProfile = null;
+
     try {
-      if (typeof supabase !== 'undefined' && SUPABASE_URL !== 'https://xyzcompany.supabase.co') {
+      if (typeof supabase !== 'undefined' && !SUPABASE_URL.includes('xyzcompany')) {
         _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       }
     } catch(e) {
-      console.warn("Supabase ejecutándose en modo seguro fallback local.");
+      console.warn("Supabase local/fallback activado.");
     }
 
-    /* 2. MOTOR HTML5 CANVAS 3D */
+    /* 2. ENGINE CANVAS 3D */
     const canvas = document.getElementById('cyberCanvas');
     const ctx = canvas.getContext('2d');
-
     function resizeCanvas() {
       canvas.width = canvas.parentElement.clientWidth;
       canvas.height = canvas.parentElement.clientHeight;
@@ -1284,74 +1097,34 @@
     window.addEventListener('resize', resizeCanvas);
 
     const particles = [];
-    const particleCount = 50;
-    let mouse = { x: null, y: null };
-
-    for (let i = 0; i < particleCount; i++) {
+    for (let i = 0; i < 45; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         vx: (Math.random() - 0.5) * 1.5,
         vy: (Math.random() - 0.5) * 1.5,
-        radius: Math.random() * 2 + 1.5
+        radius: Math.random() * 2 + 1
       });
     }
 
-    canvas.addEventListener('mousemove', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
-    });
-
     function animateCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
       for (let i = 0; i < particles.length; i++) {
         let p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-
+        p.x += p.vx; p.y += p.vy;
         if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
         if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = i % 2 === 0 ? '#ff3366' : '#ff9900';
+        ctx.fillStyle = i % 2 === 0 ? '#ff3366' : '#00f2fe';
         ctx.fill();
-
-        if (mouse.x && mouse.y) {
-          let dx = mouse.x - p.x;
-          let dy = mouse.y - p.y;
-          let dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 110) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(mouse.x, mouse.y);
-            ctx.strokeStyle = `rgba(0, 242, 254, ${1 - dist / 110})`;
-            ctx.stroke();
-          }
-        }
-
-        for (let j = i + 1; j < particles.length; j++) {
-          let p2 = particles[j];
-          let dx = p.x - p2.x;
-          let dy = p.y - p2.y;
-          let dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 95) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(255, 51, 102, ${0.3 - dist / 315})`;
-            ctx.stroke();
-          }
-        }
       }
       requestAnimationFrame(animateCanvas);
     }
     animateCanvas();
 
-    /* 3. SEMÁFORO DE DIAGNÓSTICO CON ENLACE DINÁMICO A VIRUSTOTAL */
+    /* 3. SEMÁFORO DE DIAGNÓSTICO */
     const urlInput = document.getElementById('urlInput');
     const btnScanUrl = document.getElementById('btnScanUrl');
     const luzRojo = document.getElementById('luzRojo');
@@ -1361,7 +1134,7 @@
 
     btnScanUrl.addEventListener('click', () => {
       const input = urlInput.value.trim();
-      if (!input) return alert('Por favor ingresa una URL o dirección IP para evaluar.');
+      if (!input) return alert('Por favor ingresa una URL o dirección IP.');
 
       luzRojo.classList.remove('active');
       luzAmarillo.classList.remove('active');
@@ -1370,23 +1143,13 @@
       const urlLower = input.toLowerCase();
       const encodedTarget = encodeURIComponent(input);
 
-      if (urlLower.includes('malware') || urlLower.includes('hack') || urlLower.includes('phish') || urlLower.includes('danger')) {
+      if (urlLower.includes('malware') || urlLower.includes('hack') || urlLower.includes('phish')) {
         luzRojo.classList.add('active');
         scanDetails.innerHTML = `
           <h3 style="color: var(--border-red);">[ALERTA CRÍTICA] AMENAZA MALICIOSA DETECTADA</h3>
           <p><strong>Dominio Evaluado:</strong> ${input}</p>
           <p><strong>Nivel de Riesgo:</strong> 98 / 100 (AMENAZA ALTA)</p>
-          <p><strong>Vectores Detectados:</strong> Phishing activo, Inyección de script malicioso, Certificado revocado.</p>
-          <p><strong>Verificación Externa:</strong> <a href="https://www.virustotal.com/gui/search/${encodedTarget}" target="_blank" rel="noopener noreferrer" style="color:var(--border-cyan);">Analizar reporte completo en VirusTotal ↗</a></p>
-        `;
-      } else if (urlLower.includes('suspicious') || urlLower.includes('login') || urlLower.includes('warning')) {
-        luzAmarillo.classList.add('active');
-        scanDetails.innerHTML = `
-          <h3 style="color: var(--border-yellow);">[ADVERTENCIA] ENLACE EN RIESGO / SOSPECHOSO</h3>
-          <p><strong>Dominio Evaluado:</strong> ${input}</p>
-          <p><strong>Nivel de Riesgo:</strong> 55 / 100 (PRECAUCIÓN)</p>
-          <p><strong>Vectores Detectados:</strong> Formulario de credenciales no encriptado / Certificado autofirmado.</p>
-          <p><strong>Verificación Externa:</strong> <a href="https://mxtoolbox.com/SuperTool.aspx?action=blacklist%3a${encodedTarget}" target="_blank" rel="noopener noreferrer" style="color:var(--border-orange);">Comprobar Blacklist en MXToolbox ↗</a></p>
+          <p><strong>Verificación:</strong> <a href="https://www.virustotal.com/gui/search/${encodedTarget}" target="_blank" rel="noopener noreferrer" style="color:var(--border-cyan);">Analizar reporte en VirusTotal ↗</a></p>
         `;
       } else {
         luzVerde.classList.add('active');
@@ -1394,66 +1157,32 @@
           <h3 style="color: var(--accent-green);">[VERIFICADO] SITIO LIMPIO Y SEGURO</h3>
           <p><strong>Dominio Evaluado:</strong> ${input}</p>
           <p><strong>Nivel de Riesgo:</strong> 0 / 100 (SEGURO)</p>
-          <p><strong>Certificado SSL:</strong> TLS 1.3 Válido (Emisor de Confianza).</p>
-          <p><strong>Verificación Externa:</strong> <a href="https://dnschecker.org/#A/${encodedTarget}" target="_blank" rel="noopener noreferrer" style="color:var(--accent-green);">Verificar propagación DNS global ↗</a></p>
         `;
       }
     });
 
-    /* 4. HERRAMIENTAS DE DIAGNÓSTICO DE RED CON ENLACES A PLATAFORMAS REALES */
-    const toolTabs = document.querySelectorAll('.tool-tab');
+    /* 4. HERRAMIENTAS DE DIAGNÓSTICO DE RED */
     const toolConsoleOutput = document.getElementById('toolConsoleOutput');
     const toolHostInput = document.getElementById('toolHostInput');
     const btnRunTool = document.getElementById('btnRunTool');
+    const toolTabs = document.querySelectorAll('.tool-tab');
     let currentTool = 'ping';
 
     function executeNetworkTool(toolName, targetHost) {
       const host = targetHost.trim() || 'google.com';
-      const encodedHost = encodeURIComponent(host);
-      const simIp = host.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/) 
-        ? host 
-        : `${Math.floor(Math.random() * 150 + 50)}.${Math.floor(Math.random() * 200)}.${Math.floor(Math.random() * 200)}.${Math.floor(Math.random() * 250 + 1)}`;
-
-      let outputHTML = '';
-
-      if (toolName === 'ping') {
-        outputHTML = `
-          <p style="color:#00f2fe">&gt; PING ${host} [${simIp}] with 32 bytes of data:</p>
-          <p>Reply from ${simIp}: bytes=32 time=${Math.floor(Math.random()*15+8)}ms TTL=54</p>
-          <p>Reply from ${simIp}: bytes=32 time=${Math.floor(Math.random()*15+8)}ms TTL=54</p>
-          <p>Reply from ${simIp}: bytes=32 time=${Math.floor(Math.random()*15+8)}ms TTL=54</p>
-          <p style="color:#00ff88">--- Ping statistics for ${host}: 3 packets transmitted, 0% packet loss ---</p>
-          <p style="margin-top:10px;">🔗 <b>Enlace Externo:</b> <a href="https://www.speedtest.net/" target="_blank" rel="noopener noreferrer">Medir velocidad y latencia real en Speedtest.net ↗</a></p>
-        `;
-      } else if (toolName === 'tracert') {
-        outputHTML = `
-          <p style="color:#ff9900">&gt; TRACEROUTE to ${host} [${simIp}], 30 hops max:</p>
-          <p>1 gateway.local (192.168.1.254) 1.120 ms</p>
-          <p>2 isp-backbone-01.net (10.24.0.1) 6.310 ms</p>
-          <p style="color:#00ff88">3 ${host} [${simIp}] 15.210 ms [Trace Complete]</p>
-          <p style="margin-top:10px;">🔗 <b>Enlace Externo:</b> <a href="https://mxtoolbox.com/SuperTool.aspx?action=trace%3a${encodedHost}" target="_blank" rel="noopener noreferrer">Ejecutar Traceroute remoto en MXToolbox ↗</a></p>
-        `;
-      } else if (toolName === 'nslookup') {
-        outputHTML = `
-          <p style="color:#00f2fe">&gt; NSLOOKUP ${host}</p>
-          <p>Server: resolver.cyberguard-dns.net</p>
-          <p>Address: 1.1.1.1 #53</p>
-          <p>Name: ${host} | Address: ${simIp}</p>
-          <p style="margin-top:10px;">🔗 <b>Enlace Externo:</b> <a href="https://dnschecker.org/#A/${encodedHost}" target="_blank" rel="noopener noreferrer">Consultar registros DNS reales en DNSChecker ↗</a></p>
-        `;
-      } else if (toolName === 'portscan') {
-        outputHTML = `
-          <p style="color:#ff3366">&gt; PORT SCANNER running on ${host} [${simIp}]...</p>
-          <p>Port 80/tcp [HTTP] - OPEN</p>
-          <p>Port 443/tcp [HTTPS] - OPEN (TLS 1.3 Active)</p>
-          <p>Port 22/tcp [SSH] - FILTERED</p>
-          <p style="color:#00ff88">[SCAN COMPLETE] Direct analysis for ${host} finished.</p>
-          <p style="margin-top:10px;">🔗 <b>Enlace Externo:</b> <a href="https://www.shodan.io/search?query=${encodedHost}" target="_blank" rel="noopener noreferrer">Buscar servicios expuestos en Shodan.io ↗</a></p>
-        `;
-      }
-
-      toolConsoleOutput.innerHTML = outputHTML;
-      toolConsoleOutput.scrollTop = 0;
+      toolConsoleOutput.innerHTML = `<p style="color:#00f2fe">&gt; Ejecutando ${toolName.toUpperCase()} en ${host}...</p>`;
+      
+      setTimeout(() => {
+        if (toolName === 'ping') {
+          toolConsoleOutput.innerHTML = `<p style="color:#00f2fe">&gt; PING ${host}: 4 paquetes transmitidos, 0% pérdida. Latencia media: 12ms.</p>`;
+        } else if (toolName === 'tracert') {
+          toolConsoleOutput.innerHTML = `<p style="color:#ff9900">&gt; TRACEROUTE to ${host}: 3 saltos completados sin pérdida.</p>`;
+        } else if (toolName === 'nslookup') {
+          toolConsoleOutput.innerHTML = `<p style="color:#00f2fe">&gt; NSLOOKUP ${host}: Address = 142.250.190.46</p>`;
+        } else {
+          toolConsoleOutput.innerHTML = `<p style="color:#ff3366">&gt; PORT SCANNER on ${host}: Puerto 80 (HTTP) [OPEN], Puerto 443 (HTTPS) [OPEN].</p>`;
+        }
+      }, 500);
     }
 
     toolTabs.forEach(tab => {
@@ -1466,9 +1195,8 @@
     });
 
     btnRunTool.addEventListener('click', () => executeNetworkTool(currentTool, toolHostInput.value));
-    toolHostInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') executeNetworkTool(currentTool, toolHostInput.value); });
 
-    /* 5. AUTENTICACIÓN SUPABASE Y CONTROL DE ROLES (RBAC) */
+    /* 5. GESTIÓN DE AUTENTICACIÓN, ROLES Y ESTADOS EN SUPABASE */
     const modal = document.getElementById('authModal');
     const openBtn = document.getElementById('openAuthModal');
     const closeBtn = document.getElementById('closeAuthModal');
@@ -1480,14 +1208,15 @@
     const userStatusBox = document.getElementById('userStatusBox');
     const userNameDisplay = document.getElementById('userNameDisplay');
     const userRoleBadge = document.getElementById('userRoleBadge');
+    const userStatusBadge = document.getElementById('userStatusBadge');
     const btnLogout = document.getElementById('btnLogout');
 
     const toolsRestrictedOverlay = document.getElementById('toolsRestrictedOverlay');
+    const restrictionReason = document.getElementById('restrictionReason');
     const adminPanel = document.getElementById('adminPanel');
 
     openBtn.addEventListener('click', () => modal.style.display = 'flex');
     closeBtn.addEventListener('click', () => modal.style.display = 'none');
-    window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
 
     tabLogin.addEventListener('click', () => {
       tabLogin.classList.add('active'); tabRegister.classList.remove('active');
@@ -1499,26 +1228,48 @@
       formRegister.classList.add('active'); formLogin.classList.remove('active');
     });
 
-    function updateUIByRole(username, role) {
-      userNameDisplay.textContent = username;
-      userRoleBadge.textContent = role.toUpperCase();
-      userRoleBadge.className = 'role-badge role-' + role.toLowerCase();
+    function updateUIByProfile(profile) {
+      if (!profile) {
+        userStatusBox.classList.remove('active');
+        openBtn.textContent = 'Acceso / Registro';
+        toolsRestrictedOverlay.style.display = 'flex';
+        restrictionReason.innerHTML = 'Debes iniciar sesión y tu cuenta debe estar <strong>Aprobada por el Administrador</strong> para acceder.';
+        adminPanel.style.display = 'none';
+        return;
+      }
+
+      currentUserProfile = profile;
+      userNameDisplay.textContent = profile.username;
+      userRoleBadge.textContent = profile.role.toUpperCase();
+      userRoleBadge.className = 'role-badge role-' + profile.role.toLowerCase();
+
+      userStatusBadge.textContent = profile.status.toUpperCase();
+      userStatusBadge.className = 'status-badge status-' + profile.status.toLowerCase();
 
       userStatusBox.classList.add('active');
-      openBtn.textContent = 'Mi Cuenta (' + username + ')';
+      openBtn.textContent = profile.username;
 
-      if (role === 'administrador') {
-        toolsRestrictedOverlay.style.display = 'none';
-        adminPanel.style.display = 'block';
-      } else if (role === 'supervisor') {
-        toolsRestrictedOverlay.style.display = 'none';
-        adminPanel.style.display = 'none';
-      } else {
+      // REGLAS DE ACCESO SEGÚN ROL Y ESTADO (ACTIVO / PENDIENTE / RESTRINGIDO)
+      if (profile.status === 'restringido') {
         toolsRestrictedOverlay.style.display = 'flex';
+        restrictionReason.innerHTML = '<strong style="color:var(--border-red)">CUENTA BLOQUEADA:</strong> Tu acceso ha sido restringido por el Administrador.';
         adminPanel.style.display = 'none';
+      } else if (profile.status === 'pendiente') {
+        toolsRestrictedOverlay.style.display = 'flex';
+        restrictionReason.innerHTML = '<strong style="color:var(--border-yellow)">CUENTA EN ESPERA:</strong> Tu registro fue exitoso. Espera a que el Administrador apruebe tu cuenta.';
+        adminPanel.style.display = 'none';
+      } else if (profile.status === 'activo') {
+        toolsRestrictedOverlay.style.display = 'none';
+        if (profile.role === 'administrador') {
+          adminPanel.style.display = 'block';
+          cargarUsuariosAdmin();
+        } else {
+          adminPanel.style.display = 'none';
+        }
       }
     }
 
+    /* LOGIN */
     formLogin.addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('loginEmail').value.trim();
@@ -1526,52 +1277,93 @@
 
       if (_supabase) {
         const { data, error } = await _supabase.auth.signInWithPassword({ email, password: pass });
-        if (error) {
-          alert('Error de inicio de sesión: ' + error.message);
-          return;
-        }
-        const role = data.user.user_metadata.role || 'usuario';
-        const name = data.user.user_metadata.username || email.split('@')[0];
-        updateUIByRole(name, role);
+        if (error) return alert('Error al ingresar: ' + error.message);
+
+        // Consultar el perfil
+        const { data: prof, error: profErr } = await _supabase.from('profiles').select('*').eq('id', data.user.id).single();
+        if (prof) updateUIByProfile(prof);
       } else {
-        const name = email.split('@')[0];
-        updateUIByRole(name, 'administrador');
+        // Modo demostración sin base de datos real
+        if (email.includes('admin')) {
+          updateUIByProfile({ username: 'AdminMaster', role: 'administrador', status: 'activo' });
+        } else {
+          updateUIByProfile({ username: email.split('@')[0], role: 'usuario', status: 'pendiente' });
+        }
       }
       modal.style.display = 'none';
     });
 
+    /* REGISTRO */
     formRegister.addEventListener('submit', async (e) => {
       e.preventDefault();
       const username = document.getElementById('regUser').value.trim();
       const email = document.getElementById('regEmail').value.trim();
       const pass = document.getElementById('regPass').value;
-      const role = document.getElementById('regRole').value;
 
       if (_supabase) {
         const { data, error } = await _supabase.auth.signUp({
-          email,
-          password: pass,
-          options: { data: { username, role } }
+          email, password: pass,
+          options: { data: { username } }
         });
-        if (error) {
-          alert('Error al registrar usuario: ' + error.message);
-          return;
-        }
-        alert('Cuenta creada exitosamente en Supabase con rol de ' + role.toUpperCase());
-        updateUIByRole(username, role);
+        if (error) return alert('Error al registrarse: ' + error.message);
+        alert('Registro completado. Tu cuenta se encuentra en estado PENDIENTE de aprobación por el Administrador.');
+        updateUIByProfile({ username, role: 'usuario', status: 'pendiente' });
       } else {
-        updateUIByRole(username, role);
+        alert('Registro simulado enviado. Espera aprobación del Admin.');
+        updateUIByProfile({ username, role: 'usuario', status: 'pendiente' });
       }
       modal.style.display = 'none';
     });
 
+    /* CERRAR SESIÓN */
     btnLogout.addEventListener('click', async () => {
       if (_supabase) await _supabase.auth.signOut();
-      userStatusBox.classList.remove('active');
-      openBtn.textContent = 'Acceso / Registro';
-      toolsRestrictedOverlay.style.display = 'none';
-      adminPanel.style.display = 'none';
+      updateUIByProfile(null);
     });
+
+    /* FUNCIONES DE ADMINISTRADOR PARA APROBAR O RESTRINGIR USUARIOS */
+    async function cargarUsuariosAdmin() {
+      const tbody = document.getElementById('adminUsersTableBody');
+      if (!_supabase) {
+        tbody.innerHTML = `
+          <tr>
+            <td>operador_soc@empresa.com</td>
+            <td>usuario</td>
+            <td><span class="status-badge status-pendiente">PENDIENTE</span></td>
+            <td>
+              <button class="btn-action btn-approve" onclick="alert('Usuario Aprobado')">Aprobar</button>
+              <button class="btn-action btn-restrict" onclick="alert('Usuario Restringido')">Restringir</button>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      const { data: usuarios, error } = await _supabase.from('profiles').select('*').order('created_at', { ascending: false });
+      if (error) return tbody.innerHTML = `<tr><td colspan="4">Error al cargar usuarios: ${error.message}</td></tr>`;
+
+      tbody.innerHTML = usuarios.map(u => `
+        <tr>
+          <td><strong>${u.username}</strong><br><small style="color:var(--text-muted)">${u.email}</small></td>
+          <td>${u.role}</td>
+          <td><span class="status-badge status-${u.status}">${u.status}</span></td>
+          <td>
+            ${u.status !== 'activo' ? `<button class="btn-action btn-approve" onclick="cambiarEstadoUsuario('${u.id}', 'activo')">Aprobar</button>` : ''}
+            ${u.status !== 'restringido' ? `<button class="btn-action btn-restrict" onclick="cambiarEstadoUsuario('${u.id}', 'restringido')">Restringir</button>` : ''}
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function cambiarEstadoUsuario(userId, nuevoEstado) {
+      if (!_supabase) return;
+      const { error } = await _supabase.from('profiles').update({ status: nuevoEstado }).eq('id', userId);
+      if (error) alert('Error al actualizar estado: ' + error.message);
+      else {
+        alert(`Estado actualizado a: ${nuevoEstado.toUpperCase()}`);
+        cargarUsuariosAdmin();
+      }
+    }
   </script>
 </body>
 </html>
